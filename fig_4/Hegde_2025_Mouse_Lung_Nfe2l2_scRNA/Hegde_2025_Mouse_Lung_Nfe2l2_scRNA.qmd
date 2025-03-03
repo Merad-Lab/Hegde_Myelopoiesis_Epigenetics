@@ -1,0 +1,318 @@
+---
+title: "Hegde et al - 2025 - Myelopoiesis Epigenetics"
+title-block-banner: true
+subtitle: "Mouse Lung (KP; Nfe2l2) scRNA-seq analysis"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+library(tidyverse)
+library(Seurat)
+library(SeuratWrappers)
+library(SCP)
+library(scDblFinder)
+library(miQC)
+library(muscat)
+library(ComplexHeatmap)
+library(colorspace)
+library(skimr)
+library(reactable)
+library(DT)
+
+set.seed(42)
+mincells1 = 10
+minfeatures1 = 300
+'%notin%' <- function(x,y)!('%in%'(x,y))
+```
+
+## Load data
+
+```{r, warning=FALSE}
+LUNGWT_1 = Read10X_h5("data/MIME30_LUNGWT_0_v1/per_sample_outs/LUNGC1/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGWT_1 = CreateSeuratObject(counts = LUNGWT_1, min.cells = mincells1, min.features = minfeatures1, project = "LUNGWT_1")
+```
+
+```{r}
+LUNGWT_2 = Read10X_h5("data/MIME30_LUNGWT_0_v1/per_sample_outs/LUNGC2/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGWT_2 = CreateSeuratObject(counts = LUNGWT_2, min.cells = mincells1, min.features = minfeatures1, project = "LUNGWT_2")
+```
+
+```{r}
+LUNGWT_3 = Read10X_h5("data/MIME30_LUNGWT_0_v1/per_sample_outs/LUNGC3/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGWT_3 = CreateSeuratObject(counts = LUNGWT_3, min.cells = mincells1, min.features = minfeatures1, project = "LUNGWT_3")
+```
+
+```{r, warning=FALSE}
+LUNGKO_1 = Read10X_h5("data/MIME30_LUNGKO_0_v1/per_sample_outs/LUNGFLOX1/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGKO_1 = CreateSeuratObject(counts = LUNGKO_1, min.cells = mincells1, min.features = minfeatures1, project = "LUNGKO_1")
+```
+
+```{r}
+LUNGKO_2 = Read10X_h5("data/MIME30_LUNGKO_0_v1/per_sample_outs/LUNGFLOX2/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGKO_2 = CreateSeuratObject(counts = LUNGKO_2, min.cells = mincells1, min.features = minfeatures1, project = "LUNGKO_2")
+```
+
+```{r}
+LUNGKO_3 = Read10X_h5("data/MIME30_LUNGKO_0_v1/per_sample_outs/LUNGFLOX3/count/sample_filtered_feature_bc_matrix.h5")$`Gene Expression`
+LUNGKO_3 = CreateSeuratObject(counts = LUNGKO_3, min.cells = mincells1, min.features = minfeatures1, project = "LUNGKO_3")
+```
+
+```{r}
+sc.list = list(LUNGWT_1 = LUNGWT_1,
+               LUNGWT_2 = LUNGWT_2,
+               LUNGWT_3 = LUNGWT_3,
+               LUNGKO_1 = LUNGKO_1,
+               LUNGKO_2 = LUNGKO_2,
+               LUNGKO_3 = LUNGKO_3)
+sc.list
+```
+
+## Filtering
+
+```{r}
+for (i in 1:length(sc.list)) {
+sampleID = names(sc.list[i]) %>% gsub("so_", "", .)
+print(paste0("Preprocessing... ", sampleID))
+
+x = sc.list[[i]]
+
+## Filtering cells ----
+x[["percent.mt"]] <- PercentageFeatureSet(object = x, pattern = "^mt-")
+x[["percent.ribo"]] <- PercentageFeatureSet(object = x, pattern = "^Rp[sl]")
+
+nFeature_RNA_lo = quantile(x@meta.data$nFeature_RNA, .025)
+nFeature_RNA_hi = quantile(x@meta.data$nFeature_RNA, .975)
+nCount_RNA_lo = quantile(x@meta.data$nCount_RNA, .025)
+nCount_RNA_hi = quantile(x@meta.data$nCount_RNA, .975)
+
+## Mitochondrial reads QC ----
+x = RunMiQC(x)
+x = subset(x, 
+           nFeature_RNA > nFeature_RNA_lo &
+           nFeature_RNA < nFeature_RNA_hi &
+           nCount_RNA > nCount_RNA_lo &
+           nCount_RNA < nCount_RNA_hi &
+           miQC.keep == "keep")
+
+## Doublet removal ----
+x_sce = as.SingleCellExperiment(x)
+set.seed(42)
+x_sce = scDblFinder(x_sce)
+x@meta.data[, "scDblFinder.class"] = colData(x_sce)[, "scDblFinder.class"]
+x@meta.data[, "scDblFinder.score"] = colData(x_sce)[, "scDblFinder.score"]
+x@meta.data[, "scDblFinder.weighted"] = colData(x_sce)[, "scDblFinder.weighted"]
+x@meta.data[, "scDblFinder.cxds_score"] = colData(x_sce)[, "scDblFinder.cxds_score"]
+x = subset(x, scDblFinder.class == "singlet")
+
+genes_to_remove = grep("^mt-|Rik$|^Gm|^Rp[sl]", rownames(x), value = TRUE)
+x = x[!rownames(x) %in% genes_to_remove, ]
+
+sc.list[[i]] = x
+}
+```
+
+```{r}
+sc.list
+```
+
+```{r}
+## Merge datasets ----
+sc_obj = merge(sc.list[[1]], 
+                    y = c(sc.list[2:length(sc.list)]), 
+                    add.cell.ids = names(sc.list), 
+                    project = "SH211CELLPLEX")
+sc_obj = JoinLayers(sc_obj)
+sc_obj@meta.data[, "Condition"] = gsub("LUNG", "", gsub("_1|_2|_3", "", sc_obj$orig.ident))
+sc_obj@meta.data[, "Tissue"] = gsub("WT|KO", "", gsub("_1|_2|_3", "", sc_obj$orig.ident))
+sc_obj$orig.ident = factor(sc_obj$orig.ident, levels = c("LUNGWT_1", "LUNGWT_2", "LUNGWT_3",
+                                                         "LUNGKO_1", "LUNGKO_2", "LUNGKO_3"))
+```
+
+```{r}
+skim(sc_obj@meta.data)
+```
+
+## Seurat
+
+```{r}
+sc_obj = NormalizeData(sc_obj, normalization.method = "LogNormalize", scale.factor = 10000)
+sc_obj = FindVariableFeatures(sc_obj, selection.method = "vst", nfeatures = 3000)
+sc_obj = ScaleData(sc_obj)
+sc_obj = RunPCA(sc_obj, features = VariableFeatures(object = sc_obj))
+sc_obj = FindNeighbors(sc_obj, k.param = 50, dims = 1:20, reduction = "pca", graph.name = "knn")
+sc_obj = FindClusters(sc_obj, resolution = 0.8, graph.name = "knn")
+sc_obj = RunUMAP(sc_obj, dims = 1:20, reduction.name = "umap")
+```
+
+```{r}
+degs_markers = FindAllMarkers(sc_obj, only.pos = T, logfc.threshold = 1)
+datatable(degs_markers, filter = "top")
+```
+
+```{r}
+SCP::CellDimPlot(sc_obj, group.by = "seurat_clusters", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T)
+```
+
+## Annotation
+
+```{r}
+sc_obj@meta.data = sc_obj@meta.data |> 
+  mutate(annots = 
+           case_when(seurat_clusters == 0 ~ "mono-Ly6C_high", 
+                     seurat_clusters == 1 ~ "NK",
+                     seurat_clusters == 2 ~ "AM",
+                     seurat_clusters == 3 ~ "momac-Trem2_high",
+                     seurat_clusters == 4 ~ "NK",
+                     seurat_clusters == 5 ~ "momac-Arg1_high",
+                     seurat_clusters == 6 ~ "mono-Ly6C_low",
+                     seurat_clusters == 7 ~ "neu-immature",
+                     seurat_clusters == 8 ~ "IM",
+                     seurat_clusters == 9 ~ "neu-mature",
+                     seurat_clusters == 10 ~ "remove", #contam_NK_Treg
+                     seurat_clusters == 11 ~ "dc-mregDC",
+                     seurat_clusters == 12 ~ "remove", #AM_cycling
+                     seurat_clusters == 13 ~ "remove")) #contam_PC
+sc_obj = subset(sc_obj, annots != "remove")
+Idents(sc_obj) = "annots"
+saveRDS(sc_obj, file = "Hegde_2025_Mouse_Lung_Nfe2l2_scRNA.rds")
+```
+
+```{r}
+SCP::CellDimPlot(sc_obj, group.by = "annots", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T)
+```
+
+```{r, fig.width=15, fig.height=10}
+SCP::CellDimPlot(sc_obj, group.by = "annots", split.by = "Condition", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T, legend.position = "bottom")
+```
+
+## Reproduce Manuscript Figures
+
+```{r}
+sc_obj = readRDS("LUNG_annotated/preprocessing/annots_MS.rds")
+sc_obj = subset(sc_obj, annots %notin% c("contam_NK_Treg", "contam_PC", "AM_cycling"))
+```
+
+```{r}
+SCP::CellDimPlot(sc_obj, group.by = "annots", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T)
+```
+
+## Export
+
+```{r}
+bc_to_cluster = sc_obj@meta.data |> rownames_to_column("bc") |> dplyr::select(bc, seurat_clusters, annots)
+write.csv(bc_to_cluster, file = "Hegde_2025_Mouse_Lung_Nfe2l2_scRNA_bc_cluster_annot.csv")
+```
+
+## Truth-plot
+
+This code randomly selects cell IDs from each cell type in the manual_annotation vector. Here’s a step-by-step breakdown:
+
+1.  **Reproducibility:**\
+    `set.seed(123)` ensures that the random sampling is reproducible every time the code is run.
+
+2.  **Iterating Over Cell Types:**\
+    `unique(manual_annotation)` extracts each distinct cell type from the manual_annotation vector (such as "AM", "momac_Arg1", etc.).
+
+3.  **Sampling Cell IDs:**\
+    For each cell type, the function `sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))` randomly selects cell IDs (which are the names of the vector elements) corresponding to that cell type. The number of cells selected is the minimum between the total available for that type and 50. This means that if a cell type has more than 50 cells, only 50 are chosen; if it has fewer, all available cells are selected.
+
+4.  **Combining Results:**\
+    The sampled cell IDs from each cell type are combined into a single vector called `cells` using `as.vector(sapply(...))`.
+
+In summary, the code creates a reproducible, random subsample of up to 50 cell IDs for each cell type present in the manual_annotation vector.
+
+```{r}
+markers_annots = readxl::read_xlsx("Lungmarkers.xlsx")
+```
+
+```{r}
+mat <- sc_obj@assays$RNA$counts[unique(markers_annots$gene), ]
+manual_annotation = sc_obj$annots
+```
+
+```{r}
+reactable(markers_annots)
+```
+
+```{r}
+set.seed(123)
+cells = as.vector(sapply(unique(manual_annotation), function(v) sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))))
+mat = mat[, unlist(cells)]
+manual_annotation = manual_annotation[unlist(cells)]
+
+dim(mat)
+colnames(mat) = NULL
+```
+
+```{r, fig.width=15, fig.height=10}
+unique_clusters = sort(unique(manual_annotation))
+sample_color = qualitative_hcl(n = length(unique_clusters), palette = 'Dark 2')
+names(sample_color) = unique_clusters
+color = circlize::colorRamp2(breaks = c(0,1,2,3,5,10,20), colors = c('white', rev(sequential_hcl(n = 5,palette = 'OrRd')), 'black'))
+
+gene_groups = markers_annots$group[match(rownames(mat), markers_annots$gene)]
+colnames(mat) = NULL
+h1 = Heatmap(t(as.matrix(mat)), row_names_side = "right", col = color,
+             column_split = gene_groups, row_split = manual_annotation, show_row_dend = F,
+             row_title_rot = 0, column_title_gp = gpar(fontsize = 12, fontface = "italic"),
+             row_title_gp = gpar(fontsize = 15), cluster_columns = FALSE,cluster_rows = T,
+             row_gap = unit(1, "mm"), column_gap = unit(1, "mm"), border = 'gray50',
+             column_names_gp = gpar(fontface = "italic"),
+             column_title_rot = 90,
+             heatmap_legend_param = list(title = "Expression")
+)
+
+print(h1)
+```
+
+## Differentially expressed genes (KO vs WT)
+
+```{r}
+sce = as.SingleCellExperiment(sc_obj)
+sce = sce[rowSums(counts(sce) > 0) > 0, ]
+sce = sce[rowSums(counts(sce) > 1) >= 10, ]
+sce = scuttle::computeLibraryFactors(sce)
+sce = scuttle::logNormCounts(sce)
+```
+
+```{r}
+sce = muscat::prepSCE(sce, kid = "annots", sid = "orig.ident", gid = "Condition")
+sce$group_id = factor(sce$group_id, levels = c("WT", "KO"))
+kids = levels(sce$cluster_id); nk = length(kids); sids = levels(sce$sample_id); ns = length(sids); names(kids) = kids; names(sids) = sids
+t(table(sce$cluster_id, sce$sample_id))
+
+## Create pseudobulk (PB) and MDS ----
+pb = aggregateData(sce, assay = "counts", fun = "sum", by = c("cluster_id", "sample_id"))
+
+## Run DS analysis ----
+res = pbDS(pb)
+tbl = res$table[[1]]
+combined_df = do.call(rbind, tbl)
+
+tbl_fil = lapply(tbl, function(u) {u <- dplyr::filter(u, p_adj.loc < 0.05, abs(logFC) > 1); dplyr::arrange(u, p_adj.loc)})
+tbl_fil = tbl_fil |> map(~mutate(., direction = case_when(logFC > 0 ~ "up", logFC < 0 ~ "down")))
+combined_df_fil = do.call(rbind, tbl_fil)
+```
+
+```{r}
+datatable(combined_df_fil, filter = "top")
+```
+
+```{r}
+deg_summary = combined_df_fil |> group_by(cluster_id, direction) |> summarise(deg_count = n(), .groups = 'drop') |> mutate(deg_count = ifelse(direction == "down", -deg_count, deg_count))
+ggplot(deg_summary, aes(x = cluster_id, y = deg_count, fill = direction)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = abs(deg_count)), size = 4, fontface = "bold", color = "black") + 
+  scale_fill_manual(values = c("up" = "#de2d26", "down" = "#2c7fb8")) +
+  coord_flip() +
+  theme_bw()
+```
+
+## Session Info
+
+```{r}
+sessionInfo()
+```
