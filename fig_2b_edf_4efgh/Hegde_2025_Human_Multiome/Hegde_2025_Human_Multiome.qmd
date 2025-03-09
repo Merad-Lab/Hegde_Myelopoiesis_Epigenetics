@@ -1,0 +1,366 @@
+---
+title: "Hegde et al - 2025 - Myelopoiesis Epigenetics"
+title-block-banner: true
+subtitle: "Human Lung Myeloid subset analysis"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+library(ArchR)
+library(tidyverse)
+library(ggrepel)
+library(ComplexHeatmap)
+library(RColorBrewer)
+library(colorspace)
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+
+set.seed(1234)
+addArchRThreads(threads = 8) 
+addArchRGenome("hg38")
+start_time = Sys.time()
+```
+
+## Create arrows and ArchR project
+
+```{r, warning=FALSE, eval=FALSE}
+## Path to fragments ----
+frags_path = list.files(path = "cellranger_output", 
+                        pattern = "fragments.tsv.gz$", 
+                        full.names = T)
+names(frags_path) = names(inputF)
+
+## Create arrow files ----
+ArrowFiles = createArrowFiles(inputFiles = frags_path, 
+                              sampleNames = names(frags_path), 
+                              minTSS = 8, 
+                              minFrags = 5000, 
+                              addTileMat = TRUE, 
+                              addGeneScoreMat = TRUE)
+ArrowFiles = list.files(pattern = ".arrow")
+
+## ArchR project creation ----
+archp = ArchRProject(ArrowFiles = ArrowFiles, outputDirectory = "firstpass", copyArrows = F)
+archp$status = ifelse(grepl ('N', archp$Sample), 'normal', 'tumor' )
+archp$Sample2 = gsub('.$', '', archp$Sample)
+```
+
+```{r, eval=FALSE}
+## Performing Doublets calculations ----
+archp = addDoubletScores(archp)
+
+## Filtering out Doublets ----
+archp = filterDoublets(archp)
+
+## Reduce dimensions ----
+archp = addIterativeLSI(ArchRProj = archp, 
+                        useMatrix = "TileMatrix", 
+                        name = "IterativeLSI", 
+                        force=TRUE)
+
+## Clustering ----
+archp = addClusters(input = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Add UMAP ----
+archp = addUMAP(ArchRProj = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Harmony ----
+archp = addHarmony(ArchRProj = archp, 
+                   reducedDims = "IterativeLSI", 
+                   name = "Harmony", 
+                   groupBy = "Sample", force=TRUE)
+
+## Add clusters ----
+archp = addClusters(input = archp, 
+                    reducedDims = "Harmony", 
+                    resolution = 0.8, # 1.2, 2.0
+                    name='Clusters_H', force = TRUE)
+```
+
+## Reproduce Manuscript Figures
+
+```{r}
+archp_myeloid = readRDS("Hegde_2025_Human_Multiome_ATAC.rds")
+archp_myeloid
+
+table(archp_myeloid$Clusters_H_2, archp_myeloid$annotated)
+```
+
+## Gene score heatmap
+
+```{r, fig.width=10, fig.height=5}
+markers = c('LILRB2','FCGR3A','LYPD2','PTGS2','THBS1','LGALS3','FCN1','VCAN','S100A12','CD1C','VEGFA','NFKB1','GPR183','AREG','HIF1A','HLA-DQA1','CCL3','C1QA','CTSD','SPP1','GPNMB','TMEM163','FOLR2','F13A1','SLC40A1','INHBA','LPL','PPARG')
+
+gs = getMatrixFromProject(archp_myeloid, useMatrix = 'GeneScoreMatrix')
+gs_mat = assays(gs)[[1]]
+rownames(gs_mat) = gs@elementMetadata$name
+gs_mat = gs_mat[, rownames(archp_myeloid@cellColData)]
+gs_mat = as.data.frame(as.matrix(t(gs_mat[rownames(gs_mat) %in% markers,])))
+gs_mat$clusters = archp_myeloid@cellColData$annotated
+gs_mat = aggregate (.~clusters, data= gs_mat, FUN = mean)
+rownames(gs_mat) = gs_mat[,1]
+gs_mat = gs_mat[,-1]
+
+color = circlize::colorRamp2(breaks = c(0, 0.25, 1.0, 1.5, 2.5, 3),
+colors = c('white',
+rev(sequential_hcl(n = 4, palette = 'OrRd')),
+'black'))
+
+group_order = c("CD16+ Mono", "CD14+ Mono", 
+                "mo-mac_transition", "SPP1hi mo-mac", "TREM2hi mo-mac", "AM")
+
+scaled_mat = scale(t(t(as.matrix(gs_mat))))[group_order, markers]
+
+h1 = Heatmap(scaled_mat,
+row_names_side = "right",
+col = color,
+show_row_dend = F,
+row_title_rot = 0,
+column_title_gp = gpar(fontsize = 12, fontface = "italic"),
+row_title_gp = gpar(fontsize = 15),
+cluster_columns = F,
+cluster_rows = F,
+row_gap = unit(1, "mm"), column_gap = unit(1, "mm"), border = 'gray50',
+column_names_gp = gpar(fontface = "italic"),
+column_title_rot = 90,
+heatmap_legend_param = list(title = "Gene score")
+)
+print(h1)
+```
+
+## Differential motif enrichment
+
+```{r, fig.width=10, fig.height=5}
+markersPeaks = getMarkerFeatures(
+  ArchRProj = archp_myeloid, 
+  useMatrix = "PeakMatrix", 
+  groupBy = "annotated",
+  bias = c("TSSEnrichment", "log10(nFrags)"),
+  testMethod = "wilcoxon")
+
+enrichMotifs = peakAnnoEnrichment(
+  seMarker = markersPeaks,
+  ArchRProj = archp_myeloid,
+  peakAnnotation = "Motif",
+  cutOff = "FDR <= 0.01 & Log2FC >= 1")
+
+heatmapEM = plotEnrichHeatmap(
+  enrichMotifs, 
+  n = 20,
+  clusterCols = F,
+  cutOff = 20,
+  transpose = TRUE)
+
+heatmapEM
+```
+
+## Find activating and repressing TFs
+
+```{r, fig.width=10, fig.height=8}
+cor_threshold = 0.3
+padj = 0.01
+maxDelta = 3
+
+seGroupMotif = getGroupSE(ArchRProj = archp_myeloid, 
+                          useMatrix = "MotifMatrix", 
+                          groupBy = "annotated")
+
+seZ = seGroupMotif[rowData(seGroupMotif)$seqnames=="z", ]
+
+rowData(seZ)$maxDelta = lapply(seq_len(ncol(seZ)), function(x){rowMaxs(assay(seZ) - assay(seZ)[,x])}) %>% Reduce("cbind", .) %>% rowMaxs
+  
+corGSM_MM = correlateMatrices(ArchRProj = archp_myeloid, 
+                              useMatrix1 = "GeneScoreMatrix",
+                              useMatrix2 = "MotifMatrix",
+                              reducedDims = "IterativeLSI")
+
+corGSM_MM$maxDelta = rowData(seZ)[match(corGSM_MM$MotifMatrix_name, rowData(seZ)$name), "maxDelta"]
+corGSM_MM = corGSM_MM[order(abs(corGSM_MM$cor), decreasing = TRUE), ]
+corGSM_MM = corGSM_MM[which(!duplicated(gsub("\\-.*", "", corGSM_MM[,"MotifMatrix_name"]))), ]
+corGSM_MM$TFRegulator = ""
+corGSM_MM$TFRegulator[which(corGSM_MM$cor > cor_threshold & corGSM_MM$padj < padj & corGSM_MM$maxDelta > maxDelta)] <- "YES"
+corGSM_MM$TF_name = ""
+corGSM_MM$TF_name[corGSM_MM$TFRegulator == 'YES'] = corGSM_MM[, 1][corGSM_MM$TFRegulator == 'YES']
+
+active_TF = sort(corGSM_MM[corGSM_MM$TFRegulator == "YES", 1])
+
+ggplot(data.frame(corGSM_MM), 
+       aes(cor, maxDelta, color = TFRegulator, label = TF_name)) +
+    geom_point() + 
+    theme_ArchR() +
+    geom_vline(xintercept = 0, lty = "dashed") + 
+    scale_color_manual(values = c("NO" = "darkgrey", "YES" = "firebrick3")) +
+    xlab("Correlation To Gene Score") +
+    ylab("Max TF Motif Delta") +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, max(corGSM_MM$maxDelta) * 1.05)) +
+    geom_label_repel(label = corGSM_MM$TF_name, max.overlaps=100000)
+```
+
+## RNA
+
+```{r}
+rna_obj = readRDS("Hegde_2025_Human_Multiome_RNA.rds")
+
+rna_obj
+
+table(rna_obj$annotated, rna_obj$sampleID_harmony_snn_res.0.8)
+```
+
+## Truth-plot
+
+```{r, fig.width=15, fig.height=8}
+markers = c("TMTC1", "FCGR3A", "SETBP1", "SNED1", "VCAN", "EREG", "AREG", "IL1R2", "WARS", "PTGS2", "C5AR1", "FCN1", "CLEC4E", "S100A9", "S100A8", "GBP1", "SERPINB2", "GPR183", "C1QA", "CD68", "C1QB", "C1QC", "SPP1", "FBP1", "IL4I1", "GPNMB", "A2M", "CD9", "TREM2", "MRC1", "F13A1", "SLCO2B1", "STAB1", "RNASE1", "SELENOP", "FOLR2", "LYVE1", "PPARG", "LSAMP", "MARCO")
+
+mat <- rna_obj@assays$RNA$counts[unique(markers), ]
+manual_annotation = rna_obj$annotated
+
+set.seed(123)
+cells = as.vector(sapply(unique(manual_annotation), function(v) sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))))
+mat = mat[, unlist(cells)]
+manual_annotation = manual_annotation[unlist(cells)]
+dim(mat)
+colnames(mat) = NULL
+
+color = circlize::colorRamp2(breaks = c(0,0.5,1,1.5,2,2.5,3), 
+                             colors = c('white', 
+                                        rev(sequential_hcl(n = 5, palette = 'OrRd')), 
+                                        'black'))
+
+h1 = Heatmap(t(as.matrix(mat))[, markers], 
+             row_names_side = "right", 
+             col = color,
+             row_split = manual_annotation, 
+             show_row_dend = F,
+             row_title_rot = 0, 
+             column_title_gp = gpar(fontsize = 12, fontface = "italic"),
+             row_title_gp = gpar(fontsize = 15), 
+             cluster_columns = FALSE,
+             cluster_rows = F,
+             row_gap = unit(1, "mm"), 
+             column_gap = unit(1, "mm"), 
+             border = 'gray50',
+             column_names_gp = gpar(fontface = "italic"),
+             column_title_rot = 90,
+             heatmap_legend_param = list(title = "Expression")
+)
+
+print(h1)
+```
+
+## High dimensional WGCNA
+
+```{r, message=FALSE}
+library(hdWGCNA)
+library(patchwork)
+```
+
+```{r}
+rna_obj_wgcna = SetupForWGCNA(
+  rna_obj,
+  gene_select = "fraction",
+  fraction = 0.05,
+  wgcna_name = "NSCLC_Human_RNA")
+```
+
+```{r}
+rna_obj_wgcna = MetacellsByGroups(
+  seurat_obj = rna_obj_wgcna,
+  group.by = c("annotated"), 
+  reduction = 'sampleID_harmony_umap',
+  k = 20, 
+  max_shared = 15, 
+  min_cells = 20,
+  ident.group = 'annotated')
+
+rna_obj_wgcna = NormalizeMetacells(rna_obj_wgcna)
+```
+
+```{r}
+rna_obj_wgcna = SetDatExpr(
+  rna_obj_wgcna,
+  group_name = c("mo-mac_transition",
+                 "SPP1hi mo-mac",
+                 "TREM2hi mo-mac",
+                 "AM",
+                 "IM"),
+  group.by = 'annotated',
+  assay = 'RNA',
+  layer = 'data')
+```
+
+```{r}
+rna_obj_wgcna = TestSoftPowers(rna_obj_wgcna, networkType = 'signed')
+```
+
+```{r, fig.width=10, fig.height=8}
+plot_list = PlotSoftPowers(rna_obj_wgcna)
+wrap_plots(plot_list, ncol = 2)
+```
+
+```{r}
+power_table <- GetPowerTable(rna_obj_wgcna)
+head(power_table)
+```
+
+```{r}
+rna_obj_wgcna = ConstructNetwork(rna_obj_wgcna,
+                                 tom_name = 'NSCLC_Human_RNA', 
+                                 overwrite_tom = T)
+```
+
+```{r, fig.width=10, fig.height=4}
+PlotDendrogram(rna_obj_wgcna, main = 'NSCLC Human Myeloid hdWGCNA Dendrogram')
+```
+
+```{r}
+TOM = GetTOM(rna_obj_wgcna)
+```
+
+```{r}
+rna_obj_wgcna = ModuleEigengenes(rna_obj_wgcna, group.by.vars = "sampleID")
+```
+
+```{r, fig.width=6, fig.width=6}
+hMEs = GetMEs(rna_obj_wgcna)
+```
+
+```{r}
+rna_obj_wgcna = ModuleConnectivity(rna_obj_wgcna, 
+                group_name = c("mo-mac_transition",
+                               "SPP1hi mo-mac",
+                               "TREM2hi mo-mac",
+                               "AM",
+                               "IM"),
+                group.by = 'annotated')
+```
+
+```{r, fig.width=10, fig.height=8}
+PlotKMEs(rna_obj_wgcna, ncol = 2)
+```
+
+## Export
+
+```{r}
+archp_myeloid_df = archp_myeloid@cellColData |> as.data.frame() |>
+  rownames_to_column("bc") |> 
+  dplyr::select(bc, Clusters_H_2, annotated)
+write.csv(archp_myeloid_df, 
+          file = "Hegde_2025_Human_Multiome_ATAC_bc_cluster_annot.csv", row.names = F)
+
+rna_obj_df = rna_obj@meta.data |> as.data.frame() |>
+  rownames_to_column("bc") |> 
+  dplyr::select(bc, sampleID_harmony_snn_res.0.8, annotated)
+write.csv(rna_obj_df, 
+          file = "Hegde_2025_Human_Multiome_RNA_bc_cluster_annot.csv", row.names = F)
+```
+
+## Session Info
+
+```{r}
+end_time <- Sys.time()
+print(end_time - start_time)
+
+sessionInfo()
+```

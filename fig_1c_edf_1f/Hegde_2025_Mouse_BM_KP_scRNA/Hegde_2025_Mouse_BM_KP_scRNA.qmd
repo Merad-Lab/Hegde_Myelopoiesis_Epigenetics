@@ -19,97 +19,112 @@ library(reactable)
 library(DT)
 
 set.seed(729)
+start_time = Sys.time()
 ```
 
 ## Load data
 
-```{r, warning=FALSE}
-# h5_files <- list.files("data/", pattern = "sample_filtered_feature_bc_matrix.h5", recursive = TRUE, full.names = TRUE)
-# 
-# sc.list <- lapply(h5_files, function(file) {
-#   expr_matrix <- Read10X_h5(file)$`Gene Expression`
-#   CreateSeuratObject(counts = expr_matrix, project = tools::file_path_sans_ext(basename(file)))
-# })
-# 
-# names(sc.list) <- basename(dirname(dirname(h5_files))) 
-```
+```{r, warning=FALSE, eval=FALSE}
+h5_files = list.files(path = "data/", 
+                      pattern = "sample_filtered_feature_bc_matrix.h5", 
+                      recursive = TRUE, full.names = TRUE)
 
-```{r}
-#sc.list
+sc.list <- lapply(h5_files, function(file) {
+  expr_matrix <- Read10X_h5(file)$`Gene Expression`
+  CreateSeuratObject(counts = expr_matrix, 
+                     project = tools::file_path_sans_ext(basename(file)))
+})
+
+names(sc.list) <- basename(dirname(dirname(h5_files)))
 ```
 
 ## Seurat
 
-```{r}
-# sc.list <- lapply(X = sc.list, FUN = NormalizeData) 
-# sc.list <- lapply(X = sc.list, FUN = ScaleData)
-# sc.list <- lapply(X = sc.list, FUN = SCTransform, method = "glmGamPoi")
-# 
-# features <- SelectIntegrationFeatures(object.list = sc.list, nfeatures = 3000)
-# sc.list <- PrepSCTIntegration(object.list = sc.list, anchor.features = features)
-# 
-# sc.list <- lapply(X = sc.list, FUN = RunPCA, features = features)
-# 
-# immune.anchors <- FindIntegrationAnchors(object.list = sc.list, normalization.method = "SCT", anchor.features = features, dims = 1:30, reduction = "rpca", k.anchor = 20)
-# 
-# BM_object_combined_var <- IntegrateData(anchorset = immune.anchors, normalization.method = "SCT", dims = 1:30)
-# BM_object_combined_var <- RunPCA(BM_object_combined_var, npcs = 30, verbose = FALSE) %>% 
-#                           RunUMAP(reduction = "pca", dims = 1:30, verbose = FALSE) %>% 
-#                           FindNeighbors(reduction = "pca", dims = 1:30, verbose = FALSE) %>%
-#                           FindClusters(resolution = 0.7, verbose = FALSE)
+```{r, eval=FALSE}
+sc.list <- lapply(X = sc.list, FUN = NormalizeData)
+sc.list <- lapply(X = sc.list, FUN = ScaleData)
+sc.list <- lapply(X = sc.list, FUN = SCTransform, method = "glmGamPoi")
+
+features <- SelectIntegrationFeatures(object.list = sc.list, nfeatures = 3000)
+
+sc.list <- PrepSCTIntegration(object.list = sc.list, anchor.features = features)
+
+sc.list <- lapply(X = sc.list, FUN = RunPCA, features = features)
+
+immune.anchors <- FindIntegrationAnchors(object.list = sc.list, normalization.method = "SCT", anchor.features = features, dims = 1:30, reduction = "rpca", k.anchor = 20)
+
+BM_object <- IntegrateData(anchorset = immune.anchors, 
+                           normalization.method = "SCT", 
+                           dims = 1:30)
+
+BM_object <- RunPCA(BM_object, npcs = 30, verbose = FALSE) %>%
+             RunUMAP(reduction = "pca", dims = 1:30, verbose = FALSE) %>%
+             FindNeighbors(reduction = "pca", dims = 1:30, verbose = FALSE) %>%
+             FindClusters(resolution = 0.7, verbose = FALSE)
 ```
 
 ## Annotation
 
-```{r}
-# sc_obj$SH_annots <- plyr::mapvalues(
-#   x = sc_obj$seurat_clusters, 
-#   from = c("0","1","2","3","4","5","6","7","8","9","10",
-#            "11","12","13","14","15","16","17","18","19","20",
-#            "21","22","23","24","25","26","27","28"), 
-#   to = c(
-#     'immature neu', 
-#     'pre-neu_cycling', 
-#     'pre-neu', 
-#     'immature neu', 
-#     'pre-mono', 
-#     'Ly6Chi mono', 
-#     'mature neu', 
-#     'remove', 
-#     'cMoP_cycling', 
-#     'remove', 
-#     'GMP', 
-#     'mature neu', 
-#     'preNeu', 
-#     'cMoP', 
-#     'GP', 
-#     'remove', 
-#     'preNeu_cycling', 
-#     'remove', # DC-like
-#     'Ly6Chi mono', 
-#     'Ly6Clow mono', 
-#     'remove', 
-#     'MEP', 
-#     'GMP', 
-#     'pre-mono', 
-#     'remove', 
-#     'Ly6Chi proDC3', 
-#     'remove', 
-#     'remove', 
-#     'remove' 
-#   )
-# )
-# sc_obj = subset(sc_obj, annots != "remove")
-# Idents(sc_obj) = "SH_annots"
-# saveRDS(sc_obj, file = "Hegde_2025_Mouse_BM_KP_scRNA.rds")
+```{r, eval=FALSE}
+sc_obj$annots <- plyr::mapvalues(
+  x = sc_obj$seurat_clusters,
+  from = c("0","1","2","3","4","5","6","7","8","9","10",
+           "11","12","13","14","15","16","17","18","19","20",
+           "21","22","23","24","25","26","27","28"),
+  to = c(
+    'immature neu',
+    'pre-neu_cycling',
+    'pre-neu',
+    'immature neu',
+    'pre-mono',
+    'Ly6Chi mono',
+    'mature neu',
+    'remove',
+    'cMoP_cycling',
+    'remove',
+    'GMP',
+    'mature neu',
+    'preNeu',
+    'cMoP',
+    'GP',
+    'remove',
+    'preNeu_cycling',
+    'remove', # DC-like
+    'Ly6Chi mono',
+    'Ly6Clow mono',
+    'remove',
+    'MEP',
+    'GMP',
+    'pre-mono',
+    'remove',
+    'Ly6Chi proDC3',
+    'remove',
+    'remove',
+    'remove'
+  )
+)
+
+sc_obj = subset(sc_obj, annots != "remove")
+Idents(sc_obj) = "SH_annots"
+
+saveRDS(sc_obj, file = "Hegde_2025_Mouse_BM_KP_scRNA.rds")
 ```
 
-```{r}
-# SCP::CellDimPlot(sc_obj, group.by = "SH_annots", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T)
+```{r, eval=FALSE}
+SCP::CellDimPlot(sc_obj, 
+                 group.by = "SH_annots", 
+                 reduction = "umap", 
+                 pt.size = 0.75, 
+                 label = T, label_repel = T, label_insitu = T)
 ```
 
-```{r, fig.width=15, fig.height=10}
-# SCP::CellDimPlot(sc_obj, group.by = "SH_annots", split.by = "sample_simplified", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T, legend.position = "bottom")
+```{r, fig.width=15, fig.height=10, eval=FALSE}
+SCP::CellDimPlot(sc_obj, 
+                 group.by = "SH_annots", 
+                 split.by = "sample_simplified", 
+                 reduction = "umap", 
+                 pt.size = 0.75, 
+                 label = T, label_repel = T, label_insitu = T, legend.position = "bottom")
 ```
 
 ## Reproduce Manuscript Figures
@@ -117,13 +132,18 @@ set.seed(729)
 ```{r}
 sc_obj = readRDS("Hegde_2025_Mouse_BM_KP_scRNA.rds")
 DefaultAssay(sc_obj) = "RNA"
+sc_obj
 ```
 
 ## Export
 
 ```{r}
-bc_to_annot_df = sc_obj@meta.data |> rownames_to_column("bc") |> dplyr::select(bc, seurat_clusters, SH_annots)
-write.csv(bc_to_annot_df, file = "Hegde_2025_Mouse_BM_KP_scRNA_bc_cluster_annot.csv", row.names = F)
+bc_to_annot_df = sc_obj@meta.data |> 
+                 rownames_to_column("bc") |> 
+                 dplyr::select(bc, seurat_clusters, SH_annots)
+
+write.csv(bc_to_annot_df, 
+          file = "Hegde_2025_Mouse_BM_KP_scRNA_bc_cluster_annot.csv", row.names = F)
 ```
 
 ```{r}
@@ -180,6 +200,7 @@ reactable(markers_annots)
 ```{r}
 set.seed(123)
 cells = as.vector(sapply(unique(manual_annotation), function(v) sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))))
+
 mat = mat[, unlist(cells)]
 manual_annotation = manual_annotation[unlist(cells)]
 
@@ -221,9 +242,12 @@ reactable(markers_df)
 ```
 
 ```{r, fig.width=8, fig.height=6}
+Idents(sc_obj) = "SH_annots"
+
 sc_obj <- AddModuleScore_UCell(
   sc_obj, 
   features = markers_list)
+
 signature.names <- paste0(names(markers_list), "_UCell")
 
 VlnPlot(sc_obj,
@@ -235,5 +259,8 @@ VlnPlot(sc_obj,
 ## Session Info
 
 ```{r}
+end_time <- Sys.time()
+print(end_time - start_time)
+
 sessionInfo()
 ```

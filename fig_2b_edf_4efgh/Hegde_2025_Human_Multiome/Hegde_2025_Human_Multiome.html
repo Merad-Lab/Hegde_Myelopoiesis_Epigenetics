@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Hegde et al - 2025 - Myelopoiesis Epigenetics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Hegde_2025_Human_Multiome_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Hegde_2025_Human_Multiome_files/libs/quarto-html/quarto.js"></script>
+<script src="Hegde_2025_Human_Multiome_files/libs/quarto-html/popper.min.js"></script>
+<script src="Hegde_2025_Human_Multiome_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Hegde_2025_Human_Multiome_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Hegde_2025_Human_Multiome_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Hegde_2025_Human_Multiome_files/libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Hegde_2025_Human_Multiome_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Hegde_2025_Human_Multiome_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Hegde_2025_Human_Multiome_files/libs/bootstrap/bootstrap-fe6593aca1dacbc749dc3d2ba78c8639.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Hegde et al - 2025 - Myelopoiesis Epigenetics</h1>
+            <p class="subtitle lead">Human Lung Myeloid subset analysis</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="load-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="load-libraries">Load libraries</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ArchR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########&gt;      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========&gt;
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR : Version 1.0.3
+For more information see our website : www.ArchRProject.com
+If you encounter a bug please report : https://github.com/GreenleafLab/ArchR/issues</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading Required Packages...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : devtools v2.4.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : grid v4.4.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gridExtra v2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gtools v3.9.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gtable v0.3.6</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : ggplot2 v3.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : magrittr v2.0.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : plyr v1.8.9</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : stringr v1.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : data.table v1.17.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : matrixStats v1.5.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : sparseMatrixStats v1.18.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : S4Vectors v0.44.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : GenomicRanges v1.58.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : BiocGenerics v0.52.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : Matrix v1.7.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : Rcpp v1.0.14</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : RcppArmadillo v14.2.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : SummarizedExperiment v1.36.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : rhdf5 v2.50.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ lubridate::%within%()     masks IRanges::%within%()
+✖ dplyr::arrange()          masks plyr::arrange()
+✖ dplyr::between()          masks data.table::between()
+✖ dplyr::collapse()         masks IRanges::collapse()
+✖ dplyr::combine()          masks Biobase::combine(), BiocGenerics::combine(), gridExtra::combine()
+✖ purrr::compact()          masks plyr::compact()
+✖ dplyr::count()            masks matrixStats::count(), plyr::count()
+✖ dplyr::desc()             masks IRanges::desc(), plyr::desc()
+✖ tidyr::expand()           masks Matrix::expand(), S4Vectors::expand()
+✖ tidyr::extract()          masks magrittr::extract()
+✖ dplyr::failwith()         masks plyr::failwith()
+✖ dplyr::filter()           masks stats::filter()
+✖ dplyr::first()            masks S4Vectors::first(), data.table::first()
+✖ lubridate::hour()         masks data.table::hour()
+✖ dplyr::id()               masks plyr::id()
+✖ lubridate::isoweek()      masks data.table::isoweek()
+✖ dplyr::lag()              masks stats::lag()
+✖ dplyr::last()             masks data.table::last()
+✖ lubridate::mday()         masks data.table::mday()
+✖ lubridate::minute()       masks data.table::minute()
+✖ lubridate::month()        masks data.table::month()
+✖ dplyr::mutate()           masks plyr::mutate()
+✖ tidyr::pack()             masks Matrix::pack()
+✖ BiocGenerics::Position()  masks ggplot2::Position(), base::Position()
+✖ lubridate::quarter()      masks data.table::quarter()
+✖ purrr::reduce()           masks GenomicRanges::reduce(), IRanges::reduce()
+✖ dplyr::rename()           masks S4Vectors::rename(), plyr::rename()
+✖ lubridate::second()       masks S4Vectors::second(), data.table::second()
+✖ lubridate::second&lt;-()     masks S4Vectors::second&lt;-()
+✖ purrr::set_names()        masks magrittr::set_names()
+✖ dplyr::slice()            masks IRanges::slice()
+✖ GenomicRanges::subtract() masks magrittr::subtract()
+✖ dplyr::summarise()        masks plyr::summarise()
+✖ dplyr::summarize()        masks plyr::summarize()
+✖ purrr::transpose()        masks data.table::transpose()
+✖ tidyr::unpack()           masks Matrix::unpack()
+✖ lubridate::wday()         masks data.table::wday()
+✖ lubridate::week()         masks data.table::week()
+✖ lubridate::yday()         masks data.table::yday()
+✖ lubridate::year()         masks data.table::year()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>========================================
+ComplexHeatmap version 2.22.0
+Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/
+Github page: https://github.com/jokergoo/ComplexHeatmap
+Documentation: http://jokergoo.github.io/ComplexHeatmap-reference
+
+If you use it in published research, please cite either one:
+- Gu, Z. Complex Heatmap Visualization. iMeta 2022.
+- Gu, Z. Complex heatmaps reveal patterns and correlations in multidimensional 
+    genomic data. Bioinformatics 2016.
+
+
+The new InteractiveComplexHeatmap package can directly export static 
+complex heatmaps into an interactive Shiny app with zero effort. Have a try!
+
+This message can be suppressed by:
+  suppressPackageStartupMessages(library(ComplexHeatmap))
+========================================</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TxDb.Hsapiens.UCSC.hg38.knownGene)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: GenomicFeatures
+Loading required package: AnnotationDbi
+
+Attaching package: 'AnnotationDbi'
+
+The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">addArchRThreads</span>(<span class="at">threads =</span> <span class="dv">8</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting default number of Parallel threads to 8.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addArchRGenome</span>(<span class="st">"hg38"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting default genome to Hg38.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-arrows-and-archr-project" class="level2">
+<h2 class="anchored" data-anchor-id="create-arrows-and-archr-project">Create arrows and ArchR project</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Path to fragments ----</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>frags_path <span class="ot">=</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"cellranger_output"</span>, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern =</span> <span class="st">"fragments.tsv.gz$"</span>, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">full.names =</span> T)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(frags_path) <span class="ot">=</span> <span class="fu">names</span>(inputF)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Create arrow files ----</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>ArrowFiles <span class="ot">=</span> <span class="fu">createArrowFiles</span>(<span class="at">inputFiles =</span> frags_path, </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sampleNames =</span> <span class="fu">names</span>(frags_path), </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">minTSS =</span> <span class="dv">8</span>, </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">minFrags =</span> <span class="dv">5000</span>, </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">addTileMat =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">addGeneScoreMat =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>ArrowFiles <span class="ot">=</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".arrow"</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ArchR project creation ----</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">ArchRProject</span>(<span class="at">ArrowFiles =</span> ArrowFiles, <span class="at">outputDirectory =</span> <span class="st">"firstpass"</span>, <span class="at">copyArrows =</span> F)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>archp<span class="sc">$</span>status <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span> (<span class="st">'N'</span>, archp<span class="sc">$</span>Sample), <span class="st">'normal'</span>, <span class="st">'tumor'</span> )</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>archp<span class="sc">$</span>Sample2 <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'.$'</span>, <span class="st">''</span>, archp<span class="sc">$</span>Sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Performing Doublets calculations ----</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addDoubletScores</span>(archp)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Filtering out Doublets ----</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">filterDoublets</span>(archp)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Reduce dimensions ----</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addIterativeLSI</span>(<span class="at">ArchRProj =</span> archp, </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">useMatrix =</span> <span class="st">"TileMatrix"</span>, </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">"IterativeLSI"</span>, </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">force=</span><span class="cn">TRUE</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Clustering ----</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addClusters</span>(<span class="at">input =</span> archp, <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Add UMAP ----</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addUMAP</span>(<span class="at">ArchRProj =</span> archp, <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Harmony ----</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addHarmony</span>(<span class="at">ArchRProj =</span> archp, </span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>                   <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, </span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">"Harmony"</span>, </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">groupBy =</span> <span class="st">"Sample"</span>, <span class="at">force=</span><span class="cn">TRUE</span>)</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Add clusters ----</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addClusters</span>(<span class="at">input =</span> archp, </span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">reducedDims =</span> <span class="st">"Harmony"</span>, </span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">resolution =</span> <span class="fl">0.8</span>, <span class="co"># 1.2, 2.0</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span><span class="st">'Clusters_H'</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reproduce-manuscript-figures" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-manuscript-figures">Reproduce Manuscript Figures</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>archp_myeloid <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Human_Multiome_ATAC.rds"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>archp_myeloid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: ArchRProject 
+outputDirectory: /Users/laszlohalasz/Downloads/SH_github/SH_Multiome/ 
+samples(28): Lu895T Lu912T ... Lu895N Lu883T
+sampleColData names(1): ArrowFiles
+cellColData names(33): Sample nMultiFrags ... celltype_2 annotated
+numberOfCells(1): 19425
+medianTSS(1): 12.354
+medianFrags(1): 14110</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(archp_myeloid<span class="sc">$</span>Clusters_H_2, archp_myeloid<span class="sc">$</span>annotated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+        AM CD14+ Mono CD16+ Mono   IM mo-mac_transition moDC SPP1hi mo-mac
+  C1     0       2083          0    0                 0    0             0
+  C10    0          0          0    0               203    0             0
+  C11    0        189          0    0                 0    0             0
+  C12    0          0          0    0                 0    0             0
+  C13    0          0          0  601                 0    0             0
+  C14    0          0          0  691                 0    0             0
+  C15    0        303          0    0                 0    0             0
+  C16    0          0          0  566                 0    0             0
+  C17    0          0          0    0                 0    0          1676
+  C18    0          0          0    0                 0  267             0
+  C20    0          0          0    0              1037    0             0
+  C21 1317          0          0    0                 0    0             0
+  C22  880          0          0    0                 0    0             0
+  C23    0          0       1187    0                 0    0             0
+  C24    0          0       1661    0                 0    0             0
+  C25    0          0        302    0                 0    0             0
+  C26    0          0        910    0                 0    0             0
+  C3     0        711          0    0                 0    0             0
+  C5     0          0          0    0                 0    0             0
+  C8     0          0          0    0              1469    0             0
+  C9     0          0          0    0                 0    0             0
+     
+      TREM2hi mo-mac
+  C1               0
+  C10              0
+  C11              0
+  C12            164
+  C13              0
+  C14              0
+  C15              0
+  C16              0
+  C17              0
+  C18              0
+  C20              0
+  C21              0
+  C22              0
+  C23              0
+  C24              0
+  C25              0
+  C26              0
+  C3               0
+  C5            1481
+  C8               0
+  C9            1727</code></pre>
+</div>
+</div>
+</section>
+<section id="gene-score-heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="gene-score-heatmap">Gene score heatmap</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>markers <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'LILRB2'</span>,<span class="st">'FCGR3A'</span>,<span class="st">'LYPD2'</span>,<span class="st">'PTGS2'</span>,<span class="st">'THBS1'</span>,<span class="st">'LGALS3'</span>,<span class="st">'FCN1'</span>,<span class="st">'VCAN'</span>,<span class="st">'S100A12'</span>,<span class="st">'CD1C'</span>,<span class="st">'VEGFA'</span>,<span class="st">'NFKB1'</span>,<span class="st">'GPR183'</span>,<span class="st">'AREG'</span>,<span class="st">'HIF1A'</span>,<span class="st">'HLA-DQA1'</span>,<span class="st">'CCL3'</span>,<span class="st">'C1QA'</span>,<span class="st">'CTSD'</span>,<span class="st">'SPP1'</span>,<span class="st">'GPNMB'</span>,<span class="st">'TMEM163'</span>,<span class="st">'FOLR2'</span>,<span class="st">'F13A1'</span>,<span class="st">'SLC40A1'</span>,<span class="st">'INHBA'</span>,<span class="st">'LPL'</span>,<span class="st">'PPARG'</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">=</span> <span class="fu">getMatrixFromProject</span>(archp_myeloid, <span class="at">useMatrix =</span> <span class="st">'GeneScoreMatrix'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-getMatrixFromProject-33724d358ffa-Date-2025-03-06_Time-21-50-40.899221.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:34.235346 : Organizing colData, 1.889 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:35.079259 : Organizing rowData, 1.903 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:35.096449 : Organizing rowRanges, 1.903 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:35.102341 : Organizing Assays (1 of 1), 1.903 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:51.624964 : Constructing SummarizedExperiment, 2.179 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:52.121581 : Finished Matrix Creation, 2.187 mins elapsed.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">assays</span>(gs)[[<span class="dv">1</span>]]</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gs_mat) <span class="ot">=</span> gs<span class="sc">@</span>elementMetadata<span class="sc">$</span>name</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> gs_mat[, <span class="fu">rownames</span>(archp_myeloid<span class="sc">@</span>cellColData)]</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(<span class="fu">t</span>(gs_mat[<span class="fu">rownames</span>(gs_mat) <span class="sc">%in%</span> markers,])))</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>gs_mat<span class="sc">$</span>clusters <span class="ot">=</span> archp_myeloid<span class="sc">@</span>cellColData<span class="sc">$</span>annotated</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">aggregate</span> (.<span class="sc">~</span>clusters, <span class="at">data=</span> gs_mat, <span class="at">FUN =</span> mean)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gs_mat) <span class="ot">=</span> gs_mat[,<span class="dv">1</span>]</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> gs_mat[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>color <span class="ot">=</span> circlize<span class="sc">::</span><span class="fu">colorRamp2</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="dv">3</span>),</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="at">colors =</span> <span class="fu">c</span>(<span class="st">'white'</span>,</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">sequential_hcl</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">palette =</span> <span class="st">'OrRd'</span>)),</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="st">'black'</span>))</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>group_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"CD16+ Mono"</span>, <span class="st">"CD14+ Mono"</span>, </span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"mo-mac_transition"</span>, <span class="st">"SPP1hi mo-mac"</span>, <span class="st">"TREM2hi mo-mac"</span>, <span class="st">"AM"</span>)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>scaled_mat <span class="ot">=</span> <span class="fu">scale</span>(<span class="fu">t</span>(<span class="fu">t</span>(<span class="fu">as.matrix</span>(gs_mat))))[group_order, markers]</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> <span class="fu">Heatmap</span>(scaled_mat,</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a><span class="at">row_names_side =</span> <span class="st">"right"</span>,</span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="at">col =</span> color,</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a><span class="at">show_row_dend =</span> F,</span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="at">row_title_rot =</span> <span class="dv">0</span>,</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="at">column_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a><span class="at">row_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">15</span>),</span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a><span class="at">cluster_columns =</span> F,</span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="at">cluster_rows =</span> F,</span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a><span class="at">row_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), <span class="at">column_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), <span class="at">border =</span> <span class="st">'gray50'</span>,</span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="at">column_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a><span class="at">column_title_rot =</span> <span class="dv">90</span>,</span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a><span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Gene score"</span>)</span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(h1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="differential-motif-enrichment" class="level2">
+<h2 class="anchored" data-anchor-id="differential-motif-enrichment">Differential motif enrichment</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>markersPeaks <span class="ot">=</span> <span class="fu">getMarkerFeatures</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp_myeloid, </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">useMatrix =</span> <span class="st">"PeakMatrix"</span>, </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupBy =</span> <span class="st">"annotated"</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">bias =</span> <span class="fu">c</span>(<span class="st">"TSSEnrichment"</span>, <span class="st">"log10(nFrags)"</span>),</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">testMethod =</span> <span class="st">"wilcoxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-getMarkerFeatures-3372552ff9bc-Date-2025-03-06_Time-21-52-53.807965.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>MatrixClass = Sparse.Integer.Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:52:54.77379 : Matching Known Biases, 0.007 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>###########
+2025-03-06 21:58:49.857172 : Completed Pairwise Tests, 5.925 mins elapsed.
+###########</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging successful to : ArchRLogs/ArchR-getMarkerFeatures-3372552ff9bc-Date-2025-03-06_Time-21-52-53.807965.log</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>enrichMotifs <span class="ot">=</span> <span class="fu">peakAnnoEnrichment</span>(</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">seMarker =</span> markersPeaks,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp_myeloid,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">peakAnnotation =</span> <span class="st">"Motif"</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutOff =</span> <span class="st">"FDR &lt;= 0.01 &amp; Log2FC &gt;= 1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-peakAnnoEnrichment-337240b4d155-Date-2025-03-06_Time-21-58-51.161039.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:08.556203 : Computing Enrichments 1 of 8, 0.29 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:08.727567 : Computing Enrichments 2 of 8, 0.293 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:08.878899 : Computing Enrichments 3 of 8, 0.295 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:09.05237 : Computing Enrichments 4 of 8, 0.298 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:09.196339 : Computing Enrichments 5 of 8, 0.3 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:09.346842 : Computing Enrichments 6 of 8, 0.303 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:09.509811 : Computing Enrichments 7 of 8, 0.306 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:09.658366 : Computing Enrichments 8 of 8, 0.308 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging successful to : ArchRLogs/ArchR-peakAnnoEnrichment-337240b4d155-Date-2025-03-06_Time-21-58-51.161039.log</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>heatmapEM <span class="ot">=</span> <span class="fu">plotEnrichHeatmap</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  enrichMotifs, </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">20</span>,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">clusterCols =</span> F,</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutOff =</span> <span class="dv">20</span>,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-plotEnrichHeatmap-33721f1b44a3-Date-2025-03-06_Time-21-59-09.934409.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Adding Annotations..</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Preparing Main Heatmap..</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>heatmapEM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="find-activating-and-repressing-tfs" class="level2">
+<h2 class="anchored" data-anchor-id="find-activating-and-repressing-tfs">Find activating and repressing TFs</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>cor_threshold <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>padj <span class="ot">=</span> <span class="fl">0.01</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>maxDelta <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>seGroupMotif <span class="ot">=</span> <span class="fu">getGroupSE</span>(<span class="at">ArchRProj =</span> archp_myeloid, </span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">useMatrix =</span> <span class="st">"MotifMatrix"</span>, </span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">groupBy =</span> <span class="st">"annotated"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-getGroupSE-33726534415b-Date-2025-03-06_Time-21-59-14.631031.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Getting Group Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:23.197331 : Successfully Created Group Matrix, 0.133 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Normalizing by number of Cells</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging successful to : ArchRLogs/ArchR-getGroupSE-33726534415b-Date-2025-03-06_Time-21-59-14.631031.log</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>seZ <span class="ot">=</span> seGroupMotif[<span class="fu">rowData</span>(seGroupMotif)<span class="sc">$</span>seqnames<span class="sc">==</span><span class="st">"z"</span>, ]</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(seZ)<span class="sc">$</span>maxDelta <span class="ot">=</span> <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">ncol</span>(seZ)), <span class="cf">function</span>(x){<span class="fu">rowMaxs</span>(<span class="fu">assay</span>(seZ) <span class="sc">-</span> <span class="fu">assay</span>(seZ)[,x])}) <span class="sc">%&gt;%</span> <span class="fu">Reduce</span>(<span class="st">"cbind"</span>, .) <span class="sc">%&gt;%</span> rowMaxs</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>corGSM_MM <span class="ot">=</span> <span class="fu">correlateMatrices</span>(<span class="at">ArchRProj =</span> archp_myeloid, </span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">useMatrix1 =</span> <span class="st">"GeneScoreMatrix"</span>,</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">useMatrix2 =</span> <span class="st">"MotifMatrix"</span>,</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-correlateMatrices-337249aef145-Date-2025-03-06_Time-21-59-24.221941.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>When accessing features from a matrix of class Sparse.Assays.Matrix it requires 1 seqname!
+Continuing with first seqname 'z'!
+If confused, try getFeatures(ArchRProj, 'MotifMatrix') to list out available seqnames for input!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:26.595268 : Testing 869 Mappings!, 0.04 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:26.655864 : Computing KNN, 0.041 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:26.77961 : Identifying Non-Overlapping KNN pairs, 0.043 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:28.940212 : Identified 500 Groupings!, 0.079 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 21:59:29.267981 : Getting Group Matrix 1, 0.084 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 22:00:39.549845 : Getting Group Matrix 2, 1.255 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Some entries in groupMat2 are less than 0, continuing without Log2 Normalization.
+Most likely this assay is a deviations matrix.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Getting Correlations...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-06 22:00:47.72909 : </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Computing Correlation (250 of 869)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Computing Correlation (500 of 869)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Computing Correlation (750 of 869)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging successful to : ArchRLogs/ArchR-correlateMatrices-337249aef145-Date-2025-03-06_Time-21-59-24.221941.log</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>corGSM_MM<span class="sc">$</span>maxDelta <span class="ot">=</span> <span class="fu">rowData</span>(seZ)[<span class="fu">match</span>(corGSM_MM<span class="sc">$</span>MotifMatrix_name, <span class="fu">rowData</span>(seZ)<span class="sc">$</span>name), <span class="st">"maxDelta"</span>]</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>corGSM_MM <span class="ot">=</span> corGSM_MM[<span class="fu">order</span>(<span class="fu">abs</span>(corGSM_MM<span class="sc">$</span>cor), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>corGSM_MM <span class="ot">=</span> corGSM_MM[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">-.*"</span>, <span class="st">""</span>, corGSM_MM[,<span class="st">"MotifMatrix_name"</span>]))), ]</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>corGSM_MM<span class="sc">$</span>TFRegulator <span class="ot">=</span> <span class="st">""</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>corGSM_MM<span class="sc">$</span>TFRegulator[<span class="fu">which</span>(corGSM_MM<span class="sc">$</span>cor <span class="sc">&gt;</span> cor_threshold <span class="sc">&amp;</span> corGSM_MM<span class="sc">$</span>padj <span class="sc">&lt;</span> padj <span class="sc">&amp;</span> corGSM_MM<span class="sc">$</span>maxDelta <span class="sc">&gt;</span> maxDelta)] <span class="ot">&lt;-</span> <span class="st">"YES"</span></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>corGSM_MM<span class="sc">$</span>TF_name <span class="ot">=</span> <span class="st">""</span></span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>corGSM_MM<span class="sc">$</span>TF_name[corGSM_MM<span class="sc">$</span>TFRegulator <span class="sc">==</span> <span class="st">'YES'</span>] <span class="ot">=</span> corGSM_MM[, <span class="dv">1</span>][corGSM_MM<span class="sc">$</span>TFRegulator <span class="sc">==</span> <span class="st">'YES'</span>]</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>active_TF <span class="ot">=</span> <span class="fu">sort</span>(corGSM_MM[corGSM_MM<span class="sc">$</span>TFRegulator <span class="sc">==</span> <span class="st">"YES"</span>, <span class="dv">1</span>])</span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(corGSM_MM), </span>
+<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(cor, maxDelta, <span class="at">color =</span> TFRegulator, <span class="at">label =</span> TF_name)) <span class="sc">+</span></span>
+<span id="cb97-13"><a href="#cb97-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb97-14"><a href="#cb97-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ArchR</span>() <span class="sc">+</span></span>
+<span id="cb97-15"><a href="#cb97-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb97-16"><a href="#cb97-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"NO"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>, <span class="st">"YES"</span> <span class="ot">=</span> <span class="st">"firebrick3"</span>)) <span class="sc">+</span></span>
+<span id="cb97-17"><a href="#cb97-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Correlation To Gene Score"</span>) <span class="sc">+</span></span>
+<span id="cb97-18"><a href="#cb97-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Max TF Motif Delta"</span>) <span class="sc">+</span></span>
+<span id="cb97-19"><a href="#cb97-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(corGSM_MM<span class="sc">$</span>maxDelta) <span class="sc">*</span> <span class="fl">1.05</span>)) <span class="sc">+</span></span>
+<span id="cb97-20"><a href="#cb97-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_label_repel</span>(<span class="at">label =</span> corGSM_MM<span class="sc">$</span>TF_name, <span class="at">max.overlaps=</span><span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_label_repel()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rna" class="level2">
+<h2 class="anchored" data-anchor-id="rna">RNA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>rna_obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Human_Multiome_RNA.rds"</span>)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>rna_obj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>An object of class Seurat 
+35657 features across 3500 samples within 1 assay 
+Active assay: RNA (35657 features, 2000 variable features)
+ 3 layers present: counts, data, scale.data
+ 3 dimensional reductions calculated: pca, sampleID_harmony, sampleID_harmony_umap</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rna_obj<span class="sc">$</span>annotated, rna_obj<span class="sc">$</span>sampleID_harmony_snn_res.<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   
+                      0   1   2   3   4   5   6   7   8   9  10  11
+  AM                  0   0   0   0   0   0  29   0   0   0   0   0
+  CD14+ Mono        802   0  60   0   0   0   0   0   0   0   0   0
+  CD16+ Mono         10 801   0   0   0   0 128 308   0   0 102   0
+  IM                  0   0   0   0   0  27   3   0 174   0   0   0
+  mo-mac_transition   0   0   0   0 249  75  85   0  25   0   0   0
+  moDC                0   0   0   0 113  33   0   0   0   0   0   0
+  SPP1hi mo-mac       0   0   0   0 157 174   9   0   7   0   0   0
+  TREM2hi mo-mac      0   0   0   0   0  35  73   0  21   0   0   0</code></pre>
+</div>
+</div>
+</section>
+<section id="truth-plot" class="level2">
+<h2 class="anchored" data-anchor-id="truth-plot">Truth-plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>markers <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"TMTC1"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"SETBP1"</span>, <span class="st">"SNED1"</span>, <span class="st">"VCAN"</span>, <span class="st">"EREG"</span>, <span class="st">"AREG"</span>, <span class="st">"IL1R2"</span>, <span class="st">"WARS"</span>, <span class="st">"PTGS2"</span>, <span class="st">"C5AR1"</span>, <span class="st">"FCN1"</span>, <span class="st">"CLEC4E"</span>, <span class="st">"S100A9"</span>, <span class="st">"S100A8"</span>, <span class="st">"GBP1"</span>, <span class="st">"SERPINB2"</span>, <span class="st">"GPR183"</span>, <span class="st">"C1QA"</span>, <span class="st">"CD68"</span>, <span class="st">"C1QB"</span>, <span class="st">"C1QC"</span>, <span class="st">"SPP1"</span>, <span class="st">"FBP1"</span>, <span class="st">"IL4I1"</span>, <span class="st">"GPNMB"</span>, <span class="st">"A2M"</span>, <span class="st">"CD9"</span>, <span class="st">"TREM2"</span>, <span class="st">"MRC1"</span>, <span class="st">"F13A1"</span>, <span class="st">"SLCO2B1"</span>, <span class="st">"STAB1"</span>, <span class="st">"RNASE1"</span>, <span class="st">"SELENOP"</span>, <span class="st">"FOLR2"</span>, <span class="st">"LYVE1"</span>, <span class="st">"PPARG"</span>, <span class="st">"LSAMP"</span>, <span class="st">"MARCO"</span>)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> rna_obj<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts[<span class="fu">unique</span>(markers), ]</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>manual_annotation <span class="ot">=</span> rna_obj<span class="sc">$</span>annotated</span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>cells <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(<span class="fu">unique</span>(manual_annotation), <span class="cf">function</span>(v) <span class="fu">sample</span>(<span class="fu">names</span>(manual_annotation)[manual_annotation<span class="sc">==</span>v], <span class="fu">min</span>(<span class="fu">sum</span>(manual_annotation<span class="sc">==</span>v), <span class="dv">50</span>))))</span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">=</span> mat[, <span class="fu">unlist</span>(cells)]</span>
+<span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a>manual_annotation <span class="ot">=</span> manual_annotation[<span class="fu">unlist</span>(cells)]</span>
+<span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  40 379</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>color <span class="ot">=</span> circlize<span class="sc">::</span><span class="fu">colorRamp2</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="fl">1.5</span>,<span class="dv">2</span>,<span class="fl">2.5</span>,<span class="dv">3</span>), </span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">'white'</span>, </span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">rev</span>(<span class="fu">sequential_hcl</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">palette =</span> <span class="st">'OrRd'</span>)), </span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">'black'</span>))</span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> <span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">as.matrix</span>(mat))[, markers], </span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_names_side =</span> <span class="st">"right"</span>, </span>
+<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> color,</span>
+<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_split =</span> manual_annotation, </span>
+<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">show_row_dend =</span> F,</span>
+<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_title_rot =</span> <span class="dv">0</span>, </span>
+<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">15</span>), </span>
+<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb106-17"><a href="#cb106-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">cluster_rows =</span> F,</span>
+<span id="cb106-18"><a href="#cb106-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), </span>
+<span id="cb106-19"><a href="#cb106-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), </span>
+<span id="cb106-20"><a href="#cb106-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">border =</span> <span class="st">'gray50'</span>,</span>
+<span id="cb106-21"><a href="#cb106-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb106-22"><a href="#cb106-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_title_rot =</span> <span class="dv">90</span>,</span>
+<span id="cb106-23"><a href="#cb106-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Expression"</span>)</span>
+<span id="cb106-24"><a href="#cb106-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb106-25"><a href="#cb106-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-26"><a href="#cb106-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(h1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1440"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="high-dimensional-wgcna" class="level2">
+<h2 class="anchored" data-anchor-id="high-dimensional-wgcna">High dimensional WGCNA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdWGCNA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'GenomicRanges::intersect' by
+'SeuratObject::intersect' when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'GenomicRanges::union' by 'dplyr::union'
+when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'GenomicRanges::setdiff' by 'dplyr::setdiff'
+when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'dplyr::as_data_frame' by
+'igraph::as_data_frame' when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'Seurat::components' by 'igraph::components'
+when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'dplyr::groups' by 'igraph::groups' when
+loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'dplyr::union' by 'igraph::union' when
+loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'GenomicRanges::subtract' by
+'magrittr::subtract' when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'Matrix::as.matrix' by 'proxy::as.matrix'
+when loading 'hdWGCNA'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'igraph::groups' by 'tidygraph::groups' when
+loading 'hdWGCNA'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">SetupForWGCNA</span>(</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  rna_obj,</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gene_select =</span> <span class="st">"fraction"</span>,</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fraction =</span> <span class="fl">0.05</span>,</span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">wgcna_name =</span> <span class="st">"NSCLC_Human_RNA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">MetacellsByGroups</span>(</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">seurat_obj =</span> rna_obj_wgcna,</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group.by =</span> <span class="fu">c</span>(<span class="st">"annotated"</span>), </span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">reduction =</span> <span class="st">'sampleID_harmony_umap'</span>,</span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">20</span>, </span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_shared =</span> <span class="dv">15</span>, </span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_cells =</span> <span class="dv">20</span>,</span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ident.group =</span> <span class="st">'annotated'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Data is of class dgeMatrix. Coercing to dgCMatrix.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">NormalizeMetacells</span>(rna_obj_wgcna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Normalizing layer: counts</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">SetDatExpr</span>(</span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>  rna_obj_wgcna,</span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_name =</span> <span class="fu">c</span>(<span class="st">"mo-mac_transition"</span>,</span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SPP1hi mo-mac"</span>,</span>
+<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"TREM2hi mo-mac"</span>,</span>
+<span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"AM"</span>,</span>
+<span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"IM"</span>),</span>
+<span id="cb124-8"><a href="#cb124-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">group.by =</span> <span class="st">'annotated'</span>,</span>
+<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">assay =</span> <span class="st">'RNA'</span>,</span>
+<span id="cb124-10"><a href="#cb124-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">'data'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">TestSoftPowers</span>(rna_obj_wgcna, <span class="at">networkType =</span> <span class="st">'signed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pickSoftThreshold: will use block size 6579.
+ pickSoftThreshold: calculating connectivity for given powers...
+   ..working on genes 1 through 6579 of 6800</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: executing %dopar% sequentially: no parallel backend registered</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (x, y = NULL, robustX = TRUE, robustY = TRUE, use =
+"all.obs", : bicor: zero MAD in variable 'x'. Pearson correlation was used for
+individual columns with zero (or missing) MAD.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (x, y = NULL, robustX = TRUE, robustY = TRUE, use =
+"all.obs", : bicor: zero MAD in variable 'y'. Pearson correlation was used for
+individual columns with zero (or missing) MAD.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ..working on genes 6580 through 6800 of 6800</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (x, y = NULL, robustX = TRUE, robustY = TRUE, use =
+"all.obs", : bicor: zero MAD in variable 'x'. Pearson correlation was used for
+individual columns with zero (or missing) MAD.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (x, y = NULL, robustX = TRUE, robustY = TRUE, use =
+"all.obs", : bicor: zero MAD in variable 'y'. Pearson correlation was used for
+individual columns with zero (or missing) MAD.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Power SFT.R.sq  slope truncated.R.sq  mean.k. median.k.  max.k.
+1      1    0.205  16.50          0.902 3.42e+03  3.43e+03 3600.00
+2      2    0.133  -7.21          0.828 1.78e+03  1.76e+03 2080.00
+3      3    0.734 -10.50          0.918 9.48e+02  9.29e+02 1300.00
+4      4    0.865  -8.23          0.971 5.19e+02  5.01e+02  851.00
+5      5    0.913  -6.46          0.992 2.91e+02  2.76e+02  581.00
+6      6    0.926  -5.31          0.997 1.67e+02  1.54e+02  410.00
+7      7    0.925  -4.52          0.992 9.85e+01  8.71e+01  297.00
+8      8    0.920  -3.95          0.996 5.93e+01  5.01e+01  221.00
+9      9    0.901  -3.57          0.985 3.66e+01  2.92e+01  167.00
+10    10    0.903  -3.20          0.984 2.31e+01  1.73e+01  129.00
+11    12    0.911  -2.67          0.984 9.80e+00  6.26e+00   80.30
+12    14    0.936  -2.29          0.994 4.54e+00  2.36e+00   52.80
+13    16    0.944  -2.06          0.989 2.28e+00  9.19e-01   36.60
+14    18    0.889  -2.00          0.940 1.23e+00  3.70e-01   27.20
+15    20    0.903  -1.88          0.950 7.11e-01  1.54e-01   20.70
+16    22    0.937  -1.77          0.983 4.33e-01  6.55e-02   16.20
+17    24    0.938  -1.70          0.977 2.77e-01  2.82e-02   12.80
+18    26    0.933  -1.65          0.966 1.84e-01  1.23e-02   10.30
+19    28    0.926  -1.62          0.965 1.27e-01  5.54e-03    8.40
+20    30    0.917  -1.58          0.949 8.97e-02  2.50e-03    6.91</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>plot_list <span class="ot">=</span> <span class="fu">PlotSoftPowers</span>(rna_obj_wgcna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Power  SFT.R.sq      slope truncated.R.sq   mean.k. median.k.    max.k.
+1     1 0.2054381  16.510138      0.9020552 3424.2659 3432.6259 3598.7803
+2     2 0.1325096  -7.209795      0.8276239 1777.5764 1761.4306 2076.5707
+3     3 0.7343745 -10.483857      0.9180101  948.4706  928.8680 1296.3816
+4     4 0.8654727  -8.226830      0.9713419  519.2731  501.3192  851.2168
+5     5 0.9131294  -6.463701      0.9918242  291.3820  275.6501  581.3724
+6     6 0.9263615  -5.311611      0.9971059  167.4641  154.0705  410.0720</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plot_list, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>power_table <span class="ot">&lt;-</span> <span class="fu">GetPowerTable</span>(rna_obj_wgcna)</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(power_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Power  SFT.R.sq      slope truncated.R.sq   mean.k. median.k.    max.k.
+1     1 0.2054381  16.510138      0.9020552 3424.2659 3432.6259 3598.7803
+2     2 0.1325096  -7.209795      0.8276239 1777.5764 1761.4306 2076.5707
+3     3 0.7343745 -10.483857      0.9180101  948.4706  928.8680 1296.3816
+4     4 0.8654727  -8.226830      0.9713419  519.2731  501.3192  851.2168
+5     5 0.9131294  -6.463701      0.9918242  291.3820  275.6501  581.3724
+6     6 0.9263615  -5.311611      0.9971059  167.4641  154.0705  410.0720</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">ConstructNetwork</span>(rna_obj_wgcna,</span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">tom_name =</span> <span class="st">'NSCLC_Human_RNA'</span>, </span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">overwrite_tom =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ConstructNetwork(rna_obj_wgcna, tom_name = "NSCLC_Human_RNA", :
+Overwriting TOM TOM/NSCLC_Human_RNA_TOM.rda</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Soft power not provided. Automatically using the lowest power that meets 0.8 scale-free topology fit. Using soft_power = 4
+ Calculating consensus modules and module eigengenes block-wise from all genes
+ Calculating topological overlaps block-wise from all genes
+   Flagging genes and samples with too many missing values...
+    ..step 1
+    TOM calculation: adjacency..
+    ..will not use multithreading.
+     Fraction of slow calculations: 0.000000
+    ..connectivity..
+    ..matrix multiplication (system BLAS)..
+    ..normalization..
+    ..done.
+ ..Working on block 1 .
+ ..Working on block 1 .
+ ..merging consensus modules that are too close..</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PlotDendrogram</span>(rna_obj_wgcna, <span class="at">main =</span> <span class="st">'NSCLC Human Myeloid hdWGCNA Dendrogram'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>TOM <span class="ot">=</span> <span class="fu">GetTOM</span>(rna_obj_wgcna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">ModuleEigengenes</span>(rna_obj_wgcna, <span class="at">group.by.vars =</span> <span class="st">"sampleID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "blue"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcablue to pcablue_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcablue_ 1 
+Positive:  RIPOR2, SCLT1, NEDD9, RNF144B, FRY, FYN, PRKCB, INSR, CYTIP, KCNAB2 
+       SAT1, STK17B, MPP7, SMCHD1, IQSEC1, ADGRE2, LIPN, RIN3, TMEM154, MYO1G 
+       WARS, SAMSN1, NFKBIZ, TNFRSF1B, TNFAIP8, FAM49A, FBXW7, NOCT, FGR, RYBP 
+Negative:  RGS1, HLA-DQA1, GPR183, HLA-DPB1, HLA-DRB1, CD74, HLA-DQB1, HLA-DPA1, HLA-DRA, NR4A3 
+       STX17-AS1, HLA-DRB5, SGK1, CCSER1, VIM, CD109, YWHAH, HLA-DMA, AXL, CST3 
+       TMSB10, NR4A2, CIITA, GAPDH, FOSB, ZNF331, LDLRAD4, TMSB4X, GRASP, FPR3 
+pcablue_ 2 
+Positive:  IL1B, PLAUR, EREG, SOD2, NFKB1, KYNU, NLRP3, ATP2B1, TNFAIP3, RABGEF1 
+       GK, ATP13A3, LUCAT1, CXCL8, CD55, SAMSN1, IVNS1ABP, EHD1, WTAP, NAMPT 
+       PNPLA8, NFKBIA, ADAMTSL4-AS1, ARL5B, ICAM1, BIRC3, PTGS2, LPXN, OXSR1, GK-AS1 
+Negative:  HLA-DPA1, CD74, HLA-DPB1, TMSB4X, STK17B, CEBPD, ACTB, ANKRD44, TMSB10, CST3 
+       HLA-DRB1, CXCR4, RGS1, HLA-DRB5, CYTIP, HLA-DQB1, HLA-DQA1, PFN1, AKAP13, COTL1 
+       CD86, LST1, NAP1L1, GNAI2, KCNAB2, ACTG1, EEF1A1, UBA52, ARPC1B, EEF1G 
+pcablue_ 3 
+Positive:  RGS1, OLR1, LDLRAD4, CD74, HLA-DQA1, AXL, PDGFB, CSF2RA, CIITA, B3GNT5 
+       CLEC5A, HLA-DQB1, SGK1, MGAM, AL136987.1, MIR155HG, ALOX5AP, ALPK3, IER3, HLA-DRB1 
+       GPR183, SNX8, HLA-DRA, AC025580.2, HLA-DPB1, FPR3, CXCL8, FILIP1L, HLA-DRB5, PPARD 
+Negative:  RIPOR2, FYN, CYTIP, WARS, SCLT1, PRKCB, RNF144B, KCNAB2, FRY, NEDD9 
+       MALAT1, STK17B, SAT1, IFITM3, COTL1, TNFRSF1B, IFI30, SMCHD1, NFKBIZ, CD55 
+       FAM49A, H3F3A, SULF2, C9orf72, IQSEC1, ELF1, RYBP, UBE2J1, SAMSN1, LCP1 
+pcablue_ 4 
+Positive:  MALT1, RAPGEF1, SIPA1L1, RFTN1, XYLT1, AGO2, LRRFIP1, AFF3, UBASH3B, GPAT3 
+       AKAP13, VDR, DUSP4, AC016831.7, ZBTB46, SNX8, CD80, SIK3, INPP5A, ESYT2 
+       IRF4, ENTPD1, IQCJ-SCHIP1, SLC38A1, CIITA, ANKRD11, PKIB, ARL4C, RALA, ADAM19 
+Negative:  FTH1, BCL2A1, FOS, NFKBIA, TNFAIP3, B2M, IER3, AL360012.1, EEF1A1, SOD2 
+       DUSP1, PPP1R15A, IL1B, SRGN, CCL20, OLR1, LINC00910, CXCL8, IER2, ACTB 
+       MIR3945HG, HLA-C, HLA-A, HLA-B, AL138720.1, PNRC1, NFKBIZ, ENSA, PLEK, IL1A 
+pcablue_ 5 
+Positive:  ITGA5, TRAF1, S100A10, USP12, MALAT1, AC025580.2, ANXA5, CD58, IRAK2, FLNA 
+       MIR155HG, IFITM3, EIF4E, C15orf48, S100A6, AL078604.4, MAMLD1, LPXN, ZNF267, TYMP 
+       PKM, TIMP1, LGALS1, NFAT5, ARHGEF2, LUCAT1, VASP, S100A11, ITGAX, HSPA5 
+Negative:  NAMPT, FOS, CD83, SRGN, HDAC9, SYAP1, SAMSN1, PER1, NR4A2, CCNH 
+       IL1R2, NR4A1, PHACTR1, AL360012.1, JAML, CD55, FGD4, AFF3, MPP7, EIF4A3 
+       INSR, FLT3, RGS2, CSF2RA, ENTPD1, CYTIP, PKP2, NFE2L2, USP36, TNFAIP3 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "grey"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcagrey to pcagrey_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcagrey_ 1 
+Positive:  MBD2, NAAA, ITM2B, LYST, LIMD1, TBC1D8, PIP4K2A, UTRN, TSPAN14, HSP90AA1 
+       CBL, HSPA1B, LNPEP, CHD9, RICTOR, HSPA1A, TMEM131L, HSPE1, XPO1, SLC25A25 
+       PTPRC, ARAP2, TBC1D22A, SCAF11, FAM126A, STK38, CDK6, KDM1B, FAM49B, MED13L 
+Negative:  SERPINB2, CD44, TNIP1, MAP4K4, AC079753.2, ARHGAP26, LCP2, IL6R, FLOT1, CREB5 
+       DOCK4, LIMK2, SEC22B, LAMB3, GRAMD1A, THAP2, AC005050.3, IL4R, CLEC4E, TNIP3 
+       CD93, RELB, PDE4D, ZNF697, SESTD1, AL031602.2, IFNGR2, SEC24A, SAV1, TANK 
+pcagrey_ 2 
+Positive:  LYST, PAG1, ST6GALNAC3, UTRN, RAP1GAP2, CHST15, DLEU2, PTPRC, TUT7, LRRK2 
+       TBC1D8, SVIL, TLE4, CPPED1, AGTPBP1, HCK, WAC, RNF149, SLC16A7, CCDC88C 
+       AC119396.1, ARHGEF18, RAP1B, WDR26, S100Z, ADD3, PELI2, AL034397.3, FGD3, ARAP2 
+Negative:  ALCAM, DOCK4, DTNA, TANC2, OSBPL3, USP53, A2M, GRN, AFDN, EPB41L2 
+       LMNA, FMNL3, C1QB, CD63, DST, MOB3B, MYO1E, ABHD12, MIR99AHG, CD9 
+       MYO1D, CALM1, DOCK1, CTSH, ELMO1, ITGAV, GNAS, ATP2C1, PRKCH, P3H2 
+pcagrey_ 3 
+Positive:  PLCG2, LINC00278, DDX3Y, MIS18BP1, AC084871.1, ZFAND5, DLEU1, WDR74, DLEU7, AL034397.3 
+       JDP2, VSIR, PRKY, NGB, KMT2E-AS1, AL021155.5, TTTY14, EPHA1-AS1, AL591518.1, SRGAP2 
+       SPTLC2, KDM5D, CLEC4E, ZFY, AL118511.1, LRRK2, NUDT16, TANC2, RGS18, RASSF4 
+Negative:  XIST, CD44, LMNA, STAT4, RFX2, FAM102B, TSIX, IL4R, TUBB6, ARFGAP3 
+       ANXA2, KDM6A, KMT2E, NIBAN2, EPB41L3, MOB3B, USP32, ADGRE5, STK40, IL6R 
+       RAB10, FNIP1, PDE4D, RTN4, ZMIZ1, SEC24A, RAP1B, KPNA4, EHD4, PHF20 
+pcagrey_ 4 
+Positive:  ELMO1, FOXN3, USP53, FOXP1, MIR99AHG, MS4A4E, PLXNA2, RAB31, RTN1, MOB3B 
+       P2RY14, MYO1D, SSBP2, PELI1, MICAL2, LRRC8C, CMIP, ACSM3, PICALM, AFDN 
+       PRKAG2, CREB5, DNM2, ADGRB3, TTC7A, CHKA, OSBPL3, DTNA, PDE7B, DGKD 
+Negative:  CSTB, LY6E, IFI6, LGALS3, GSTO1, FBP1, FABP5, CD63, ARPC5, MARCKS 
+       C3AR1, OAS2, STAT1, MOB1A, TANK, APOL6, CD48, PAG1, PIK3AP1, SRSF5 
+       ANXA2, ATP6V0C, TSPO, DPYD-AS1, CALM1, CANX, PSMA7, TNIP1, IFIT2, NDUFB9 
+pcagrey_ 5 
+Positive:  USP15, CLEC4E, ARHGAP26, DPYD-AS1, AGTPBP1, NAIP, AC084871.1, ST6GALNAC3, PTPRE, SPTLC2 
+       PTK2B, CERS6, AL034397.3, PRKAG2, TREM1, ROCK1, AL049651.1, CACNA2D3, SHTN1, EIF4G3 
+       SRGAP2, ATF6, PCNX1, PCSK5, PHACTR2, LINC00937, CPVL, TRPS1, QKI, YBX3 
+Negative:  LIMD1, AC104809.2, CDKN1C, TBC1D8, IL21R, LMNA, TAGLN, SH2B3, P3H2, RAPH1 
+       SLC44A2, PTPN13, PLXNA2, KCNQ3, AC024084.1, RASA3, RAP1GAP2, HEG1, NOL4L, SVIL 
+       MYOF, CDYL2, PHF19, SH2D3C, AC119396.1, ABR, CD9, NEURL1, SH3BP2, NAAA </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Key 'harmony_' taken, using 'lxquf_' instead</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "yellow"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcayellow to pcayellow_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcayellow_ 1 
+Positive:  GPNMB, CTSD, APOE, TPRG1, APOC1, MITF, ARHGAP10, FTL, PPARG, LPL 
+       CD68, TNS3, ABCG1, DENND4C, SNTB1, ACP5, PSAP, TNS1, TGFBI, NEK6 
+       HEXB, CTSZ, NCEH1, DNASE2, SH3RF3, SIGLEC1, RREB1, CTSL, GLUL, FAM20C 
+Negative:  TCF7L2, VMP1, HK3, DDX60L, DYSF, C5AR1, CR1, TPST1, ZNF281, CPNE8 
+       SLC11A1, ZEB2, CKAP4, ASPH, SIRPB1, TNFAIP2, CD36, PRAM1, AP003086.1, VRK2 
+       SLC22A15, PTPN12, PYGL, CTSS, FNDC3A, DUS2, PRPF3, CLIP4, DOK3, CLMN 
+pcayellow_ 2 
+Positive:  ARHGAP10, TGFBI, FHAD1, EMP1, APOC1, APOE, CTSZ, PMP22, MMP2, NEK6 
+       EPAS1, GPNMB, CD82, MITF, FAM20C, HEXB, ABCG1, SDC2, PPARG, IRAK1 
+       LAIR1, CTSD, CTSA, ZMIZ1-AS1, PDE4DIP, PLBD2, ASPH, ADM, SIGLEC1, MFHAS1 
+Negative:  TCF7L2, ZEB2, CLIP4, VMP1, CTSS, FCGR3A, CERT1, LTA4H, SASH1, OAS1 
+       ARHGAP17, PDCD6IP, HK3, DDX60L, PTPN12, PRAM1, SLC22A15, PVT1, SLC11A1, FGD6 
+       DUS2, PAPSS1, PSAP, CD300LF, RYK, CD36, CPNE8, MDM2, CR1, ITPKB 
+pcayellow_ 3 
+Positive:  FCGR3A, FTL, TCF7L2, OAS1, CTSS, RREB1, HMOX1, LINC01473, DUS2, TGFBI 
+       SLC25A13, LTA4H, TMEM30A, ITPKB, LIPA, GLUL, RMND5A, PAPSS1, ADAR, CD300LF 
+       BRI3, APOC1, APOE, CD68, ODC1, RYK, MRPS5, PSAP, CTSZ, FHAD1 
+Negative:  SLC11A1, FNDC3A, C5AR1, TPST1, PLA2G7, DYSF, ASPH, TNFAIP2, AP003086.1, DDX60L 
+       CPNE8, PPARG, MPP1, ZEB2, CTSL, KIF13A, SNTB1, SDC2, CKAP4, SEMA3C 
+       TBC1D2, ZNF281, PYGL, VRK2, VMP1, IGF2R, EEPD1, MARCO, TNS3, SLC22A15 
+pcayellow_ 4 
+Positive:  APOE, CTSS, PSAP, APOC1, FTL, CD68, GM2A, GPNMB, MMP2, DNASE2 
+       CTSD, FCGR3A, DYSF, C5AR1, LTA4H, ZNF281, AP003086.1, SNTB1, VRK2, LIPA 
+       PYGL, TPST1, AC008957.2, SH3RF3, PRAM1, TNFAIP2, TNFRSF14, DDX60L, CTSA, AC066613.2 
+Negative:  EMP1, DENND4C, ARHGAP10, CORO1C, PAPSS1, ATP10A, PDE4DIP, NEK6, MCUB, RREB1 
+       PSMD14, SDC2, SLC25A13, PPARG, ARHGAP17, EPAS1, TFRC, SASH1, ARMC8, FSD1L 
+       MFHAS1, CERT1, SND1, PMP22, MITF, GPD2, TNS1, ATP9B, MPP1, DCTN4 
+pcayellow_ 5 
+Positive:  CTSL, TCF7L2, MPP1, FCGR3A, CERT1, ADM, NPC1, FNDC3A, ZEB2, ITPKB 
+       CLIP4, TFRC, TNFAIP2, HMOX1, MGLL, PDE4DIP, WDFY1, NEU1, SLC11A1, PLA2G7 
+       PRPF3, EPAS1, PPARG, FLNB, MMP2, GPNMB, SASH1, PCID2, PMP22, APOE 
+Negative:  CD36, ASPH, SLC22A15, TEX2, KIF13A, HSD17B4, DYSF, LRP1, CPNE8, PVT1 
+       NSMCE2, SNTB1, RREB1, CTSS, TPST1, PGD, FIG4, DENND4C, CAST, FGD6 
+       IDH1, MITF, LTBR, MICU1, HM13, SLC25A13, CLMN, FKBP15, TNS3, GPD2 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "turquoise"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcaturquoise to pcaturquoise_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcaturquoise_ 1 
+Positive:  FMNL2, MAP3K1, TBXAS1, SSH2, FYB1, FAM117B, DAPK1, PECAM1, FKBP5, C2CD5 
+       NCOA2, FLI1, STX7, DOCK2, WASHC4, ANKS1A, USP3, SPRED1, APBB1IP, REPS1 
+       SNAPC3, SETBP1, WASF2, SPATA6, KANSL1, USP24, AKAP10, TENT2, HERC1, SAMHD1 
+Negative:  FMN1, LDLR, AGPAT4, DUSP16, DRAM1, IL6ST, CD99, AL592429.2, N4BP1, IL1RAP 
+       NUMB, FOXO3, GAB2, HRH1, PLD1, AL163541.1, RBM47, SIAH2, MB21D2, SGMS1 
+       ATP6V1C1, TMCC3, SFTPA2, ARHGAP24, TBK1, ELL, PXN, SIAH1, SLC11A2, RHOU 
+pcaturquoise_ 2 
+Positive:  ZBTB16, FAM117B, EXT1, LILRB2, XPR1, SETBP1, NCOA2, SSH2, PPM1L, SNAPC3 
+       SNED1, NOTCH2, MAP3K1, FYB1, SPATA6, DICER1, USP3, PTBP2, MEGF9, SBF2 
+       MAP3K3, DOCK2, FLI1, DPYD, ULK2, DIAPH2, AGFG1, AOAH, REPS1, BIN2 
+Negative:  FRMD4A, SLCO2B1, ARHGAP18, F13A1, MRC1, BNC2, IGSF21, FRMD4B, AL356124.1, STARD13 
+       NCKAP5, CPM, MB21D2, DAB2, PTPRM, MGAT4A, MGAT5, FMN1, LGMN, ARHGAP22 
+       BMP2K, NRP1, C1QA, TMEM51, ARHGAP6, NHSL1, C1QC, ANK3, AP2A2, COLEC12 
+pcaturquoise_ 3 
+Positive:  TXNIP, CSF1R, MGAT4A, ARHGAP22, LPAR6, CTNND1, CD84, ST6GAL1, C1QC, VPS13C 
+       FMNL2, TMEM51, ADAP2, AL035446.2, FAM135A, FRMD4A, GCLC, GPR34, C1QA, STX6 
+       ATF7IP, ALPK1, BNC2, ATM, ST3GAL6, SRGAP3, MRPS28, APBB1IP, OTULINL, P2RY12 
+Negative:  SFTPC, SFTPA1, SGMS1, GAS7, AGPAT4, AGFG1, RBM47, PID1, DMXL2, SFTPA2 
+       LDLR, GAB2, NUMB, CSGALNACT1, SFTPB, RBMS1, SLCO3A1, EXT1, DPYD, ANTXR2 
+       IGSF21, IL1RAP, TLR2, ZBTB16, F13A1, ARHGAP24, ARHGAP6, SBF2, STARD13, CD163 
+pcaturquoise_ 4 
+Positive:  DPYD, FMN1, ARHGAP24, CD163, SLC1A3, FCHSD2, FKBP5, AOAH, MS4A6A, MEGF9 
+       ZBTB16, TLR2, FAR2, PTEN, SLC2A9, SRGAP1, DENND1A, SPIDR, TFEC, PARP8 
+       BAZ2B, CHPT1, NFIA, FAM13A, MAML2, DISC1, FYB1, SSH2, KLF7, SRPK2 
+Negative:  FMNL2, ANKH, MB21D2, SPRED1, ARHGAP6, EML4, SFTPA2, SFTPC, SFTPB, KIF1B 
+       MRC1, PSD3, SNED1, PTPN9, SETBP1, FOXO1, TRAK1, SFTPA1, AGPAT4, MS4A7 
+       LRCH3, KCNMA1, LILRB2, COLEC12, LGMN, N4BP1, MSR1, NR3C1, ST3GAL1, SNAPC3 
+pcaturquoise_ 5 
+Positive:  MAML2, LHFPL2, TFEC, SLC1A3, DPYD, NPL, ATXN1, ACER3, KCNMA1, IL6ST 
+       ABCA1, SLC38A6, MGAT4A, RBMS1, ANKRD10, RBM47, PLD1, AGFG1, EML4, FMN1 
+       SIPA1L2, GSAP, N4BP1, LRMDA, DRAM1, NUMB, STK3, HSPB1, DMXL2, TAB2 
+Negative:  IGSF21, KHDRBS2, CSGALNACT1, F13A1, ANK3, CTTNBP2, NCKAP5, PECAM1, ZBTB16, ANKS1A 
+       ITSN1, PDGFC, FCHSD2, PRKN, ADGRG6, CBLB, SETBP1, FKBP5, ZMYND11, SNED1 
+       PRKAR2B, SLC40A1, ST6GAL1, PREX1, ITGA9, SLC9A9, PDE3B, FAM117B, PDK4, AL356124.1 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Key 'harmony_' taken, using 'wbqkn_' instead</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "brown"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcabrown to pcabrown_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcabrown_ 1 
+Positive:  LINC01504, ABHD6, SIDT2, ARL4A, TMTC1, TGOLN2, HNRNPUL2, NUCB1, LINC02432, AC020651.2 
+       VCL, CEP164, SLC16A10, VCP, POLG2, SLC8B1, MRPL18, SDS, SLC19A2, SPCS2 
+       KCTD13, CLEC12A, CS, SPTAN1, PSMD12, ERRFI1, LRPAP1, SARNP, PFKFB4, SEC23IP 
+Negative:  AQP9, VCAN, ALDH1A2, THBS1, GCH1, FCAR, ACSL1, ELL2, PDE4B, AZIN1-AS1 
+       TNFAIP6, CXCL2, DENND5A, PLCB1, IRAK3, AC013652.1, SLC25A37, AC037198.1, AC106865.2, FNDC3B 
+       MCTP1, CLIC4, VCAN-AS1, FAM107B, CSF3R, NOTCH2NLC, CD300E, MCTP2, AC005280.2, APLP2 
+pcabrown_ 2 
+Positive:  SLC16A10, ELL2, CTSB, GNA12, FNDC3B, MMP19, SLC19A2, CLIC4, MMP2-AS1, LONRF3 
+       CXCL2, SDS, AZIN1-AS1, CXCL3, RNF19B, SDC4, ERRFI1, IQCN, RAB20, SPTAN1 
+       MAPK6, GLIPR2, SARNP, ANPEP, SLC44A1, LYZ, QSOX1, FAM107B, ZRANB1, SLC16A1 
+Negative:  TMTC1, LINC02432, AC020651.2, CLEC12A, CSGALNACT2, VCL, SLC24A4, ZDHHC20, IRAK3, VNN1 
+       ARL4A, ASAH1, SMIM25, FCN1, SIDT2, DGKG, ABHD6, LILRA5, STK10, P2RX1 
+       TMEM170B, CCDC69, HES1, FPR2, PFKFB4, SGMS2, PLCB1, HAL, KCNE1, NHSL2 
+pcabrown_ 3 
+Positive:  PLCB1, LYZ, CSF3R, AC013652.1, FCN1, S100A9, AC022217.3, AC009522.1, TNFAIP6, THBS1 
+       S100A8, AC106865.2, FCAR, DRAIC, TMEM170B, GLT1D1, AL691403.1, ELL2, CRISPLD2, SLC36A4 
+       AC084871.3, AZIN1-AS1, AC020656.1, ACSL1, TAFA2, CPD, NEBL, ABHD5, AC037198.1, DLGAP1 
+Negative:  B4GALT5, MMP19, NEAT1, GRB2, STK10, JAK1, SEPTIN9, TRAF3, ANPEP, SLC43A2 
+       CRADD, ECE1, MAPK6, MYO9B, KMO, CD300E, ZBTB43, CYTH1, SLC16A10, FEM1C 
+       TRIM25, TMTC1, ZSWIM6, BACH1, RNF19A, GK5, P2RX1, TXNDC11, FNDC3B, XIAP 
+pcabrown_ 4 
+Positive:  MCTP2, DENND5A, SLC22A4, FAM107B, GCH1, ECE1, GK5, TNFAIP6, CYP1B1, PSEN1 
+       MCTP1, PDE4B, STK10, FOSL1, NOTCH2NLC, CLIC4, TMTC1, PTX3, FCAR, MAEA 
+       AC037198.1, CD300E, B4GALT5, LPCAT1, DAP, RNF19B, SLC9A8, TRAF3, CAMKK2, PILRA 
+Negative:  PLIN2, LYZ, CTSB, AC022217.3, TEX41, SDS, AC020656.1, MMP19, ASAH1, LRPAP1 
+       SDC4, MMP2-AS1, LINC01366, ABHD5, SLC36A4, SLC19A2, KMO, AL691403.1, CCRL2, FCN1 
+       UGP2, LYAR, NCF2, ZDHHC20, MANBA, TGOLN2, KCNE1, VCP, SLC16A10, DRAIC 
+pcabrown_ 5 
+Positive:  NBN, AC020651.2, AZIN1-AS1, ALDH1A2, AC022217.3, TEX41, MMP2-AS1, MCTP1, GCH1, CCRL2 
+       CLIC4, AC005280.2, LINC01366, AC007032.1, NOTCH2NLC, LINC02541, AC106865.2, TULP2, AQP9, NEAT1 
+       ACSL1, MS4A14, LINC02432, PDE4B, ASAH1, PILRA, TMTC1, HES1, TNFAIP6, PTGER2 
+Negative:  LYZ, ANPEP, SGMS2, VCAN, THBS1, S100A9, FCN1, AC037198.1, CSF3R, GK5 
+       S100A8, AC020656.1, NEBL, CTNNBL1, TMEM170B, MYO9B, NLRP12, GLIPR2, CPD, SEPTIN9 
+       PLCB1, FERMT3, LONRF3, AC096564.1, SLC22A4, ST6GALNAC2, FCAR, PADI4, MMP19, CCDC69 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pink"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in svd.function(A = t(x = object), nv = npcs, ...): You're computing
+too large a percentage of total singular values, use a standard svd instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcapink to pcapink_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcapink_ 1 
+Positive:  POU2F2, CCDC26, JAZF1, ETV6, IPCEF1, ITGA4, TRIM8, AC079793.1, TRA2B, CLEC4F 
+       U62317.4, SP140, COX17, IKZF1, P2RY13, MNDA, MIR646HG, EGR3, LMO7, RNASET2 
+       CALHM6, TOMM7, PLEKHO1, SLC8A1, GPR137B, FGL2, TMEM107, STRBP, NUDT3, PTGER4 
+Negative:  PCNX2, BCL2, OGFRL1, AL078590.2, GSN, FAM149A, ZFP36L2, VASH1, CROCC, HLA-DQA2 
+       PLD4, CLDN1, HERPUD1, NPC2, TMEM156, NFATC2, NDRG2, HSP90AB1, RUNX2, ZFP36L1 
+       AC103591.3, HLA-DOA, CKLF, SLC9A7, HLA-DQB2, MEF2C, RHOH, TEX14, SSPN, AL355075.4 
+pcapink_ 2 
+Positive:  TEX14, CROCC, AC012447.1, AC103591.3, TMEM107, AL355075.4, AL078590.2, RHOH, SSPN, U62317.4 
+       EGR3, NPC2, ZFP36L1, ZFP36L2, HLA-DQA2, BCL2, MIR646HG, LMO7, PCNX2, VASH1 
+       RUNX2, HERPUD1, PLD4, FAM149A, HLA-DOA, NDRG2, OGFRL1, NFATC2, TMEM156, TOMM7 
+Negative:  ITGA4, POU2F2, CCDC26, IKZF1, CLEC4F, MEF2C, RNASET2, IPCEF1, P2RY13, SLC8A1 
+       FGL2, GPR137B, JAZF1, PLEKHO1, PTGER4, AC079793.1, TRIM8, SP140, CALHM6, COX17 
+       HLA-DQB2, MNDA, PLA2G4A, GSN, TRA2B, ETV6, SLC9A7, STRBP, CKLF, NUDT3 
+pcapink_ 3 
+Positive:  CROCC, AC012447.1, POU2F2, AC103591.3, FGL2, TEX14, TMEM107, ITGA4, P2RY13, CCDC26 
+       AC079793.1, AL355075.4, RNASET2, MNDA, JAZF1, CALHM6, NUDT3, HERPUD1, IKZF1, TRIM8 
+       TRA2B, MEF2C, U62317.4, PLEKHO1, ZFP36L2, AL078590.2, PLD4, NPC2, PTGER4, COX17 
+Negative:  STRBP, BCL2, ETV6, CLDN1, HLA-DQB2, GPR137B, GSN, RHOH, SLC9A7, ZFP36L1 
+       PCNX2, FAM149A, NFATC2, CLEC4F, SP140, EGR3, HLA-DOA, CKLF, PLA2G4A, VASH1 
+       LMO7, NDRG2, TMEM156, HSP90AB1, MIR646HG, TOMM7, OGFRL1, SSPN, HLA-DQA2, RUNX2 
+pcapink_ 4 
+Positive:  JAZF1, IPCEF1, CLDN1, CLEC4F, TMEM107, SLC8A1, EGR3, TEX14, AL355075.4, STRBP 
+       CROCC, AC012447.1, TRA2B, CCDC26, PLA2G4A, ETV6, POU2F2, IKZF1, SSPN, AC103591.3 
+       SLC9A7, ITGA4, HLA-DQB2, FAM149A, BCL2, LMO7, NFATC2, GPR137B, PCNX2, CKLF 
+Negative:  ZFP36L2, FGL2, CALHM6, PLEKHO1, HLA-DOA, NPC2, TOMM7, RUNX2, HERPUD1, ZFP36L1 
+       RNASET2, NUDT3, VASH1, TRIM8, COX17, HSP90AB1, PTGER4, P2RY13, PLD4, U62317.4 
+       RHOH, AC079793.1, HLA-DQA2, OGFRL1, MNDA, GSN, AL078590.2, TMEM156, MIR646HG, NDRG2 
+pcapink_ 5 
+Positive:  HSP90AB1, TOMM7, SLC9A7, HLA-DQB2, PTGER4, FGL2, GPR137B, CALHM6, CLDN1, EGR3 
+       TRA2B, COX17, STRBP, MNDA, NPC2, GSN, HLA-DQA2, TEX14, TRIM8, NDRG2 
+       CROCC, HLA-DOA, AC012447.1, U62317.4, AL355075.4, AC103591.3, ZFP36L1, P2RY13, CKLF, TMEM107 
+Negative:  TMEM156, PLA2G4A, MIR646HG, AC079793.1, RUNX2, MEF2C, RHOH, PCNX2, AL078590.2, HERPUD1 
+       NFATC2, FAM149A, LMO7, IKZF1, IPCEF1, ZFP36L2, OGFRL1, RNASET2, NUDT3, ETV6 
+       VASH1, SSPN, PLD4, BCL2, SP140, SLC8A1, CCDC26, ITGA4, POU2F2, CLEC4F </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Key 'harmony_' taken, using 'pmuyh_' instead</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "red"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in svd.function(A = t(x = object), nv = npcs, ...): You're computing
+too large a percentage of total singular values, use a standard svd instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcared to pcared_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcared_ 1 
+Positive:  C3, MACC1, RASAL2, WNT5A, MRC2, BHLHE41, KLHL6, FCGBP, PLXDC2, KCTD12 
+       ADCY3, KCNIP1, DAGLB, LINC00486, HIF1A, SORL1, CCL4L2, PTMS, PLAU, HIF1A-AS3 
+       TGFBR1, PALM2-AKAP2, CX3CR1, BST2, KCNK13, AL589935.1, TLR7, PARVG, SLAMF7, AC245014.3 
+Negative:  LYN, ITGAL, GBP2, GBP3, TBC1D30, AC053513.1, TWISTNB, HACL1, GBP1, PLXNC1 
+       OPRM1, SP100, ATP8B1, HK2, GIMAP4, SPI1, PLCB2, TSC22D4, SLC15A4, BOD1L1 
+       EPB41, BAG3, CARD9, OTUD1, TBC1D1, SH3KBP1, XAF1, CD300A, IL17RA, PUM3 
+pcared_ 2 
+Positive:  CCL3L1, PALM2-AKAP2, HK2, PLXDC2, CCL4L2, AC253572.2, HIF1A, RASAL2, HIF1A-AS3, GBP2 
+       TNF, PLAU, TBC1D30, MACC1, SORL1, C3, AC245014.3, AC069549.1, MRC2, WNT5A 
+       KCNK13, AC239799.2, ADCY3, RAB32, BHLHE41, PTMS, KCNIP1, FCGBP, PTCH2, LINC00486 
+Negative:  ITGAL, LYN, AC053513.1, MACF1, HSPD1, TBC1D1, NUB1, HLA-E, SP100, XAF1 
+       SPI1, RAB14, BOD1L1, LAP3, SLC15A4, CD300A, IL17RA, PUM3, GBP1, OPRM1 
+       SH3KBP1, CAMK1, GIMAP4, PLCB2, PTPRO, ATP5F1A, BAG3, IRF8, TSC22D4, IER5 
+pcared_ 3 
+Positive:  HIF1A, GBP1, GBP2, BAG3, HIF1A-AS3, SLAMF7, HSPD1, OTUD1, LAP3, TNF 
+       IER5, HK2, TBC1D30, LYN, GBP3, MACC1, PLAU, ADCY3, WDR91, AL589935.1 
+       HACL1, CXorf21, SLC15A4, CCL3L1, TWISTNB, MACF1, FCGBP, PALM2-AKAP2, SP100, XAF1 
+Negative:  LINC00486, AC253572.2, AC245014.3, SORL1, PTCH2, PARVG, KCTD12, TRERF1, BOD1L1, PLCB2 
+       NDUFA3, SH3KBP1, AC239799.2, PLXDC2, IL17RA, TBC1D1, ITGAL, ATP5MD, DHRS7, BHLHE41 
+       UQCRQ, AC053513.1, DAGLB, NSA2, CARD9, C4orf48, EPB41, NUB1, FBXW5, DDOST 
+pcared_ 4 
+Positive:  RASAL2, HIF1A, DAGLB, PLAU, VPS28, KCNK13, MACC1, DDOST, ADCY3, PTMS 
+       UQCRQ, PARVG, RAB14, PTPRO, TARS, C4orf48, UBL5, PLXDC2, WDR91, MACF1 
+       BOD1L1, TGFBR1, PUM3, SPI1, POLR2L, KCNIP1, WNT5A, PLCB2, MESD, CXorf21 
+Negative:  CCL3L1, CCL4L2, TNF, GBP2, AC253572.2, AC245014.3, PTCH2, AC239799.2, LINC00486, GBP1 
+       PLXNC1, LYN, SLAMF7, HK2, ITGAL, CX3CR1, GBP3, TWISTNB, TBC1D1, GIMAP4 
+       IL17RA, LAP3, OPRM1, AC053513.1, HLA-E, TAP1, IRF8, FBXW5, AC069549.1, C3 
+pcared_ 5 
+Positive:  TAP1, GBP1, BST2, HLA-E, LAP3, XAF1, GIMAP4, KCTD12, DDOST, NUB1 
+       PDAP1, PTMS, ATP5F1A, POLR2L, GBP3, GBP2, NDUFA3, PALM2-AKAP2, UQCRQ, VPS28 
+       AC069549.1, RAB32, PARP1, ATP8B1, LINC00486, TLR7, C4orf48, BHLHE41, HK2, NSA2 
+Negative:  SH3KBP1, AC253572.2, BAG3, LYN, MACF1, KCNIP1, IER5, WDR91, TBC1D1, HSPD1 
+       ADCY3, FCGBP, PLAU, AC245014.3, HACL1, PLXNC1, IRF8, ITGAL, AC239799.2, CAMK1 
+       DAGLB, TRERF1, SLAMF7, MACC1, PTPRO, PTCH2, CX3CR1, IL17RA, EPB41, CXorf21 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 5/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 5 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "green"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcagreen to pcagreen_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcagreen_ 1 
+Positive:  AC090559.1, JAK3, RUNX1, LRCH4, AKT2, PSTPIP2, CEACAM4, ICA1L, SMAP2, RBM14 
+       IMPA2, PDP1, RASA2, EPC1, STIMATE, MAML3, ERMARD, POGLUT1, ITPK1, STXBP5 
+       TAF15, RUFY3, BCL7C, NT5DC3, AHCYL2, FBXO21, RASAL3, FCGR2A, HSPA6, SESN3 
+Negative:  ATP8B4, PALD1, ADAM28, ABCC4, GPRIN3, CAMK1D, TENM4, MEF2A, AP001636.3, TMEM163 
+       DPYSL2, MAN2A1, PAPOLG, AC120193.1, IL13RA1, KLHL5, USP9Y, UST, DOCK8, LRBA 
+       ANKRD22, CD4, MOB1B, TSC22D3, CELF2, TNPO1, RGS10, IFNGR1, TRPC6, CASS4 
+pcagreen_ 2 
+Positive:  GRK3, SMAP2, CELF2, MARCH1, JAK2, PHTF2, DOCK8, STIMATE, MYCBP2, SRGAP2B 
+       MBNL1, AC090559.1, ITPK1, KLF12, ARHGAP15, FBXL17, STXBP5, CLEC2B, AKNA, ARID1A 
+       UTY, AHCYL2, SCRN1, TAF15, SEC14L1, CCDC6, ARHGEF6, RUFY3, IFNGR1, PHC2 
+Negative:  ADAM28, TMEM163, PALD1, RUNX1, GPRIN3, ATP8B4, IL13RA1, ABCC4, AC120193.1, CARD11 
+       RGS10, FCGR2A, PAPOLG, AP001636.3, KLHL5, PPP2R2B, OPHN1, CHST11, PLAGL1, CASS4 
+       ANKRD22, AC020611.2, TENM4, PLPP1, DPYSL2, MOB1B, UST, USP9Y, CEP128, PTK2 
+pcagreen_ 3 
+Positive:  UST, CAMK1D, CLEC2B, PHTF2, PPP2R2B, GPRIN3, AC090559.1, SEC14L1, RASA2, EXOC6 
+       KLF12, OPHN1, HIVEP3, STIMATE, PRKDC, CHST11, POGLUT1, PLPP1, RASAL3, ABCC4 
+       SCRN1, PHC2, AKNA, SUZ12, BCL7C, JAK3, FBXO21, LRBA, PDP1, DOCK8 
+Negative:  UTY, MAML3, SPECC1, USP9Y, IL13RA1, PSTPIP2, CEACAM4, IFNGR1, JAK2, AC008014.1 
+       LPGAT1, MYCBP2, AC120193.1, SAP30, MEF2A, AP001636.3, SMAP2, NT5DC3, CASS4, RUFY3 
+       ANKRD22, AC020611.2, CCDC6, STAMBPL1, TSC22D3, ARHGEF6, SRGAP2B, CELF2, ARID1A, ADAM28 
+pcagreen_ 4 
+Positive:  SEC14L1, TSC22D3, CLEC2B, PRKAB1, TMEM163, STIMATE, USP9Y, ZNF490, TENM4, TNPO1 
+       SRGAP2B, RGS10, CARD11, WIPI2, PAPOLG, LINC01684, CAMK1D, CD4, UTY, MEF2A 
+       CELF2, CASS4, ZNF791, SAP30, MAN2A1, PALD1, STAMBPL1, ERMARD, JAK2, ANKRD22 
+Negative:  RASA2, MAML3, PPP2R2B, RUNX1, TRPC6, OPHN1, MBNL1, CEACAM4, ARHGAP15, BRCA2 
+       EXOC6, RUFY3, STXBP5, BCAS2, CCDC6, PLAGL1, PSTPIP2, ATAD2, PLPP1, CEP128 
+       FUT8, FBXL17, AHCYL2, NT5DC3, LRCH4, IL13RA1, PHC2, TAF15, IMPA2, AC008014.1 
+pcagreen_ 5 
+Positive:  UTY, QSER1, USP9Y, KLF12, AKT2, DPYSL2, RGS10, ZNF791, MEF2A, FUT8 
+       BCL7C, RASAL3, OPHN1, HIVEP3, CEP128, CD4, GNPTAB, PHTF2, SESN3, BCAS2 
+       DOCK8, PRKDC, PPP2R2B, SPECC1, ARID1A, ITPK1, BRI3BP, ICA1L, PDP1, LINC01684 
+Negative:  AC020611.2, SEC14L1, PSTPIP2, SRGAP2B, PAPOLG, RANBP9, CHST11, CLEC2B, SMAP2, ARHGAP15 
+       TAF15, JAK3, CASS4, MAN2A1, RASA2, AC120193.1, FCGR2A, SAP30, ADAM28, AKNA 
+       IL13RA1, HSPA6, RUFY3, EPC1, POGLUT1, IKBIP, SUZ12, AC090559.1, TENM4, FOCAD </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 4 iterations</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Key 'harmony_' taken, using 'bwxcj_' instead</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "black"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Centering and scaling data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in svd.function(A = t(x = object), nv = npcs, ...): You're computing
+too large a percentage of total singular values, use a standard svd instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Keys should be one or more alphanumeric characters followed by an
+underscore, setting key from pcablack to pcablack_</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>pcablack_ 1 
+Positive:  SPP1, CD81, FN1, JUN, CCL3, PRDX1, CCL4, EGR1, ATP6V1F, UGCG 
+       IER5L, TNFSF13, IFIT3, KLF6, USF2, SNHG25, IFI44L, PKD2, SKP1, H1F0 
+       KRTCAP2, CHCHD10, ATP6V0A1, NDUFS5, ABL2, UBB, CEBPA, MYDGF, NARS, SLC17A5 
+Negative:  TOP1, ZNF407, SNX27, AC009313.1, ARHGEF3, PNP, PDE8A, ODF3B, SCPEP1, ZNF143 
+       MFSD2A, TCP1, CACYBP, CHORDC1, AP002336.2, UTP20, TMEM140, SMC6, RHOB, NCF1 
+       PSMD11, NOL7, RDH11, NSMAF, UNC93B1, P2RX7, PPDPF, COPE, SNX3, TMEM160 
+pcablack_ 2 
+Positive:  CCL3, ABL2, EGR1, CCL4, MIR222HG, SPP1, FN1, MFSD2A, ACTN1, SNHG25 
+       PRKCA, PNP, CD81, KLF6, IER5L, NCF1, PRDX1, SYPL1, KDELR1, MYDGF 
+       ATP6V1F, AC009313.1, H1F0, TMEM160, SNHG3, UGCG, KRTCAP2, SKP1, USF2, PKD2 
+Negative:  PARP14, IFI44L, CHORDC1, IFI44, ARHGEF3, CYBB, TMEM140, RHOB, EIF2AK2, PARP9 
+       IFIT3, OAS3, SNX27, CACYBP, TCP1, PDE8A, SCPEP1, ZNF407, UNC93B1, P2RX7 
+       ADA2, SMC6, DNAJA1, SNX3, UBB, EPRS, DNAJA4, ATP6V1B2, TOP1, UTP20 
+pcablack_ 3 
+Positive:  IFI44L, IFI44, IFIT3, PARP14, OAS3, EIF2AK2, PARP9, SPP1, FN1, NCF1 
+       PKD2, MFSD2A, ODF3B, SYPL1, UNC93B1, H1F0, TNFSF13, PPDPF, ADA2, KDELR1 
+       SNX27, CCL3, CCL4, TMEM160, CD81, MYDGF, SNHG3, SNHG25, CHCHD10, PSMD11 
+Negative:  CHORDC1, DNAJA1, DNAJA4, TCP1, JUN, KLF6, UBB, CACYBP, RHOB, TMEM140 
+       PDE8A, ATP6V1B2, SKP1, IER5L, AC009313.1, JPT1, ZNF143, SLC17A5, ARHGEF3, ATP6V0A1 
+       SNX3, UGCG, PRDX1, ACTN1, EPRS, NDUFS5, CEBPA, BCAP31, TOP1, ZNF407 
+pcablack_ 4 
+Positive:  AC009313.1, IFI44L, CCL4, MIR222HG, CCL3, IFI44, DNAJA1, DNAJA4, PNP, TOP1 
+       ABL2, CHORDC1, JUN, PARP14, IFIT3, KLF6, EGR1, P2RX7, PARP9, OAS3 
+       TMEM140, ZNF143, EIF2AK2, AP002336.2, MFSD2A, ATP6V1B2, NSMAF, UBB, TCP1, CACYBP 
+Negative:  KDELR1, EPRS, TMEM160, CHCHD10, CYBB, NARS, SNHG25, PRDX1, USF2, UGCG 
+       BCAP31, ATP6V1F, NDUFS5, ADA2, UTP20, SYPL1, TNFSF13, CD81, COPE, MYDGF 
+       PPDPF, SCPEP1, CEBPA, RDH11, KRTCAP2, JPT1, PDE8A, SNX27, SNX3, UNC93B1 
+pcablack_ 5 
+Positive:  SLC17A5, ABL2, ATP6V0A1, ACTN1, PNP, UGCG, KLF6, PDE8A, ATP6V1B2, COPE 
+       NDUFS5, SNX3, PSMD11, ATP6V1F, TOP1, MYDGF, PKD2, IFI44L, MIR222HG, KDELR1 
+       CHCHD10, EIF2AK2, IFI44, NSMAF, CD81, PARP9, KRTCAP2, IFIT3, IER5L, UBB 
+Negative:  NCF1, RHOB, EGR1, CYBB, SNX27, CCL4, CCL3, ADA2, DNAJA1, NARS 
+       SNHG25, P2RX7, SYPL1, SCPEP1, ZNF407, FN1, AC009313.1, TNFSF13, JUN, ZNF143 
+       MFSD2A, SPP1, SNHG3, NOL7, EPRS, PPDPF, PARP14, TMEM160, TMEM140, BCAP31 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Transposing data matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 1/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 2/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 3/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 4/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony 5/10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Harmony converged after 5 iterations</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a>hMEs <span class="ot">=</span> <span class="fu">GetMEs</span>(rna_obj_wgcna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href="#cb254-1" aria-hidden="true" tabindex="-1"></a>rna_obj_wgcna <span class="ot">=</span> <span class="fu">ModuleConnectivity</span>(rna_obj_wgcna, </span>
+<span id="cb254-2"><a href="#cb254-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">group_name =</span> <span class="fu">c</span>(<span class="st">"mo-mac_transition"</span>,</span>
+<span id="cb254-3"><a href="#cb254-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"SPP1hi mo-mac"</span>,</span>
+<span id="cb254-4"><a href="#cb254-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"TREM2hi mo-mac"</span>,</span>
+<span id="cb254-5"><a href="#cb254-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"AM"</span>,</span>
+<span id="cb254-6"><a href="#cb254-6" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"IM"</span>),</span>
+<span id="cb254-7"><a href="#cb254-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">group.by =</span> <span class="st">'annotated'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb255"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PlotKMEs</span>(rna_obj_wgcna, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Human_Multiome_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="export" class="level2">
+<h2 class="anchored" data-anchor-id="export">Export</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href="#cb256-1" aria-hidden="true" tabindex="-1"></a>archp_myeloid_df <span class="ot">=</span> archp_myeloid<span class="sc">@</span>cellColData <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb256-2"><a href="#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"bc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb256-3"><a href="#cb256-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(bc, Clusters_H_2, annotated)</span>
+<span id="cb256-4"><a href="#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(archp_myeloid_df, </span>
+<span id="cb256-5"><a href="#cb256-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"Hegde_2025_Human_Multiome_ATAC_bc_cluster_annot.csv"</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb256-6"><a href="#cb256-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-7"><a href="#cb256-7" aria-hidden="true" tabindex="-1"></a>rna_obj_df <span class="ot">=</span> rna_obj<span class="sc">@</span>meta.data <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb256-8"><a href="#cb256-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"bc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb256-9"><a href="#cb256-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(bc, sampleID_harmony_snn_res.<span class="fl">0.8</span>, annotated)</span>
+<span id="cb256-10"><a href="#cb256-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(rna_obj_df, </span>
+<span id="cb256-11"><a href="#cb256-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"Hegde_2025_Human_Multiome_RNA_bc_cluster_annot.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="session-info" class="level2">
+<h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb257"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb257-1"><a href="#cb257-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb257-2"><a href="#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(end_time <span class="sc">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 14.26036 mins</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb259"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.2 (2024-10-31)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sequoia 15.3.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+Random number generation:
+ RNG:     L'Ecuyer-CMRG 
+ Normal:  Inversion 
+ Sample:  Rejection 
+ 
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] patchwork_1.3.0                         
+ [2] hdWGCNA_0.4.04                          
+ [3] GeneOverlap_1.42.0                      
+ [4] UCell_2.10.1                            
+ [5] tidygraph_1.3.1                         
+ [6] ggraph_2.2.1                            
+ [7] igraph_2.1.4                            
+ [8] WGCNA_1.73                              
+ [9] fastcluster_1.2.6                       
+[10] dynamicTreeCut_1.63-1                   
+[11] Seurat_5.2.1                            
+[12] SeuratObject_5.0.2                      
+[13] sp_2.2-0                                
+[14] harmony_1.2.3                           
+[15] circlize_0.4.16                         
+[16] nabor_0.5.0                             
+[17] TxDb.Hsapiens.UCSC.hg38.knownGene_3.20.0
+[18] GenomicFeatures_1.58.0                  
+[19] AnnotationDbi_1.68.0                    
+[20] colorspace_2.1-1                        
+[21] RColorBrewer_1.1-3                      
+[22] ComplexHeatmap_2.22.0                   
+[23] ggrepel_0.9.6                           
+[24] lubridate_1.9.4                         
+[25] forcats_1.0.0                           
+[26] dplyr_1.1.4                             
+[27] purrr_1.0.4                             
+[28] readr_2.1.5                             
+[29] tidyr_1.3.1                             
+[30] tibble_3.2.1                            
+[31] tidyverse_2.0.0                         
+[32] rhdf5_2.50.2                            
+[33] SummarizedExperiment_1.36.0             
+[34] Biobase_2.66.0                          
+[35] RcppArmadillo_14.2.3-1                  
+[36] Rcpp_1.0.14                             
+[37] Matrix_1.7-2                            
+[38] GenomicRanges_1.58.0                    
+[39] GenomeInfoDb_1.42.3                     
+[40] IRanges_2.40.1                          
+[41] S4Vectors_0.44.0                        
+[42] BiocGenerics_0.52.0                     
+[43] sparseMatrixStats_1.18.0                
+[44] MatrixGenerics_1.18.1                   
+[45] matrixStats_1.5.0                       
+[46] data.table_1.17.0                       
+[47] stringr_1.5.1                           
+[48] plyr_1.8.9                              
+[49] magrittr_2.0.3                          
+[50] ggplot2_3.5.1                           
+[51] gtable_0.3.6                            
+[52] gtools_3.9.5                            
+[53] gridExtra_2.3                           
+[54] devtools_2.4.5                          
+[55] usethis_3.1.0                           
+[56] ArchR_1.0.3                             
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.5                          spatstat.sparse_3.1-0            
+  [3] bitops_1.0-9                      httr_1.4.7                       
+  [5] doParallel_1.0.17                 backports_1.5.0                  
+  [7] profvis_0.4.0                     tools_4.4.2                      
+  [9] sctransform_0.4.1                 R6_2.6.1                         
+ [11] lazyeval_0.2.2                    uwot_0.2.3                       
+ [13] rhdf5filters_1.18.0               GetoptLong_1.0.5                 
+ [15] urlchecker_1.0.1                  withr_3.0.2                      
+ [17] preprocessCore_1.68.0             progressr_0.15.1                 
+ [19] cli_3.6.4                         Cairo_1.6-2                      
+ [21] spatstat.explore_3.3-4            fastDummies_1.7.5                
+ [23] labeling_0.4.3                    spatstat.data_3.1-4              
+ [25] proxy_0.4-27                      ggridges_0.5.6                   
+ [27] pbapply_1.7-2                     Rsamtools_2.22.0                 
+ [29] foreign_0.8-88                    parallelly_1.42.0                
+ [31] sessioninfo_1.2.3                 BSgenome_1.74.0                  
+ [33] impute_1.80.0                     rstudioapi_0.17.1                
+ [35] RSQLite_2.3.9                     FNN_1.1.4.1                      
+ [37] generics_0.1.3                    shape_1.4.6.1                    
+ [39] BiocIO_1.16.0                     ica_1.0-3                        
+ [41] spatstat.random_3.3-2             GO.db_3.20.0                     
+ [43] abind_1.4-8                       lifecycle_1.0.4                  
+ [45] yaml_2.3.10                       gplots_3.2.0                     
+ [47] SparseArray_1.6.2                 Rtsne_0.17                       
+ [49] blob_1.2.4                        promises_1.3.2                   
+ [51] crayon_1.5.3                      miniUI_0.1.1.1                   
+ [53] lattice_0.22-6                    cowplot_1.1.3                    
+ [55] KEGGREST_1.46.0                   magick_2.8.5                     
+ [57] pillar_1.10.1                     knitr_1.49                       
+ [59] rjson_0.2.23                      future.apply_1.11.3              
+ [61] codetools_0.2-20                  glue_1.8.0                       
+ [63] spatstat.univar_3.1-1             remotes_2.5.0                    
+ [65] vctrs_0.6.5                       png_0.1-8                        
+ [67] spam_2.11-1                       cachem_1.1.0                     
+ [69] xfun_0.51                         S4Arrays_1.6.0                   
+ [71] mime_0.12                         survival_3.8-3                   
+ [73] SingleCellExperiment_1.28.1       iterators_1.0.14                 
+ [75] ellipsis_0.3.2                    fitdistrplus_1.2-2               
+ [77] ROCR_1.0-11                       nlme_3.1-167                     
+ [79] bit64_4.6.0-1                     RcppAnnoy_0.0.22                 
+ [81] irlba_2.3.5.1                     rpart_4.1.24                     
+ [83] KernSmooth_2.23-26                Hmisc_5.2-2                      
+ [85] DBI_1.2.3                         nnet_7.3-20                      
+ [87] tidyselect_1.2.1                  bit_4.5.0.1                      
+ [89] compiler_4.4.2                    curl_6.2.1                       
+ [91] BiocNeighbors_2.0.1               htmlTable_2.4.3                  
+ [93] DelayedArray_0.32.0               plotly_4.10.4                    
+ [95] rtracklayer_1.66.0                caTools_1.18.3                   
+ [97] checkmate_2.3.2                   scales_1.3.0                     
+ [99] lmtest_0.9-40                     digest_0.6.37                    
+[101] goftest_1.2-3                     spatstat.utils_3.1-2             
+[103] rmarkdown_2.29                    RhpcBLASctl_0.23-42              
+[105] XVector_0.46.0                    base64enc_0.1-3                  
+[107] htmltools_0.5.8.1                 pkgconfig_2.0.3                  
+[109] fastmap_1.2.0                     rlang_1.1.5                      
+[111] GlobalOptions_0.1.2               htmlwidgets_1.6.4.9000           
+[113] UCSC.utils_1.2.0                  shiny_1.10.0                     
+[115] farver_2.1.2                      zoo_1.8-13                       
+[117] jsonlite_1.9.1                    BiocParallel_1.40.0              
+[119] RCurl_1.98-1.16                   Formula_1.2-5                    
+[121] GenomeInfoDbData_1.2.13           dotCall64_1.2                    
+[123] Rhdf5lib_1.28.0                   munsell_0.5.1                    
+[125] viridis_0.6.5                     reticulate_1.41.0                
+[127] stringi_1.8.4                     zlibbioc_1.52.0                  
+[129] MASS_7.3-65                       pkgbuild_1.4.6                   
+[131] listenv_0.9.1                     deldir_2.0-4                     
+[133] graphlayouts_1.2.2                Biostrings_2.74.1                
+[135] splines_4.4.2                     tensor_1.5                       
+[137] hms_1.1.3                         BSgenome.Hsapiens.UCSC.hg38_1.4.5
+[139] spatstat.geom_3.3-5               RcppHNSW_0.6.0                   
+[141] reshape2_1.4.4                    pkgload_1.4.0                    
+[143] XML_3.99-0.18                     evaluate_1.0.3                   
+[145] tester_0.2.0                      tweenr_2.0.3                     
+[147] tzdb_0.4.0                        foreach_1.5.2                    
+[149] httpuv_1.6.15                     RANN_2.6.2                       
+[151] polyclip_1.10-7                   future_1.34.0                    
+[153] clue_0.3-66                       scattermore_1.2                  
+[155] ggforce_0.4.2                     xtable_1.8-4                     
+[157] restfulr_0.0.15                   RSpectra_0.16-2                  
+[159] later_1.4.1                       viridisLite_0.4.2                
+[161] memoise_2.0.1                     GenomicAlignments_1.42.0         
+[163] cluster_2.1.8                     timechange_0.3.0                 
+[165] globals_0.16.3                   </code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

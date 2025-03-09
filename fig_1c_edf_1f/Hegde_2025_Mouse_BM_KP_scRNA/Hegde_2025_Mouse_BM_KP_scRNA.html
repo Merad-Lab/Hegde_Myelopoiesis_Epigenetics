@@ -230,109 +230,138 @@ The following object is masked from 'package:SeuratObject':
 
     JS</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">729</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">729</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># h5_files &lt;- list.files("data/", pattern = "sample_filtered_feature_bc_matrix.h5", recursive = TRUE, full.names = TRUE)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- lapply(h5_files, function(file) {</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   expr_matrix &lt;- Read10X_h5(file)$`Gene Expression`</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   CreateSeuratObject(counts = expr_matrix, project = tools::file_path_sans_ext(basename(file)))</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># })</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># names(sc.list) &lt;- basename(dirname(dirname(h5_files))) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sc.list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>h5_files <span class="ot">=</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data/"</span>, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pattern =</span> <span class="st">"sample_filtered_feature_bc_matrix.h5"</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(h5_files, <span class="cf">function</span>(file) {</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  expr_matrix <span class="ot">&lt;-</span> <span class="fu">Read10X_h5</span>(file)<span class="sc">$</span><span class="st">`</span><span class="at">Gene Expression</span><span class="st">`</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> expr_matrix, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">project =</span> tools<span class="sc">::</span><span class="fu">file_path_sans_ext</span>(<span class="fu">basename</span>(file)))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sc.list) <span class="ot">&lt;-</span> <span class="fu">basename</span>(<span class="fu">dirname</span>(<span class="fu">dirname</span>(h5_files)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="seurat" class="level2">
 <h2 class="anchored" data-anchor-id="seurat">Seurat</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- lapply(X = sc.list, FUN = NormalizeData) </span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- lapply(X = sc.list, FUN = ScaleData)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- lapply(X = sc.list, FUN = SCTransform, method = "glmGamPoi")</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># features &lt;- SelectIntegrationFeatures(object.list = sc.list, nfeatures = 3000)</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- PrepSCTIntegration(object.list = sc.list, anchor.features = features)</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sc.list &lt;- lapply(X = sc.list, FUN = RunPCA, features = features)</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># immune.anchors &lt;- FindIntegrationAnchors(object.list = sc.list, normalization.method = "SCT", anchor.features = features, dims = 1:30, reduction = "rpca", k.anchor = 20)</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># BM_object_combined_var &lt;- IntegrateData(anchorset = immune.anchors, normalization.method = "SCT", dims = 1:30)</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># BM_object_combined_var &lt;- RunPCA(BM_object_combined_var, npcs = 30, verbose = FALSE) %&gt;% </span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#                           RunUMAP(reduction = "pca", dims = 1:30, verbose = FALSE) %&gt;% </span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#                           FindNeighbors(reduction = "pca", dims = 1:30, verbose = FALSE) %&gt;%</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#                           FindClusters(resolution = 0.7, verbose = FALSE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> sc.list, <span class="at">FUN =</span> NormalizeData)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> sc.list, <span class="at">FUN =</span> ScaleData)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> sc.list, <span class="at">FUN =</span> SCTransform, <span class="at">method =</span> <span class="st">"glmGamPoi"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">SelectIntegrationFeatures</span>(<span class="at">object.list =</span> sc.list, <span class="at">nfeatures =</span> <span class="dv">3000</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">PrepSCTIntegration</span>(<span class="at">object.list =</span> sc.list, <span class="at">anchor.features =</span> features)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>sc.list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> sc.list, <span class="at">FUN =</span> RunPCA, <span class="at">features =</span> features)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>immune.anchors <span class="ot">&lt;-</span> <span class="fu">FindIntegrationAnchors</span>(<span class="at">object.list =</span> sc.list, <span class="at">normalization.method =</span> <span class="st">"SCT"</span>, <span class="at">anchor.features =</span> features, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">reduction =</span> <span class="st">"rpca"</span>, <span class="at">k.anchor =</span> <span class="dv">20</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>BM_object <span class="ot">&lt;-</span> <span class="fu">IntegrateData</span>(<span class="at">anchorset =</span> immune.anchors, </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">normalization.method =</span> <span class="st">"SCT"</span>, </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>BM_object <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(BM_object, <span class="at">npcs =</span> <span class="dv">30</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>             <span class="fu">RunUMAP</span>(<span class="at">reduction =</span> <span class="st">"pca"</span>, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>             <span class="fu">FindNeighbors</span>(<span class="at">reduction =</span> <span class="st">"pca"</span>, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>             <span class="fu">FindClusters</span>(<span class="at">resolution =</span> <span class="fl">0.7</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="annotation" class="level2">
 <h2 class="anchored" data-anchor-id="annotation">Annotation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sc_obj$SH_annots &lt;- plyr::mapvalues(</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   x = sc_obj$seurat_clusters, </span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   from = c("0","1","2","3","4","5","6","7","8","9","10",</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#            "11","12","13","14","15","16","17","18","19","20",</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#            "21","22","23","24","25","26","27","28"), </span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   to = c(</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     'immature neu', </span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     'pre-neu_cycling', </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     'pre-neu', </span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     'immature neu', </span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     'pre-mono', </span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Ly6Chi mono', </span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     'mature neu', </span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     'cMoP_cycling', </span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     'GMP', </span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     'mature neu', </span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     'preNeu', </span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     'cMoP', </span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     'GP', </span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     'preNeu_cycling', </span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', # DC-like</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Ly6Chi mono', </span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Ly6Clow mono', </span></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#     'MEP', </span></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     'GMP', </span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     'pre-mono', </span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Ly6Chi proDC3', </span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove', </span></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     'remove' </span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="co"># sc_obj = subset(sc_obj, annots != "remove")</span></span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Idents(sc_obj) = "SH_annots"</span></span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(sc_obj, file = "Hegde_2025_Mouse_BM_KP_scRNA.rds")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sc_obj<span class="sc">$</span>SH_annots <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">mapvalues</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> sc_obj<span class="sc">$</span>seurat_clusters,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">c</span>(<span class="st">"0"</span>,<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>,<span class="st">"6"</span>,<span class="st">"7"</span>,<span class="st">"8"</span>,<span class="st">"9"</span>,<span class="st">"10"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"11"</span>,<span class="st">"12"</span>,<span class="st">"13"</span>,<span class="st">"14"</span>,<span class="st">"15"</span>,<span class="st">"16"</span>,<span class="st">"17"</span>,<span class="st">"18"</span>,<span class="st">"19"</span>,<span class="st">"20"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">"21"</span>,<span class="st">"22"</span>,<span class="st">"23"</span>,<span class="st">"24"</span>,<span class="st">"25"</span>,<span class="st">"26"</span>,<span class="st">"27"</span>,<span class="st">"28"</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">c</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'immature neu'</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pre-neu_cycling'</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pre-neu'</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'immature neu'</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pre-mono'</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Ly6Chi mono'</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mature neu'</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cMoP_cycling'</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GMP'</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mature neu'</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'preNeu'</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cMoP'</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GP'</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'preNeu_cycling'</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>, <span class="co"># DC-like</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Ly6Chi mono'</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Ly6Clow mono'</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MEP'</span>,</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GMP'</span>,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pre-mono'</span>,</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Ly6Chi proDC3'</span>,</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span>,</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">'remove'</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>sc_obj <span class="ot">=</span> <span class="fu">subset</span>(sc_obj, annots <span class="sc">!=</span> <span class="st">"remove"</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="fu">Idents</span>(sc_obj) <span class="ot">=</span> <span class="st">"SH_annots"</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(sc_obj, <span class="at">file =</span> <span class="st">"Hegde_2025_Mouse_BM_KP_scRNA.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SCP::CellDimPlot(sc_obj, group.by = "SH_annots", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>SCP<span class="sc">::</span><span class="fu">CellDimPlot</span>(sc_obj, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">group.by =</span> <span class="st">"SH_annots"</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">reduction =</span> <span class="st">"umap"</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pt.size =</span> <span class="fl">0.75</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> T, <span class="at">label_repel =</span> T, <span class="at">label_insitu =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SCP::CellDimPlot(sc_obj, group.by = "SH_annots", split.by = "sample_simplified", reduction = "umap", pt.size = 0.75, label = T, label_repel = T, label_insitu = T, legend.position = "bottom")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>SCP<span class="sc">::</span><span class="fu">CellDimPlot</span>(sc_obj, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">group.by =</span> <span class="st">"SH_annots"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">split.by =</span> <span class="st">"sample_simplified"</span>, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">reduction =</span> <span class="st">"umap"</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pt.size =</span> <span class="fl">0.75</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> T, <span class="at">label_repel =</span> T, <span class="at">label_insitu =</span> T, <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="reproduce-manuscript-figures" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce-manuscript-figures">Reproduce Manuscript Figures</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sc_obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Mouse_BM_KP_scRNA.rds"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultAssay</span>(sc_obj) <span class="ot">=</span> <span class="st">"RNA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sc_obj <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Mouse_BM_KP_scRNA.rds"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultAssay</span>(sc_obj) <span class="ot">=</span> <span class="st">"RNA"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sc_obj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>An object of class Seurat 
+33691 features across 10786 samples within 3 assays 
+Active assay: RNA (15553 features, 0 variable features)
+ 2 layers present: counts, data
+ 2 other assays present: SCT, integrated
+ 2 dimensional reductions calculated: pca, umap</code></pre>
+</div>
 </div>
 </section>
 <section id="export" class="level2">
 <h2 class="anchored" data-anchor-id="export">Export</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bc_to_annot_df <span class="ot">=</span> sc_obj<span class="sc">@</span>meta.data <span class="sc">|&gt;</span> <span class="fu">rownames_to_column</span>(<span class="st">"bc"</span>) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(bc, seurat_clusters, SH_annots)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bc_to_annot_df, <span class="at">file =</span> <span class="st">"Hegde_2025_Mouse_BM_KP_scRNA_bc_cluster_annot.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bc_to_annot_df <span class="ot">=</span> sc_obj<span class="sc">@</span>meta.data <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">rownames_to_column</span>(<span class="st">"bc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                 dplyr<span class="sc">::</span><span class="fu">select</span>(bc, seurat_clusters, SH_annots)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bc_to_annot_df, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"Hegde_2025_Mouse_BM_KP_scRNA_bc_cluster_annot.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sc_obj<span class="sc">$</span>sample, sc_obj<span class="sc">$</span>SH_annots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -364,7 +393,7 @@ data's fill values.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -380,7 +409,7 @@ data's fill values.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -479,10 +508,11 @@ The sampled cell IDs from each cell type are combined into a single vector calle
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>cells <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(<span class="fu">unique</span>(manual_annotation), <span class="cf">function</span>(v) <span class="fu">sample</span>(<span class="fu">names</span>(manual_annotation)[manual_annotation<span class="sc">==</span>v], <span class="fu">min</span>(<span class="fu">sum</span>(manual_annotation<span class="sc">==</span>v), <span class="dv">50</span>))))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">=</span> mat[, <span class="fu">unlist</span>(cells)]</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>manual_annotation <span class="ot">=</span> manual_annotation[<span class="fu">unlist</span>(cells)]</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">=</span> mat[, <span class="fu">unlist</span>(cells)]</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>manual_annotation <span class="ot">=</span> manual_annotation[<span class="fu">unlist</span>(cells)]</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  36 650</code></pre>
 </div>
@@ -510,7 +540,7 @@ The sampled cell IDs from each cell type are combined into a single vector calle
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -531,9 +561,11 @@ The sampled cell IDs from each cell type are combined into a single vector calle
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>sc_obj <span class="ot">&lt;-</span> <span class="fu">AddModuleScore_UCell</span>(</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  sc_obj, </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">features =</span> markers_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Idents</span>(sc_obj) <span class="ot">=</span> <span class="st">"SH_annots"</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>sc_obj <span class="ot">&lt;-</span> <span class="fu">AddModuleScore_UCell</span>(</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  sc_obj, </span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">features =</span> markers_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The following genes were not found and will be
                         imputed to exp=0:
@@ -556,7 +588,7 @@ This message will be shown once per session.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="Hegde_2025_Mouse_BM_KP_scRNA_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -565,7 +597,12 @@ This message will be shown once per session.</code></pre>
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(end_time <span class="sc">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 36.31055 secs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.2 (2024-10-31)
 Platform: x86_64-apple-darwin20
@@ -602,7 +639,7 @@ loaded via a namespace (and not attached):
   [9] repr_1.1.7                  tools_4.4.2                
  [11] sctransform_0.4.1           R6_2.6.1                   
  [13] HDF5Array_1.34.0            lazyeval_0.2.2             
- [15] uwot_0.2.2                  rhdf5filters_1.18.0        
+ [15] uwot_0.2.3                  rhdf5filters_1.18.0        
  [17] GetoptLong_1.0.5            withr_3.0.2                
  [19] prettyunits_1.2.0           gridExtra_2.3              
  [21] progressr_0.15.1            cli_3.6.4                  
@@ -613,8 +650,8 @@ loaded via a namespace (and not attached):
  [31] pbapply_1.7-2               slingshot_2.14.0           
  [33] Rsamtools_2.22.0            yulab.utils_0.2.0          
  [35] gson_0.1.0                  DOSE_4.0.0                 
- [37] R.utils_2.12.3              parallelly_1.42.0          
- [39] limma_3.62.2                readxl_1.4.3               
+ [37] R.utils_2.13.0              parallelly_1.42.0          
+ [39] limma_3.62.2                readxl_1.4.4               
  [41] rstudioapi_0.17.1           RSQLite_2.3.9              
  [43] generics_0.1.3              gridGraphics_0.5-1         
  [45] shape_1.4.6.1               crosstalk_1.2.1            
@@ -624,7 +661,7 @@ loaded via a namespace (and not attached):
  [53] abind_1.4-8                 R.methodsS3_1.8.2          
  [55] lifecycle_1.0.4             yaml_2.3.10                
  [57] SummarizedExperiment_1.36.0 rhdf5_2.50.2               
- [59] qvalue_2.38.0               SparseArray_1.6.1          
+ [59] qvalue_2.38.0               SparseArray_1.6.2          
  [61] BiocFileCache_2.14.0        Rtsne_0.17                 
  [63] blob_1.2.4                  promises_1.3.2             
  [65] crayon_1.5.3                ggtangle_0.0.6             
@@ -636,7 +673,7 @@ loaded via a namespace (and not attached):
  [77] future.apply_1.11.3         codetools_0.2-20           
  [79] fastmatch_1.1-6             glue_1.8.0                 
  [81] ggfun_0.1.8                 spatstat.univar_3.1-1      
- [83] data.table_1.16.4           treeio_1.30.0              
+ [83] data.table_1.17.0           treeio_1.30.0              
  [85] vctrs_0.6.5                 png_0.1-8                  
  [87] spam_2.11-1                 cellranger_1.1.0           
  [89] gtable_0.3.6                reactR_0.6.1               
@@ -657,7 +694,7 @@ loaded via a namespace (and not attached):
 [119] tidyselect_1.2.1            proxyC_0.4.1               
 [121] bit_4.5.0.1                 compiler_4.4.2             
 [123] curl_6.2.1                  httr2_1.1.0                
-[125] BiocNeighbors_2.0.1         xml2_1.3.6                 
+[125] BiocNeighbors_2.0.1         xml2_1.3.7                 
 [127] DelayedArray_0.32.0         plotly_4.10.4              
 [129] scales_1.3.0                lmtest_0.9-40              
 [131] rappdirs_0.3.3              digest_0.6.37              
@@ -670,17 +707,17 @@ loaded via a namespace (and not attached):
 [145] GlobalOptions_0.1.2         htmlwidgets_1.6.4.9000     
 [147] UCSC.utils_1.2.0            shiny_1.10.0               
 [149] jquerylib_0.1.4             farver_2.1.2               
-[151] zoo_1.8-12                  jsonlite_1.9.0             
+[151] zoo_1.8-13                  jsonlite_1.9.1             
 [153] BiocParallel_1.40.0         GOSemSim_2.32.0            
 [155] R.oo_1.27.0                 RCurl_1.98-1.16            
 [157] magrittr_2.0.3              GenomeInfoDbData_1.2.13    
 [159] ggplotify_0.1.2             dotCall64_1.2              
 [161] patchwork_1.3.0             Rhdf5lib_1.28.0            
 [163] munsell_0.5.1               Rcpp_1.0.14                
-[165] TrajectoryUtils_1.14.0      ggnewscale_0.5.0           
-[167] ape_5.8-1                   reticulate_1.40.0          
+[165] TrajectoryUtils_1.14.0      ggnewscale_0.5.1           
+[167] ape_5.8-1                   reticulate_1.41.0          
 [169] stringi_1.8.4               zlibbioc_1.52.0            
-[171] MASS_7.3-64                 plyr_1.8.9                 
+[171] MASS_7.3-65                 plyr_1.8.9                 
 [173] parallel_4.4.2              listenv_0.9.1              
 [175] ggrepel_0.9.6               deldir_2.0-4               
 [177] Biostrings_2.74.1           splines_4.4.2              
@@ -696,8 +733,8 @@ loaded via a namespace (and not attached):
 [197] scattermore_1.2             ggforce_0.4.2              
 [199] xtable_1.8-4                tidytree_0.4.6             
 [201] RSpectra_0.16-2             later_1.4.1                
-[203] viridisLite_0.4.2           clusterProfiler_4.14.4     
-[205] aplot_0.2.4                 beeswarm_0.4.0             
+[203] viridisLite_0.4.2           clusterProfiler_4.14.6     
+[205] aplot_0.2.5                 beeswarm_0.4.0             
 [207] memoise_2.0.1               AnnotationDbi_1.68.0       
 [209] IRanges_2.40.1              cluster_2.1.8              
 [211] timechange_0.3.0            globals_0.16.3             </code></pre>
