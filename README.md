@@ -28,6 +28,8 @@ This repository contains code for reproducing figure panels based on bulk + sing
 | 1k-m | bulk CUT&RUN | human CD34-enriched PBMCs | lung cancer and healthy | plotting profiles, heatmaps, and chromVAR scores  |
 | 1i | scMultiome | human CD34-enriched PBMCs | lung cancer and healthy | cell marker plot |
 | 3i | scRNA | public data, human NSCLC | pre/post treatment | pre-processing, annotation, and plotting of NRF2 scores and ChIP-X enrichment analysis |
+| 4a | scRNA | mouse lung tumor | tumor-bearing | pre-processing, annotation, marker plot |
+| 4c-d | scATAC | mouse lung tumor | tumor-bearing | pre-processing, annotation, motif enrichment, market plot | 
 | 4e-h | scMultiome | human tumor and PBMCs | NSCLC patients | pre-processing, cell marker plot, motif enrichment, differential analysis, WCGNA on myeloid cells |
 | 10a-d | scRNA | public data, human solid tumors | pre/post treatment | pre-processing, annotation, and plotting of ChIP-X enrichment analysis |
 
