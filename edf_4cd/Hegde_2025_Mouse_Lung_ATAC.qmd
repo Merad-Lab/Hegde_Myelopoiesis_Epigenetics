@@ -1,0 +1,200 @@
+---
+title: "Hegde et al - 2025 - Myelopoiesis Epigenetics"
+title-block-banner: true
+subtitle: "Mouse Lung KP ATAC"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+library(ArchR)
+library(tidyverse)
+library(ggrepel)
+library(ComplexHeatmap)
+library(RColorBrewer)
+library(colorspace)
+
+set.seed(1234)
+addArchRThreads(threads = 8) 
+addArchRGenome("mm10")
+start_time = Sys.time()
+```
+
+## Create arrows and ArchR project
+
+```{r, warning=FALSE, eval=FALSE}
+## Path to fragments ----
+frags_path = list.files(path = "cellranger_output", 
+                        pattern = "fragments.tsv.gz$", 
+                        full.names = T)
+names(frags_path) = names(inputF)
+
+## Create arrow files ----
+ArrowFiles = createArrowFiles(inputFiles = frags_path, 
+                              sampleNames = names(frags_path), 
+                              minTSS = 8, 
+                              minFrags = 5000, 
+                              addTileMat = TRUE, 
+                              addGeneScoreMat = TRUE)
+ArrowFiles = list.files(pattern = ".arrow")
+
+## ArchR project creation ----
+archp = ArchRProject(ArrowFiles = ArrowFiles, outputDirectory = "firstpass", copyArrows = F)
+```
+
+```{r, eval=FALSE}
+## Performing Doublets calculations ----
+archp = addDoubletScores(archp)
+
+## Filtering out Doublets ----
+archp = filterDoublets(archp)
+
+## Reduce dimensions ----
+archp = addIterativeLSI(ArchRProj = archp, 
+                        useMatrix = "TileMatrix", 
+                        name = "IterativeLSI", 
+                        force=TRUE)
+
+## Clustering ----
+archp = addClusters(input = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Add UMAP ----
+archp = addUMAP(ArchRProj = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Harmony ----
+archp = addHarmony(ArchRProj = archp, 
+                   reducedDims = "IterativeLSI", 
+                   name = "Harmony", 
+                   groupBy = "Sample", force=TRUE)
+
+## Add clusters ----
+archp = addClusters(input = archp, 
+                    reducedDims = "Harmony", 
+                    resolution = 0.8, # 0.2, 0.4, 0.8
+                    name='Clusters_H', force = TRUE)
+```
+
+## Reproduce Manuscript Figures
+
+```{r}
+archp = readRDS("Hegde_2025_Mouse_Lung_ATAC.rds")
+table(archp$Clusters, archp$SH_annots_ATAC)
+```
+
+## Gene score heatmap
+
+```{r, fig.width=10, fig.height=5}
+markers = c("Treml4", "Pglyrp1", "Adgre4", "Dusp16", "Cd300e", "Ly6c2", "Sell", "Plac8", "F13a1", "Mmp8", "Lyve1", "Fn1", "Prtn3", "Thbs1", "Ccl24", "Ms4a7", "Cd72", "Stab1", "Mmp13", "Pf4", "C1qc", "C1qb", "C1qa", "C3ar1", "Clec10a", "Folr2", "Slc40a1", "Eno3", "Il7r", "Nrp2", "Apol7c", "C5ar1", "Fcgr4", "Gbp2", "Arg1", "Fabp5", "Gpnmb", "Trem2", "Syngr1", "Krt79", "Cidec", "Ear1", "Fabp4", "Siglecf", "Plet1")
+
+gs = getMatrixFromProject(archp, useMatrix = 'GeneScoreMatrix')
+
+gs_mat = assays(gs)[[1]]
+rownames(gs_mat) = gs@elementMetadata$name
+gs_mat = gs_mat[, rownames(archp@cellColData)]
+gs_mat = as.data.frame(as.matrix(t(gs_mat[rownames(gs_mat) %in% markers, ])))
+gs_mat$clusters = as.vector(archp$SH_annots_ATAC)
+gs_mat = aggregate(.~clusters, data = gs_mat, FUN = mean)
+rownames(gs_mat) = gs_mat[, 1]
+gs_mat = gs_mat[, -1]
+
+color = circlize::colorRamp2(breaks = c(0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0),
+                             colors = c('white', 
+                                        rev(sequential_hcl(n = 5, palette = 'OrRd')), 
+                                        'black'))
+
+Heatmap(t(t(scale(gs_mat))[markers,]), 
+        clustering_distance_columns = 'euclidean',
+        clustering_distance_rows = 'euclidean',
+        cluster_rows = F,
+        cluster_columns = F,
+        col = color)
+```
+
+## Differential motif enrichment
+
+```{r, fig.width=10, fig.height=5}
+markersPeaks = getMarkerFeatures(
+  ArchRProj = archp, 
+  useMatrix = "PeakMatrix", 
+  groupBy = "SH_annots_ATAC",
+  bias = c("TSSEnrichment", "log10(nFrags)"),
+  testMethod = "wilcoxon")
+
+enrichMotifs = peakAnnoEnrichment(
+  seMarker = markersPeaks,
+  ArchRProj = archp,
+  peakAnnotation = "Motif",
+  cutOff = "FDR <= 0.01 & Log2FC >= 1")
+
+heatmapEM = plotEnrichHeatmap(
+  enrichMotifs, 
+  n = 20,
+  clusterCols = F,
+  cutOff = 20,
+  transpose = TRUE)
+
+heatmapEM
+```
+
+## Find activating and repressing TFs
+
+```{r, fig.width=10, fig.height=8}
+cor_threshold = 0.3
+padj = 0.01
+maxDelta = 3
+
+seGroupMotif = getGroupSE(ArchRProj = archp, 
+                          useMatrix = "MotifMatrix", 
+                          groupBy = "SH_annots_ATAC")
+
+seZ = seGroupMotif[rowData(seGroupMotif)$seqnames=="z", ]
+
+rowData(seZ)$maxDelta = lapply(seq_len(ncol(seZ)), function(x){rowMaxs(assay(seZ) - assay(seZ)[,x])}) %>% Reduce("cbind", .) %>% rowMaxs
+  
+corGSM_MM = correlateMatrices(ArchRProj = archp, 
+                              useMatrix1 = "GeneScoreMatrix",
+                              useMatrix2 = "MotifMatrix",
+                              reducedDims = "IterativeLSI")
+
+corGSM_MM$maxDelta = rowData(seZ)[match(corGSM_MM$MotifMatrix_name, rowData(seZ)$name), "maxDelta"]
+corGSM_MM = corGSM_MM[order(abs(corGSM_MM$cor), decreasing = TRUE), ]
+corGSM_MM = corGSM_MM[which(!duplicated(gsub("\\-.*", "", corGSM_MM[,"MotifMatrix_name"]))), ]
+corGSM_MM$TFRegulator = ""
+corGSM_MM$TFRegulator[which(corGSM_MM$cor > cor_threshold & corGSM_MM$padj < padj & corGSM_MM$maxDelta > maxDelta)] <- "YES"
+corGSM_MM$TF_name = ""
+corGSM_MM$TF_name[corGSM_MM$TFRegulator == 'YES'] = corGSM_MM[, 1][corGSM_MM$TFRegulator == 'YES']
+
+active_TF = sort(corGSM_MM[corGSM_MM$TFRegulator == "YES", 1])
+
+ggplot(data.frame(corGSM_MM), 
+       aes(cor, maxDelta, color = TFRegulator, label = TF_name)) +
+    geom_point() + 
+    theme_ArchR() +
+    geom_vline(xintercept = 0, lty = "dashed") + 
+    scale_color_manual(values = c("NO" = "darkgrey", "YES" = "firebrick3")) +
+    xlab("Correlation To Gene Score") +
+    ylab("Max TF Motif Delta") +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, max(corGSM_MM$maxDelta) * 1.05)) +
+    geom_label_repel(label = corGSM_MM$TF_name, max.overlaps=100000)
+```
+
+## Export
+
+```{r}
+archp_df = archp@cellColData |> as.data.frame() |>
+  rownames_to_column("bc") |> 
+  dplyr::select(bc, Clusters, SH_annots_ATAC)
+write.csv(archp_df, 
+          file = "Hegde_2025_Mouse_Lung_ATAC_bc_cluster_annot.csv", row.names = F)
+```
+
+## Session Info
+
+```{r}
+end_time <- Sys.time()
+print(end_time - start_time)
+
+sessionInfo()
+```
