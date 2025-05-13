@@ -1,0 +1,262 @@
+---
+title: "Hegde et al - 2025 - Myelopoiesis Epigenetics"
+title-block-banner: true
+subtitle: "Mouse Lung KP-Naive scRNA-seq analysis"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+library(tidyverse)
+library(Seurat)
+library(SCP)
+library(scDissector)
+library(ComplexHeatmap)
+library(colorspace)
+library(skimr)
+library(reactable)
+library(DT)
+
+set.seed(729)
+start_time = Sys.time()
+```
+
+## Load data
+
+```{r, warning=FALSE, eval=FALSE}
+h5_files = list.files(path = "data/", 
+                      pattern = "sample_filtered_feature_bc_matrix.h5", 
+                      recursive = TRUE, full.names = TRUE)
+
+sc.list <- lapply(h5_files, function(file) {
+  expr_matrix <- Read10X_h5(file)$`Gene Expression`
+  CreateSeuratObject(counts = expr_matrix, 
+                     project = tools::file_path_sans_ext(basename(file)))
+})
+
+names(sc.list) <- basename(dirname(dirname(h5_files)))
+```
+
+## Seurat
+
+```{r, eval=FALSE}
+sc.list <- lapply(X = sc.list, FUN = NormalizeData)
+sc.list <- lapply(X = sc.list, FUN = ScaleData)
+sc.list <- lapply(X = sc.list, FUN = SCTransform, method = "glmGamPoi")
+
+features <- SelectIntegrationFeatures(object.list = sc.list, nfeatures = 3000)
+
+sc.list <- PrepSCTIntegration(object.list = sc.list, anchor.features = features)
+
+sc.list <- lapply(X = sc.list, FUN = RunPCA, features = features)
+
+immune.anchors <- FindIntegrationAnchors(object.list = sc.list, normalization.method = "SCT", anchor.features = features, dims = 1:30, reduction = "rpca", k.anchor = 20)
+
+Lung_object <- IntegrateData(anchorset = immune.anchors, 
+                           normalization.method = "SCT", 
+                           dims = 1:30)
+
+Lung_object <- RunPCA(Lung_object, npcs = 30, verbose = FALSE) %>%
+               RunUMAP(reduction = "pca", dims = 1:30, verbose = FALSE) %>%
+               FindNeighbors(reduction = "pca", dims = 1:30, verbose = FALSE) %>%
+               FindClusters(resolution = 1.2, verbose = FALSE) # 0.7
+```
+
+## Annotation
+
+```{r, eval=FALSE}
+sc_obj$annots <- plyr::mapvalues(
+  x = sc_obj$seurat_clusters,
+  from = c("0", "1"),
+  to = c(
+    'cell_type1',
+    'cell_type2',
+  )
+)
+sc_obj = subset(sc_obj, annots != "remove")
+Idents(sc_obj) = "annots"
+saveRDS(sc_obj, file = "Hegde_2025_Mouse_Lung_KP_scRNA.rds")
+```
+
+```{r, eval=FALSE}
+SCP::CellDimPlot(sc_obj, 
+                 group.by = "annots", 
+                 reduction = "umap", 
+                 pt.size = 0.75, 
+                 label = T, label_repel = T, label_insitu = T)
+```
+
+```{r, fig.width=15, fig.height=10, eval=FALSE}
+SCP::CellDimPlot(sc_obj, 
+                 group.by = "annots", 
+                 split.by = "sample_simplified", 
+                 reduction = "umap", 
+                 pt.size = 0.75, 
+                 label = T, label_repel = T, label_insitu = T, legend.position = "bottom")
+```
+
+## Reproduce Manuscript Figures
+
+```{r}
+sc_obj = readRDS("Hegde_2025_Mouse_Lung_KP_scRNA.rds")
+DefaultAssay(sc_obj) = "RNA"
+Idents(sc_obj) = "annots"
+```
+
+## Export
+
+```{r}
+bc_to_annot_df = sc_obj@meta.data |> 
+  rownames_to_column("bc") |> 
+  dplyr::select(bc, seurat_clusters, annots)
+
+write.csv(bc_to_annot_df,
+          file = "Hegde_2025_Mouse_Lung_KP_scRNA_bc_cluster_annot.csv", row.names = F)
+```
+
+```{r}
+table(sc_obj$sample, sc_obj$annots)
+```
+
+## Markers
+
+```{r}
+degs_markers = FindAllMarkers(sc_obj, only.pos = T, logfc.threshold = 1, assay = "RNA")
+datatable(degs_markers, filter = "top")
+```
+
+## Truth-plot
+
+This code randomly selects cell IDs from each cell type in the manual_annotation vector. Here’s a step-by-step breakdown:
+
+1.  **Reproducibility:**\
+    `set.seed(123)` ensures that the random sampling is reproducible every time the code is run.
+
+2.  **Iterating Over Cell Types:**\
+    `unique(manual_annotation)` extracts each distinct cell type from the manual_annotation vector (such as "AM", "momac_Arg1", etc.).
+
+3.  **Sampling Cell IDs:**\
+    For each cell type, the function `sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))` randomly selects cell IDs (which are the names of the vector elements) corresponding to that cell type. The number of cells selected is the minimum between the total available for that type and 50. This means that if a cell type has more than 50 cells, only 50 are chosen; if it has fewer, all available cells are selected.
+
+4.  **Combining Results:**\
+    The sampled cell IDs from each cell type are combined into a single vector called `cells` using `as.vector(sapply(...))`.
+
+In summary, the code creates a reproducible, random subsample of up to 50 cell IDs for each cell type present in the manual_annotation vector.
+
+```{r}
+markers = c("Fcgr4", "Pglyrp1", "Eno3", "Dusp16", "Cd300e", 
+            "Hes1", "Plac8", "Hp", "Ly6c2", "F13a1", "Cd177",
+            "C1qb", "C1qa", "C1qc", "Selenop", "Cxcl9", "Ms4a7",
+            "C5ar1", "Folr2", "Fn1", "Thbs1", "Arg1", "Ccl24",
+            "Prtn3", "Fabp5", "Spp1", "Gpnmb", "Trem2", "Il7r",
+            "Syngr1", "Ltc4s", "Ear1", "Krt79", "Cidec", "Siglecf")
+```
+
+```{r}
+mat = sc_obj@assays$RNA$counts[unique(markers), ]
+mat = mat[unique(markers), ]
+manual_annotation = sc_obj$annots
+```
+
+```{r}
+set.seed(123)
+cells = as.vector(sapply(unique(manual_annotation), function(v) sample(names(manual_annotation)[manual_annotation==v], min(sum(manual_annotation==v), 50))))
+mat = mat[, unlist(cells)]
+
+manual_annotation = manual_annotation[unlist(cells)]
+
+dim(mat)
+colnames(mat) = NULL
+```
+
+```{r, fig.width=15, fig.height=10}
+unique_clusters = sort(unique(manual_annotation))
+sample_color = qualitative_hcl(n = length(unique_clusters), palette = 'Dark 2')
+names(sample_color) = unique_clusters
+color = circlize::colorRamp2(breaks = c(0, 0.25, 1.5, 4, 6), 
+                             colors = c('white', 
+                                        rev(sequential_hcl(n = 3, palette = 'OrRd')), 
+                                        'black'))
+
+colnames(mat) = NULL
+h1 = Heatmap(t(as.matrix(mat)), row_names_side = "right", col = color,
+             row_split = manual_annotation, show_row_dend = F,
+             row_title_rot = 0, column_title_gp = gpar(fontsize = 12, fontface = "italic"),
+             row_title_gp = gpar(fontsize = 15), cluster_columns = FALSE,cluster_rows = T,
+             row_gap = unit(1, "mm"), column_gap = unit(1, "mm"), border = 'gray50',
+             column_names_gp = gpar(fontface = "italic"),
+             column_title_rot = 90,
+             heatmap_legend_param = list(title = "Expression")
+)
+
+print(h1)
+```
+
+## Module analysis - scDissector
+
+```{r}
+metadata_df = sc_obj@meta.data |> dplyr::select(sample, annots)
+metadata_df = metadata_df |> dplyr::mutate(combined_label = paste0(sample, "_", annots))
+umitab = as(sc_obj@assays$RNA$counts, "CsparseMatrix")
+cluster_factor = as.factor(metadata_df$annots); names(cluster_factor) = rownames(metadata_df)
+cells = colnames(umitab)
+cell_to_cluster = as.factor(cluster_factor); names(cell_to_cluster) = names(cluster_factor)
+cell_to_sample = metadata_df$sample; names(cell_to_sample) = cells
+ldm = import_dataset_and_model(model_version_name = "", 
+                             clustering_data_path = "", 
+                             umitab = umitab, 
+                             cell_to_cluster = cell_to_cluster, 
+                             cell_to_sample = cell_to_sample,
+                             min_umis = 250,
+                             max_umis = 25000,
+                             ds_numis = c(200, 500, 1000, 2000),
+                             insilico_gating = NULL,
+                             clustAnnots = NA,
+                             ds_list = NULL)
+```
+
+```{r}
+genes_to_exclude <- c(
+  "Malat1", "Jchain",
+  grep("^mt-", rownames(ldm$dataset$umitab), value = TRUE, ignore.case = TRUE),
+  grep("^Mtr", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Igh", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Igl", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Igk", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Rp-", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Rpl", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Rps", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("^Gm[0-9]+$", rownames(ldm$dataset$umitab), value = TRUE),
+  grep("Rik$", rownames(ldm$dataset$umitab), value = TRUE)
+)
+```
+
+```{r, eval=FALSE}
+cormat = gene_cor_analysis(ldm, "2000", 0.15, 50, genes_to_exclude = genes_to_exclude)
+
+parse_modules = function(ldm, 
+                          cormat, 
+                          ds_version, 
+                          nmods = 50,
+                          mod_size = 4, 
+                          min_mod_cor = 0.1) {
+  gene_mask = names(which(apply(cormat, 1, quantile, 1 - mod_size/ncol(cormat), na.rm = T) >= min_mod_cor))
+  ds = ldm$dataset$ds[[match(ds_version, ldm$dataset$ds_numis)]]
+  mods = cutree(hclust(as.dist(1 - cormat[gene_mask, gene_mask])), nmods)
+  modsl = split(names(mods), mods)
+  return(modsl)
+}
+
+parse_modules(ldm, cormat, "2000", nmods = 50)
+```
+
+## Session Info
+
+```{r}
+end_time <- Sys.time()
+print(end_time - start_time)
+
+sessionInfo()
+```

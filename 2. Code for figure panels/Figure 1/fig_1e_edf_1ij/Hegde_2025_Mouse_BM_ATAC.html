@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Hegde et al - 2025 - Myelopoiesis Epigenetics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/quarto.js"></script>
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/popper.min.js"></script>
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Hegde_2025_Mouse_BM_ATAC_files/libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Hegde_2025_Mouse_BM_ATAC_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Hegde_2025_Mouse_BM_ATAC_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Hegde_2025_Mouse_BM_ATAC_files/libs/bootstrap/bootstrap-fe6593aca1dacbc749dc3d2ba78c8639.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Hegde et al - 2025 - Myelopoiesis Epigenetics</h1>
+            <p class="subtitle lead">Mouse BM ATAC</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="load-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="load-libraries">Load libraries</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ArchR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########&gt;      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========&gt;
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR : Version 1.0.3
+For more information see our website : www.ArchRProject.com
+If you encounter a bug please report : https://github.com/GreenleafLab/ArchR/issues</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading Required Packages...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : devtools v2.4.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : grid v4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gridExtra v2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gtools v3.9.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : gtable v0.3.6</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : ggplot2 v3.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : magrittr v2.0.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : plyr v1.8.9</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : stringr v1.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : data.table v1.17.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : matrixStats v1.5.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : sparseMatrixStats v1.18.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : S4Vectors v0.44.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : GenomicRanges v1.58.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : BiocGenerics v0.52.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : Matrix v1.7.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : Rcpp v1.0.14</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : RcppArmadillo v14.4.2.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : SummarizedExperiment v1.36.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Loading Package : rhdf5 v2.50.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ lubridate::%within%()     masks IRanges::%within%()
+✖ dplyr::arrange()          masks plyr::arrange()
+✖ dplyr::between()          masks data.table::between()
+✖ dplyr::collapse()         masks IRanges::collapse()
+✖ dplyr::combine()          masks Biobase::combine(), BiocGenerics::combine(), gridExtra::combine()
+✖ purrr::compact()          masks plyr::compact()
+✖ dplyr::count()            masks matrixStats::count(), plyr::count()
+✖ dplyr::desc()             masks IRanges::desc(), plyr::desc()
+✖ tidyr::expand()           masks Matrix::expand(), S4Vectors::expand()
+✖ tidyr::extract()          masks magrittr::extract()
+✖ dplyr::failwith()         masks plyr::failwith()
+✖ dplyr::filter()           masks stats::filter()
+✖ dplyr::first()            masks S4Vectors::first(), data.table::first()
+✖ lubridate::hour()         masks data.table::hour()
+✖ dplyr::id()               masks plyr::id()
+✖ lubridate::isoweek()      masks data.table::isoweek()
+✖ dplyr::lag()              masks stats::lag()
+✖ dplyr::last()             masks data.table::last()
+✖ lubridate::mday()         masks data.table::mday()
+✖ lubridate::minute()       masks data.table::minute()
+✖ lubridate::month()        masks data.table::month()
+✖ dplyr::mutate()           masks plyr::mutate()
+✖ tidyr::pack()             masks Matrix::pack()
+✖ BiocGenerics::Position()  masks ggplot2::Position(), base::Position()
+✖ lubridate::quarter()      masks data.table::quarter()
+✖ purrr::reduce()           masks GenomicRanges::reduce(), IRanges::reduce()
+✖ dplyr::rename()           masks S4Vectors::rename(), plyr::rename()
+✖ lubridate::second()       masks S4Vectors::second(), data.table::second()
+✖ lubridate::second&lt;-()     masks S4Vectors::second&lt;-()
+✖ purrr::set_names()        masks magrittr::set_names()
+✖ dplyr::slice()            masks IRanges::slice()
+✖ GenomicRanges::subtract() masks magrittr::subtract()
+✖ dplyr::summarise()        masks plyr::summarise()
+✖ dplyr::summarize()        masks plyr::summarize()
+✖ purrr::transpose()        masks data.table::transpose()
+✖ tidyr::unpack()           masks Matrix::unpack()
+✖ lubridate::wday()         masks data.table::wday()
+✖ lubridate::week()         masks data.table::week()
+✖ lubridate::yday()         masks data.table::yday()
+✖ lubridate::year()         masks data.table::year()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>========================================
+ComplexHeatmap version 2.22.0
+Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/
+Github page: https://github.com/jokergoo/ComplexHeatmap
+Documentation: http://jokergoo.github.io/ComplexHeatmap-reference
+
+If you use it in published research, please cite either one:
+- Gu, Z. Complex Heatmap Visualization. iMeta 2022.
+- Gu, Z. Complex heatmaps reveal patterns and correlations in multidimensional 
+    genomic data. Bioinformatics 2016.
+
+
+The new InteractiveComplexHeatmap package can directly export static 
+complex heatmaps into an interactive Shiny app with zero effort. Have a try!
+
+This message can be suppressed by:
+  suppressPackageStartupMessages(library(ComplexHeatmap))
+========================================</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">addArchRThreads</span>(<span class="at">threads =</span> <span class="dv">8</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting default number of Parallel threads to 8.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addArchRGenome</span>(<span class="st">"mm10"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting default genome to Mm10.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-arrows-and-archr-project" class="level2">
+<h2 class="anchored" data-anchor-id="create-arrows-and-archr-project">Create arrows and ArchR project</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Path to fragments ----</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>frags_path <span class="ot">=</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"cellranger_output"</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern =</span> <span class="st">"fragments.tsv.gz$"</span>, </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">full.names =</span> T)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(frags_path) <span class="ot">=</span> <span class="fu">names</span>(inputF)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Create arrow files ----</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>ArrowFiles <span class="ot">=</span> <span class="fu">createArrowFiles</span>(<span class="at">inputFiles =</span> frags_path, </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sampleNames =</span> <span class="fu">names</span>(frags_path), </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">minTSS =</span> <span class="dv">8</span>, </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">minFrags =</span> <span class="dv">5000</span>, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">addTileMat =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">addGeneScoreMat =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>ArrowFiles <span class="ot">=</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".arrow"</span>)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ArchR project creation ----</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">ArchRProject</span>(<span class="at">ArrowFiles =</span> ArrowFiles, <span class="at">outputDirectory =</span> <span class="st">"firstpass"</span>, <span class="at">copyArrows =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Performing Doublets calculations ----</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addDoubletScores</span>(archp)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Filtering out Doublets ----</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">filterDoublets</span>(archp)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Reduce dimensions ----</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addIterativeLSI</span>(<span class="at">ArchRProj =</span> archp, </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">useMatrix =</span> <span class="st">"TileMatrix"</span>, </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">"IterativeLSI"</span>, </span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">force=</span><span class="cn">TRUE</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Clustering ----</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addClusters</span>(<span class="at">input =</span> archp, <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Add UMAP ----</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addUMAP</span>(<span class="at">ArchRProj =</span> archp, <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Harmony ----</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addHarmony</span>(<span class="at">ArchRProj =</span> archp, </span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>                   <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>, </span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">"Harmony"</span>, </span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">groupBy =</span> <span class="st">"Sample"</span>, <span class="at">force=</span><span class="cn">TRUE</span>)</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Add clusters ----</span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addClusters</span>(<span class="at">input =</span> archp, </span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">reducedDims =</span> <span class="st">"Harmony"</span>, </span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">resolution =</span> <span class="fl">0.8</span>, <span class="co"># 0.2, 0.4, 0.8</span></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span><span class="st">'Clusters_H'</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Add gene expression matrix ----</span></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>scrna_data <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Mouse_BM_KP_scRNA.rds"</span>)</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>rse_obj <span class="ot">=</span> <span class="fu">SummarizedExperiment</span>(</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">assays =</span> <span class="fu">list</span>(<span class="at">counts =</span> scrna_data<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>data),</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">rowData =</span> <span class="fu">rownames</span>(scrna_data),</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">colData =</span> scrna_data<span class="sc">@</span>meta.data)</span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addGeneIntegrationMatrix</span>(</span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">useMatrix =</span> <span class="st">"GeneScoreMatrix"</span>,</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrixName =</span> <span class="st">"GeneIntegrationMatrix"</span>,</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>,</span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">seRNA =</span> rse_obj,</span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">addToArrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupRNA =</span> <span class="st">"annots"</span>,</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameCell =</span> <span class="st">"predicted_Cell_Un"</span>,</span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameGroup =</span> <span class="st">"predicted_Group_Un"</span>,</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameScore =</span> <span class="st">"predicted_Score_Un"</span>, <span class="at">force =</span> T)</span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a>groupList <span class="ot">=</span> <span class="fu">SimpleList</span>(</span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">naive =</span> <span class="fu">SimpleList</span>(</span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATAC =</span> <span class="fu">rownames</span>(archp<span class="sc">@</span>cellColData <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Sample <span class="sc">==</span> <span class="st">"naive"</span>)),</span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">RNA =</span> <span class="fu">rownames</span>(rse_obj<span class="sc">@</span>colData <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Condition <span class="sc">==</span> <span class="st">"naive"</span>))),</span>
+<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a>  <span class="at">KP =</span> <span class="fu">SimpleList</span>(</span>
+<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATAC =</span> <span class="fu">rownames</span>(archp<span class="sc">@</span>cellColData <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Sample <span class="sc">==</span> <span class="st">"KP"</span>)),</span>
+<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">RNA =</span> <span class="fu">rownames</span>(rse_obj<span class="sc">@</span>colData <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Condition <span class="sc">==</span> <span class="st">"KP"</span>))))</span>
+<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addGeneIntegrationMatrix</span>(</span>
+<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">useMatrix =</span> <span class="st">"GeneScoreMatrix"</span>,</span>
+<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrixName =</span> <span class="st">"GeneIntegrationMatrix"</span>,</span>
+<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">reducedDims =</span> <span class="st">"IterativeLSI"</span>,</span>
+<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">seRNA =</span> rse_obj,</span>
+<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">addToArrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupList =</span> groupList,</span>
+<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupRNA =</span> <span class="st">"annots"</span>,</span>
+<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameCell =</span> <span class="st">"predicted_Cell_Co"</span>,</span>
+<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameGroup =</span> <span class="st">"predicted_Group_Co"</span>,</span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameScore =</span> <span class="st">"predicted_Score_Co"</span>, <span class="at">force =</span> T, <span class="at">threads =</span> <span class="dv">1</span>)</span>
+<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a><span class="do">## Add group peakset ----</span></span>
+<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addReproduciblePeakSet</span>(</span>
+<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupBy =</span> <span class="st">"predicted.id"</span>, <span class="at">cutOff =</span> <span class="fl">0.05</span>, <span class="at">method =</span> <span class="st">"q"</span>, </span>
+<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">pathToMacs2 =</span> <span class="st">"~/conda_env/bin/macs3"</span>, <span class="at">threads =</span> <span class="dv">1</span>L)</span>
+<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addPeakMatrix</span>(archp)</span>
+<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a><span class="do">## Add motif annotataions ----</span></span>
+<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">addMotifAnnotations</span>(<span class="at">ArchRProj =</span> archp, <span class="at">motifSet =</span> <span class="st">"cisbp"</span>, <span class="at">name =</span> <span class="st">"Motif"</span>) <span class="co"># homer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>archp <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"Hegde_2025_Mouse_BM_ATAC.rds"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>archp_meta <span class="ot">=</span> archp<span class="sc">@</span>cellColData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>archp_meta <span class="ot">=</span> <span class="fu">subset</span>(archp_meta, Sample_simplified <span class="sc">!=</span> <span class="st">"IL4c"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(archp_meta<span class="sc">$</span>annotated, archp_meta<span class="sc">$</span>Clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 
+                   C10  C11  C12  C13  C14  C15  C16  C17  C18  C19  C20  C21
+  Baso               0    0    0    0    0    0  512  121    0    0    0    0
+  cMoP               0    0    0 2840  899   97    0    0    0    0    0    0
+  cMoP_cycling       0    0    0    0    0    0    0    0    0    0    0    0
+  GMP                0    0    0    0    0    0    0    0    0    0    0    0
+  immature neu       0    0    0    0    0    0    0    0    0 1160    0    0
+  Ly6Chi mono        0  447 3153    0    0    0    0    0    0    0    0    0
+  Ly6Clow mono     986    0    0    0    0    0    0    0    0    0    0    0
+  mature neu         0    0    0    0    0    0    0    0  754    0  601    0
+  MEP                0    0    0    0    0    0    0    0    0    0    0    0
+  pre-neu            0    0    0    0    0    0    0    0    0    0    0  385
+  pre-neu_cycling    0    0    0    0    0    0    0    0    0    0    0    0
+                 
+                   C22  C23  C25   C7   C9
+  Baso               0    0    0    0    0
+  cMoP               0    0    0    0 1100
+  cMoP_cycling       0    0  550    0    0
+  GMP                0  290    0    0    0
+  immature neu       0    0    0    0    0
+  Ly6Chi mono        0    0    0    0    0
+  Ly6Clow mono       0    0    0    0    0
+  mature neu         0    0    0    0    0
+  MEP                0    0    0  507    0
+  pre-neu            0    0    0    0    0
+  pre-neu_cycling 1753    0    0    0    0</code></pre>
+</div>
+</div>
+</section>
+<section id="gene-score-heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="gene-score-heatmap">Gene score heatmap</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>markers <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Csf3r"</span>, <span class="st">"Ccl6"</span>, <span class="st">"Mmp8"</span>, <span class="st">"Tuba4a"</span>, <span class="st">"S100a9"</span>, <span class="st">"S100a8"</span>, <span class="st">"Cxcr2"</span>, <span class="st">"Retnlg"</span>, <span class="st">"Mmp9"</span>, <span class="st">"Grina"</span>, <span class="st">"Mki67"</span>, <span class="st">"Tmem216"</span>, <span class="st">"Cd177"</span>, <span class="st">"Chil1"</span> ,<span class="st">"Eno3"</span>, <span class="st">"Car1"</span>, <span class="st">"Pf4"</span>, <span class="st">"Car2"</span>, <span class="st">"Ms4a3"</span>, <span class="st">"Elane"</span>, <span class="st">"Prtn3"</span>, <span class="st">"Zmpste24"</span>, <span class="st">"Serpinb1a"</span>, <span class="st">"Cebpe"</span>, <span class="st">"Orm1"</span>, <span class="st">"Cenpf"</span>, <span class="st">"Ear2"</span>, <span class="st">"Adgre4"</span>, <span class="st">"Lgals1"</span>, <span class="st">"Ass1"</span>, <span class="st">"Gria3"</span>, <span class="st">"Fn1"</span>, <span class="st">"F13a1"</span>, <span class="st">"Wfdc17"</span>, <span class="st">"Irf8"</span>, <span class="st">"Ccr2"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">=</span> <span class="fu">getMatrixFromProject</span>(archp, <span class="at">useMatrix =</span> <span class="st">'GeneScoreMatrix'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ArchR logging to : ArchRLogs/ArchR-getMatrixFromProject-37a333ae4049-Date-2025-04-30_Time-18-52-42.495596.log
+If there is an issue, please report to github with logFile!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:03.518604 : Organizing colData, 0.35 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:03.600614 : Organizing rowData, 0.352 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:03.602505 : Organizing rowRanges, 0.352 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:03.606427 : Organizing Assays (1 of 1), 0.352 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:04.974549 : Constructing SummarizedExperiment, 0.375 mins elapsed.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-04-30 18:53:05.29224 : Finished Matrix Creation, 0.38 mins elapsed.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">assays</span>(gs)[[<span class="dv">1</span>]]</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gs_mat) <span class="ot">=</span> gs<span class="sc">@</span>elementMetadata<span class="sc">$</span>name</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> gs_mat[, <span class="fu">rownames</span>(archp_meta)]</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(<span class="fu">t</span>(gs_mat[<span class="fu">rownames</span>(gs_mat) <span class="sc">%in%</span> markers, ])))</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>gs_mat<span class="sc">$</span>clusters <span class="ot">=</span> <span class="fu">as.vector</span>(archp_meta<span class="sc">$</span>annotated)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> <span class="fu">aggregate</span>(.<span class="sc">~</span>clusters, <span class="at">data =</span> gs_mat, <span class="at">FUN =</span> mean)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gs_mat) <span class="ot">=</span> gs_mat[, <span class="dv">1</span>]</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>gs_mat <span class="ot">=</span> gs_mat[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>color <span class="ot">=</span> circlize<span class="sc">::</span><span class="fu">colorRamp2</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="dv">3</span>), </span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">'white'</span>, </span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">rev</span>(<span class="fu">sequential_hcl</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">palette =</span> <span class="st">'OrRd'</span>)), </span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">'black'</span>))</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>group_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"MEP"</span>, <span class="st">"Ly6Clow mono"</span>, <span class="st">"Ly6Chi mono"</span>, <span class="st">"cMoP"</span>, </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"GMP"</span>, <span class="st">"pre-neu_cycling"</span>, <span class="st">"pre-neu"</span>, <span class="st">"immature neu"</span>, <span class="st">"mature neu"</span>)</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>scaled_mat <span class="ot">=</span> <span class="fu">scale</span>(<span class="fu">t</span>(<span class="fu">t</span>(<span class="fu">as.matrix</span>(gs_mat))))[group_order, markers]</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> <span class="fu">Heatmap</span>(scaled_mat, </span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_names_side =</span> <span class="st">"right"</span>,</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> color,</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">show_row_dend =</span> F,</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_title_rot =</span> <span class="dv">0</span>, </span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">15</span>), </span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">cluster_columns =</span> F,</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">cluster_rows =</span> F,</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">row_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), <span class="at">column_gap =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>), <span class="at">border =</span> <span class="st">'gray50'</span>,</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontface =</span> <span class="st">"italic"</span>),</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">column_title_rot =</span> <span class="dv">90</span>,</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Gene score"</span>)</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(h1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hegde_2025_Mouse_BM_ATAC_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="differential-motif-enrichment" class="level2">
+<h2 class="anchored" data-anchor-id="differential-motif-enrichment">Differential motif enrichment</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>markersPeaks <span class="ot">=</span> <span class="fu">getMarkerFeatures</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">useMatrix =</span> <span class="st">"PeakMatrix"</span>, </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupBy =</span> <span class="st">"annotated"</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">bias =</span> <span class="fu">c</span>(<span class="st">"TSSEnrichment"</span>, <span class="st">"log10(nFrags)"</span>),</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">testMethod =</span> <span class="st">"wilcoxon"</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>enrichMotifs <span class="ot">=</span> <span class="fu">peakAnnoEnrichment</span>(</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">seMarker =</span> markersPeaks,</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ArchRProj =</span> archp,</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">peakAnnotation =</span> <span class="st">"Motif"</span>,</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutOff =</span> <span class="st">"FDR &lt;= 0.01 &amp; Log2FC &gt;= 1"</span>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>heatmapEM <span class="ot">=</span> <span class="fu">plotEnrichHeatmap</span>(</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  enrichMotifs, </span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">20</span>,</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">clusterCols =</span> F,</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutOff =</span> <span class="dv">20</span>,</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>heatmapEM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop over all comparisons ----</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>clusterlist <span class="ot">=</span> <span class="fu">unique</span>(archp<span class="sc">$</span>annotated)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>archp<span class="sc">@</span>cellColData<span class="sc">$</span>combined <span class="ot">=</span> <span class="fu">paste0</span>(archp<span class="sc">$</span>annotated, <span class="st">"_"</span>, archp<span class="sc">$</span>Sample)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>holder1_peak <span class="ot">=</span> <span class="fu">tibble</span>()</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>holder1_mot <span class="ot">=</span> <span class="fu">tibble</span>()</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> clusterlist) {</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  SplitbyTissue_Peaks <span class="ot">=</span> <span class="fu">getMarkerFeatures</span>(</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">useMatrix =</span> <span class="st">"PeakMatrix"</span>, </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupBy =</span> <span class="st">"combined"</span>,</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">useGroups =</span> <span class="fu">paste0</span>(i, <span class="st">"_KP"</span>),</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">bgdGroups =</span> <span class="fu">paste0</span>(i, <span class="st">"_naive"</span>),</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias =</span> <span class="fu">c</span>(<span class="st">"TSSEnrichment"</span>, <span class="st">"log10(nFrags)"</span>),</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">testMethod =</span> <span class="st">"wilcoxon"</span>)</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>  assay_data <span class="ot">=</span> SplitbyTissue_Peaks<span class="sc">@</span>assays<span class="sc">@</span>data</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>  compiled_df <span class="ot">=</span> <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(assay_data, <span class="cf">function</span>(x) x<span class="sc">$</span>x)) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>  compiled_df[, <span class="st">"peak"</span>] <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">as.character</span>(<span class="fu">rowData</span>(SplitbyTissue_Peaks)<span class="sc">$</span>seqnames), </span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"_"</span>, </span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">as.character</span>(<span class="fu">rowData</span>(SplitbyTissue_Peaks)<span class="sc">$</span>start), </span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"_"</span>, </span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">as.character</span>(<span class="fu">rowData</span>(SplitbyTissue_Peaks)<span class="sc">$</span>end))</span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>  compiled_df[, <span class="st">"comp"</span>] <span class="ot">=</span> i</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>  holder1_peak <span class="ot">=</span> <span class="fu">bind_rows</span>(holder1_peak, compiled_df)</span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>  SplitbyTissue_motifs <span class="ot">=</span> <span class="fu">getMarkerFeatures</span>(</span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">ArchRProj =</span> archp, </span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">useMatrix =</span> <span class="st">"MotifMatrix"</span>, </span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">groupBy =</span> <span class="st">"combined"</span>,</span>
+<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">useGroups =</span> <span class="fu">paste0</span>(i, <span class="st">"_KP"</span>),</span>
+<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">bgdGroups =</span> <span class="fu">paste0</span>(i, <span class="st">"_naive"</span>),</span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias =</span> <span class="fu">c</span>(<span class="st">"TSSEnrichment"</span>, <span class="st">"log10(nFrags)"</span>),</span>
+<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">testMethod =</span> <span class="st">"wilcoxon"</span>)</span>
+<span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a>  assay_data <span class="ot">=</span> SplitbyTissue_motifs<span class="sc">@</span>assays<span class="sc">@</span>data</span>
+<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>  compiled_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(assay_data, <span class="cf">function</span>(df) df[[<span class="dv">1</span>]])) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a>  compiled_df[, <span class="st">"motif"</span>] <span class="ot">=</span> <span class="fu">as.character</span>(<span class="fu">rowData</span>(SplitbyTissue_motifs)<span class="sc">$</span>name)</span>
+<span id="cb51-41"><a href="#cb51-41" aria-hidden="true" tabindex="-1"></a>  compiled_df[, <span class="st">"comp"</span>] <span class="ot">=</span> i</span>
+<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a>  holder1_mot <span class="ot">=</span> <span class="fu">bind_rows</span>(holder1_mot, compiled_df)</span>
+<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(holder1_peak, <span class="fu">paste0</span>(output_dir, <span class="st">"PeakScore_summary.csv"</span>))</span>
+<span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(holder1_mot, <span class="fu">paste0</span>(output_dir, <span class="st">"MotifScore_summary.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="export" class="level2">
+<h2 class="anchored" data-anchor-id="export">Export</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>archp_df <span class="ot">=</span> <span class="fu">as.data.frame</span>(archp<span class="sc">@</span>cellColData) <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">"bc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(bc, Clusters, annotated)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(archp_df, </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"Hegde_2025_Mouse_BM_ATAC_bc_cluster_annot.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="session-info" class="level2">
+<h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(end_time <span class="sc">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 29.00422 secs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.3 (2025-02-28)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sequoia 15.4.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+Random number generation:
+ RNG:     L'Ecuyer-CMRG 
+ Normal:  Inversion 
+ Sample:  Rejection 
+ 
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] colorspace_2.1-1            RColorBrewer_1.1-3         
+ [3] ComplexHeatmap_2.22.0       ggrepel_0.9.6              
+ [5] lubridate_1.9.4             forcats_1.0.0              
+ [7] dplyr_1.1.4                 purrr_1.0.4                
+ [9] readr_2.1.5                 tidyr_1.3.1                
+[11] tibble_3.2.1                tidyverse_2.0.0            
+[13] rhdf5_2.50.2                SummarizedExperiment_1.36.0
+[15] Biobase_2.66.0              RcppArmadillo_14.4.2-1     
+[17] Rcpp_1.0.14                 Matrix_1.7-3               
+[19] GenomicRanges_1.58.0        GenomeInfoDb_1.42.3        
+[21] IRanges_2.40.1              S4Vectors_0.44.0           
+[23] BiocGenerics_0.52.0         sparseMatrixStats_1.18.0   
+[25] MatrixGenerics_1.18.1       matrixStats_1.5.0          
+[27] data.table_1.17.0           stringr_1.5.1              
+[29] plyr_1.8.9                  magrittr_2.0.3             
+[31] ggplot2_3.5.2               gtable_0.3.6               
+[33] gtools_3.9.5                gridExtra_2.3              
+[35] devtools_2.4.5              usethis_3.1.0              
+[37] ArchR_1.0.3                
+
+loaded via a namespace (and not attached):
+ [1] bitops_1.0-9                       remotes_2.5.0                     
+ [3] rlang_1.1.6                        clue_0.3-66                       
+ [5] GetoptLong_1.0.5                   compiler_4.4.3                    
+ [7] png_0.1-8                          vctrs_0.6.5                       
+ [9] profvis_0.4.0                      shape_1.4.6.1                     
+[11] pkgconfig_2.0.3                    crayon_1.5.3                      
+[13] fastmap_1.2.0                      magick_2.8.6                      
+[15] XVector_0.46.0                     ellipsis_0.3.2                    
+[17] Rsamtools_2.22.0                   promises_1.3.2                    
+[19] rmarkdown_2.29                     sessioninfo_1.2.3                 
+[21] tzdb_0.5.0                         UCSC.utils_1.2.0                  
+[23] xfun_0.52                          zlibbioc_1.52.0                   
+[25] cachem_1.1.0                       jsonlite_2.0.0                    
+[27] later_1.4.2                        rhdf5filters_1.18.1               
+[29] DelayedArray_0.32.0                BiocParallel_1.40.2               
+[31] Rhdf5lib_1.28.0                    cluster_2.1.8.1                   
+[33] R6_2.6.1                           stringi_1.8.7                     
+[35] rtracklayer_1.66.0                 pkgload_1.4.0                     
+[37] iterators_1.0.14                   knitr_1.50                        
+[39] httpuv_1.6.16                      timechange_0.3.0                  
+[41] tidyselect_1.2.1                   BSgenome.Mmusculus.UCSC.mm10_1.4.3
+[43] rstudioapi_0.17.1                  dichromat_2.0-0.1                 
+[45] abind_1.4-8                        yaml_2.3.10                       
+[47] doParallel_1.0.17                  codetools_0.2-20                  
+[49] miniUI_0.1.2                       curl_6.2.2                        
+[51] pkgbuild_1.4.7                     lattice_0.22-7                    
+[53] shiny_1.10.0                       withr_3.0.2                       
+[55] evaluate_1.0.3                     urlchecker_1.0.1                  
+[57] Biostrings_2.74.1                  circlize_0.4.16                   
+[59] pillar_1.10.2                      foreach_1.5.2                     
+[61] generics_0.1.3                     RCurl_1.98-1.17                   
+[63] hms_1.1.3                          scales_1.4.0                      
+[65] xtable_1.8-4                       glue_1.8.0                        
+[67] tools_4.4.3                        BiocIO_1.16.0                     
+[69] GenomicAlignments_1.42.0           BSgenome_1.74.0                   
+[71] XML_3.99-0.18                      fs_1.6.6                          
+[73] Cairo_1.6-2                        GenomeInfoDbData_1.2.13           
+[75] restfulr_0.0.15                    cli_3.6.5                         
+[77] S4Arrays_1.6.0                     digest_0.6.37                     
+[79] SparseArray_1.6.2                  rjson_0.2.23                      
+[81] htmlwidgets_1.6.4                  farver_2.1.2                      
+[83] memoise_2.0.1                      htmltools_0.5.8.1                 
+[85] lifecycle_1.0.4                    httr_1.4.7                        
+[87] GlobalOptions_0.1.2                mime_0.13                         </code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

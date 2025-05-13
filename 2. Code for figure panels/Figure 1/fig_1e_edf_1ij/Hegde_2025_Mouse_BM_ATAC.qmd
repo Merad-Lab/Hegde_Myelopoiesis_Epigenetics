@@ -1,0 +1,280 @@
+---
+title: "Hegde et al - 2025 - Myelopoiesis Epigenetics"
+title-block-banner: true
+subtitle: "Mouse BM ATAC"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+library(ArchR)
+library(tidyverse)
+library(ggrepel)
+library(ComplexHeatmap)
+library(RColorBrewer)
+library(colorspace)
+
+set.seed(1234)
+addArchRThreads(threads = 8) 
+addArchRGenome("mm10")
+start_time = Sys.time()
+```
+
+## Create arrows and ArchR project
+
+```{r, warning=FALSE, eval=FALSE}
+## Path to fragments ----
+frags_path = list.files(path = "cellranger_output", 
+                        pattern = "fragments.tsv.gz$", 
+                        full.names = T)
+names(frags_path) = names(inputF)
+
+## Create arrow files ----
+ArrowFiles = createArrowFiles(inputFiles = frags_path, 
+                              sampleNames = names(frags_path), 
+                              minTSS = 8, 
+                              minFrags = 5000, 
+                              addTileMat = TRUE, 
+                              addGeneScoreMat = TRUE)
+ArrowFiles = list.files(pattern = ".arrow")
+
+## ArchR project creation ----
+archp = ArchRProject(ArrowFiles = ArrowFiles, outputDirectory = "firstpass", copyArrows = F)
+```
+
+```{r, eval=FALSE}
+## Performing Doublets calculations ----
+archp = addDoubletScores(archp)
+
+## Filtering out Doublets ----
+archp = filterDoublets(archp)
+
+## Reduce dimensions ----
+archp = addIterativeLSI(ArchRProj = archp, 
+                        useMatrix = "TileMatrix", 
+                        name = "IterativeLSI", 
+                        force=TRUE)
+
+## Clustering ----
+archp = addClusters(input = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Add UMAP ----
+archp = addUMAP(ArchRProj = archp, reducedDims = "IterativeLSI", force = TRUE)
+
+## Harmony ----
+archp = addHarmony(ArchRProj = archp, 
+                   reducedDims = "IterativeLSI", 
+                   name = "Harmony", 
+                   groupBy = "Sample", force=TRUE)
+
+## Add clusters ----
+archp = addClusters(input = archp, 
+                    reducedDims = "Harmony", 
+                    resolution = 0.8, # 0.2, 0.4, 0.8
+                    name='Clusters_H', force = TRUE)
+
+## Add gene expression matrix ----
+scrna_data = readRDS("Hegde_2025_Mouse_BM_KP_scRNA.rds")
+
+rse_obj = SummarizedExperiment(
+  assays = list(counts = scrna_data@assays$RNA$data),
+  rowData = rownames(scrna_data),
+  colData = scrna_data@meta.data)
+
+archp = addGeneIntegrationMatrix(
+  ArchRProj = archp, 
+  useMatrix = "GeneScoreMatrix",
+  matrixName = "GeneIntegrationMatrix",
+  reducedDims = "IterativeLSI",
+  seRNA = rse_obj,
+  addToArrow = TRUE,
+  groupRNA = "annots",
+  nameCell = "predicted_Cell_Un",
+  nameGroup = "predicted_Group_Un",
+  nameScore = "predicted_Score_Un", force = T)
+
+groupList = SimpleList(
+  naive = SimpleList(
+    ATAC = rownames(archp@cellColData |> as.data.frame() |> dplyr::filter(Sample == "naive")),
+    RNA = rownames(rse_obj@colData |> as.data.frame() |> dplyr::filter(Condition == "naive"))),
+  KP = SimpleList(
+    ATAC = rownames(archp@cellColData |> as.data.frame() |> dplyr::filter(Sample == "KP")),
+    RNA = rownames(rse_obj@colData |> as.data.frame() |> dplyr::filter(Condition == "KP"))))
+
+archp = addGeneIntegrationMatrix(
+  ArchRProj = archp, 
+  useMatrix = "GeneScoreMatrix",
+  matrixName = "GeneIntegrationMatrix",
+  reducedDims = "IterativeLSI",
+  seRNA = rse_obj,
+  addToArrow = TRUE,
+  groupList = groupList,
+  groupRNA = "annots",
+  nameCell = "predicted_Cell_Co",
+  nameGroup = "predicted_Group_Co",
+  nameScore = "predicted_Score_Co", force = T, threads = 1)
+
+## Add group peakset ----
+archp = addReproduciblePeakSet(
+  ArchRProj = archp, 
+  groupBy = "predicted.id", cutOff = 0.05, method = "q", 
+  pathToMacs2 = "~/conda_env/bin/macs3", threads = 1L)
+archp = addPeakMatrix(archp)
+
+## Add motif annotataions ----
+archp = addMotifAnnotations(ArchRProj = archp, motifSet = "cisbp", name = "Motif") # homer
+```
+
+```{r}
+archp = readRDS("Hegde_2025_Mouse_BM_ATAC.rds")
+archp_meta = archp@cellColData
+```
+
+```{r}
+archp_meta = subset(archp_meta, Sample_simplified != "IL4c")
+```
+
+```{r}
+table(archp_meta$annotated, archp_meta$Clusters)
+```
+
+## Gene score heatmap
+
+```{r, fig.width=10, fig.height=5}
+markers = c("Csf3r", "Ccl6", "Mmp8", "Tuba4a", "S100a9", "S100a8", "Cxcr2", "Retnlg", "Mmp9", "Grina", "Mki67", "Tmem216", "Cd177", "Chil1" ,"Eno3", "Car1", "Pf4", "Car2", "Ms4a3", "Elane", "Prtn3", "Zmpste24", "Serpinb1a", "Cebpe", "Orm1", "Cenpf", "Ear2", "Adgre4", "Lgals1", "Ass1", "Gria3", "Fn1", "F13a1", "Wfdc17", "Irf8", "Ccr2")
+
+gs = getMatrixFromProject(archp, useMatrix = 'GeneScoreMatrix')
+
+gs_mat = assays(gs)[[1]]
+rownames(gs_mat) = gs@elementMetadata$name
+gs_mat = gs_mat[, rownames(archp_meta)]
+gs_mat = as.data.frame(as.matrix(t(gs_mat[rownames(gs_mat) %in% markers, ])))
+gs_mat$clusters = as.vector(archp_meta$annotated)
+gs_mat = aggregate(.~clusters, data = gs_mat, FUN = mean)
+rownames(gs_mat) = gs_mat[, 1]
+gs_mat = gs_mat[, -1]
+
+color = circlize::colorRamp2(breaks = c(0, 0.5, 1.5, 2.0, 3), 
+                             colors = c('white', 
+                                        rev(sequential_hcl(n = 3, palette = 'OrRd')), 
+                                        'black'))
+
+group_order = c("MEP", "Ly6Clow mono", "Ly6Chi mono", "cMoP", 
+                "GMP", "pre-neu_cycling", "pre-neu", "immature neu", "mature neu")
+
+scaled_mat = scale(t(t(as.matrix(gs_mat))))[group_order, markers]
+
+h1 = Heatmap(scaled_mat, 
+             row_names_side = "right",
+             col = color,
+             show_row_dend = F,
+             row_title_rot = 0, 
+             column_title_gp = gpar(fontsize = 12, fontface = "italic"),
+             row_title_gp = gpar(fontsize = 15), 
+             cluster_columns = F,
+             cluster_rows = F,
+             row_gap = unit(1, "mm"), column_gap = unit(1, "mm"), border = 'gray50',
+             column_names_gp = gpar(fontface = "italic"),
+             column_title_rot = 90,
+             heatmap_legend_param = list(title = "Gene score")
+)
+
+print(h1)
+```
+
+## Differential motif enrichment
+
+```{r, fig.width=10, fig.height=5, eval=FALSE}
+markersPeaks = getMarkerFeatures(
+  ArchRProj = archp, 
+  useMatrix = "PeakMatrix", 
+  groupBy = "annotated",
+  bias = c("TSSEnrichment", "log10(nFrags)"),
+  testMethod = "wilcoxon")
+
+enrichMotifs = peakAnnoEnrichment(
+  seMarker = markersPeaks,
+  ArchRProj = archp,
+  peakAnnotation = "Motif",
+  cutOff = "FDR <= 0.01 & Log2FC >= 1")
+
+heatmapEM = plotEnrichHeatmap(
+  enrichMotifs, 
+  n = 20,
+  clusterCols = F,
+  cutOff = 20,
+  transpose = TRUE)
+
+heatmapEM
+```
+
+```{r, eval=FALSE}
+## Loop over all comparisons ----
+clusterlist = unique(archp$annotated)
+archp@cellColData$combined = paste0(archp$annotated, "_", archp$Sample)
+
+holder1_peak = tibble()
+holder1_mot = tibble()
+for (i in clusterlist) {
+  print(i)
+  
+  SplitbyTissue_Peaks = getMarkerFeatures(
+    ArchRProj = archp, 
+    useMatrix = "PeakMatrix", 
+    groupBy = "combined",
+    useGroups = paste0(i, "_KP"),
+    bgdGroups = paste0(i, "_naive"),
+    bias = c("TSSEnrichment", "log10(nFrags)"),
+    testMethod = "wilcoxon")
+  
+  assay_data = SplitbyTissue_Peaks@assays@data
+  compiled_df = do.call(cbind, lapply(assay_data, function(x) x$x)) |> as.data.frame()
+  compiled_df[, "peak"] = paste0(as.character(rowData(SplitbyTissue_Peaks)$seqnames), 
+                                 "_", 
+                                 as.character(rowData(SplitbyTissue_Peaks)$start), 
+                                 "_", 
+                                 as.character(rowData(SplitbyTissue_Peaks)$end))
+  compiled_df[, "comp"] = i
+  holder1_peak = bind_rows(holder1_peak, compiled_df)
+  
+  SplitbyTissue_motifs = getMarkerFeatures(
+    ArchRProj = archp, 
+    useMatrix = "MotifMatrix", 
+    groupBy = "combined",
+    useGroups = paste0(i, "_KP"),
+    bgdGroups = paste0(i, "_naive"),
+    bias = c("TSSEnrichment", "log10(nFrags)"),
+    testMethod = "wilcoxon")
+  
+  assay_data = SplitbyTissue_motifs@assays@data
+  compiled_df <- do.call(cbind, lapply(assay_data, function(df) df[[1]])) |> as.data.frame()
+  compiled_df[, "motif"] = as.character(rowData(SplitbyTissue_motifs)$name)
+  compiled_df[, "comp"] = i
+  holder1_mot = bind_rows(holder1_mot, compiled_df)
+}
+
+write.csv(holder1_peak, paste0(output_dir, "PeakScore_summary.csv"))
+write.csv(holder1_mot, paste0(output_dir, "MotifScore_summary.csv"))
+```
+
+## Export
+
+```{r}
+archp_df = as.data.frame(archp@cellColData) |>
+  tibble::rownames_to_column("bc") |> 
+  dplyr::select(bc, Clusters, annotated)
+
+write.csv(archp_df, 
+          file = "Hegde_2025_Mouse_BM_ATAC_bc_cluster_annot.csv", row.names = F)
+```
+
+## Session Info
+
+```{r}
+end_time <- Sys.time()
+print(end_time - start_time)
+
+sessionInfo()
+```
