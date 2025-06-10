@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sb
 import numpy as np
 
-### Replace with path to DORC matrix
+### Replace with path to ImmGen CUT&RUN DORC matrix
 dorc_matrix = pd.read_csv(
     "[/path/to/your/object]",
     sep = "\t"

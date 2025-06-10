@@ -29,7 +29,7 @@ df_plot = df_plot[
 ].copy()
 
 x_axis = "H3K4me3_mean_diff"
-y_axis = "H3K27ac_mean_diff"
+y_axis = "H3K4me1_mean_diff"
 
 fig, ax = plt.subplots(figsize = (3, 3))
 

@@ -60,13 +60,13 @@ gr_ocrs$ucsc_name <- paste0(
   seqnames(gr_ocrs), ":", start(gr_ocrs), "-", end(gr_ocrs)
 )
 
-# Get paths of files from metadata
+# Get paths of files from ImmGen CUT&RUN metadata
 METADATA_PATH <- file.path("/path/to/metadata/metadata.xlsx")
 
 df_metadata <- read_excel(METADATA_PATH)
 
 cell_subsets <- c("Monocyte", "GMP")
-labs <- c("Merad", "Buenrostro")
+labs <- c("Merad")
 
 df_metadata_filt <- df_metadata %>%
   filter(
